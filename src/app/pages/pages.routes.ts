@@ -9,9 +9,9 @@ const pagesRoutes: Routes = [
         path: '',
         component: PagesComponent,
         children: [
-            {path: 'dashboard', component: DashboardComponent},
-            {path: 'maniobras', component: ManiobrasComponent},
-            {path: 'account-settings', component: AccountSettingsComponent},
+            {path: 'dashboard', component: DashboardComponent, data: {titulo: 'Dashboard'}},
+            {path: 'maniobras', component: ManiobrasComponent, data: {titulo: 'Maniobras'}},
+            {path: 'account-settings', component: AccountSettingsComponent, data: {titulo: 'Configuración de la cuenta'}},
         {path: '', redirectTo: '/dashboard', pathMatch: 'full'}
         ]
     }
