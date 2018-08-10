@@ -3,16 +3,19 @@ import { NgModule } from '@angular/core';
 
 // RUTAS
 import { APP_ROUTES } from './app.routes';
-// Fin RUTAS
+
 // Servicios
 import { ServiceModule } from './services/service.module';
-// Fin Servicios
+
 // Modulos
 import { PagesModules } from './pages/pages.module';
-// FIn modulos
+
+// temporal
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+// Componentes
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-
 
 @NgModule({
   declarations: [
@@ -23,7 +26,9 @@ import { LoginComponent } from './login/login.component';
     BrowserModule,
     APP_ROUTES,
     PagesModules,
-    ServiceModule
+    ServiceModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
