@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from '../shared/shared.module';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-// RUTAS
 import { PAGES_ROUTES } from './pages.routes';
+import { SharedModule } from '../shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
 
 // MODULES
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -21,23 +20,24 @@ import { ModalUploadComponent } from '../components/modal-upload/modal-upload.co
 
 @NgModule({
     declarations: [
-        PagesComponent,
+        // PagesComponent,
         DashboardComponent,
         ManiobrasComponent,
         AccountSettingsComponent,
         RegisterComponent,
         ProfileComponent,
-        UsuariosComponent,
-        ModalUploadComponent
+        UsuariosComponent
+       // ModalUploadComponent
     ],
     exports: [
+        DashboardComponent
     ],
     imports: [
+        CommonModule,
         SharedModule,
         PAGES_ROUTES,
         FormsModule,
         ReactiveFormsModule,
-        CommonModule,
         PipesModule
     ]
     })

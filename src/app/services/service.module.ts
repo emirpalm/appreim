@@ -9,7 +9,9 @@ import {
     SidebarService,
     UsuarioService,
     SubirArchivoService,
-    LoginGuardGuard
+    LoginGuardGuard,
+    AdminGuard,
+    VerificaTokenGuard
    } from './service.index';
 
    @NgModule({
@@ -24,7 +26,9 @@ import {
       UsuarioService,
       SubirArchivoService,
       ModalUploadService,
-      LoginGuardGuard
+      LoginGuardGuard,
+      AdminGuard,
+      VerificaTokenGuard
     ],
     declarations: []
   })
