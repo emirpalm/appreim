@@ -1,33 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { Maniobra } from '../../models/maniobras.models';
-import { ManiobraService } from '../../services/service.index';
+import { Contenedor } from '../../models/contenedores.models';
+import { ContenedorService } from '../../services/service.index';
 
 @Component({
-  selector: 'app-maniobras',
-  templateUrl: './maniobras.component.html',
+  selector: 'app-contenedores',
+  templateUrl: './contenedores.component.html',
   styles: []
 })
-export class ManiobrasComponent implements OnInit {
+export class ContenedoresComponent implements OnInit {
    // tslint:disable-next-line:typedef-whitespace
-   maniobras: Maniobra[] = [];
+   contenedor: Contenedor[] = [];
    // tslint:disable-next-line:no-inferrable-types
    cargando: boolean = true;
    // tslint:disable-next-line:no-inferrable-types
    totalRegistros: number = 0;
    // tslint:disable-next-line:no-inferrable-types
    desde: number = 0;
-   constructor(public _maniobraService: ManiobraService) { }
+
+  constructor(public _contenedorService: ContenedorService) { }
 
   ngOnInit() {
-    this.cargarManiobras();
+    this.cargarContenedores();
   }
 
-  cargarManiobras() {
+  cargarContenedores() {
     this.cargando = true;
-    this._maniobraService.cargarManiobras(this.desde)
+    this._contenedorService.cargarContenedores(this.desde)
     .subscribe((resp: any) => {
       this.totalRegistros = resp.total;
-      this.maniobras = resp.maniobras;
+      this.contenedor = resp.contenedor;
       this.cargando = false;
       console.log(this.totalRegistros);
     });
@@ -44,29 +45,28 @@ export class ManiobrasComponent implements OnInit {
       return;
     }
     this.desde += valor;
-    this.cargarManiobras();
+    this.cargarContenedores();
 
   }
 
-  buscarManiobra(termino: string) {
+  buscarContenedor(termino: string) {
     if (termino.length <= 0) {
-      this.cargarManiobras();
+      this.cargarContenedores();
       return;
     }
     this.cargando = true;
-    this._maniobraService.buscarManiobra(termino)
-    .subscribe((maniobras: Maniobra[]) => {
-      this.maniobras = maniobras;
+    this._contenedorService.buscarContenedor(termino)
+    .subscribe((contenedor: Contenedor[]) => {
+      this.contenedor = contenedor;
       this.cargando = false;
 
     });
   }
 
-  borrarManiobra( maniobras: Maniobra ) {
+  borrarContenedor( contenedor: Contenedor ) {
 
-    this._maniobraService.borrarManiobra( maniobras._id )
-            .subscribe( () =>  this.cargarManiobras() );
+    this._contenedorService.borrarContenedor( contenedor._id )
+            .subscribe( () =>  this.cargarContenedores() );
 
   }
 }
-

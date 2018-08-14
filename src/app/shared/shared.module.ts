@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { RouterModule } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
@@ -15,7 +16,9 @@ import { ModalUploadComponent } from '../components/modal-upload/modal-upload.co
     imports: [
         RouterModule,
         CommonModule,
-        PipesModule
+        PipesModule,
+        FormsModule,
+        ReactiveFormsModule,
         ],
     declarations: [
         HeaderComponent,

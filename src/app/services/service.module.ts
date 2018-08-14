@@ -8,11 +8,17 @@ import {
     SharedService,
     SidebarService,
     UsuarioService,
+    OperadorService,
+    ClienteService,
+    PlacaService,
+    ContenedorService,
+    ManiobraService,
     SubirArchivoService,
     LoginGuardGuard,
     AdminGuard,
     VerificaTokenGuard
    } from './service.index';
+
 
    @NgModule({
     imports: [
@@ -24,6 +30,11 @@ import {
       SharedService,
       SidebarService,
       UsuarioService,
+      OperadorService,
+      ClienteService,
+      PlacaService,
+      ContenedorService,
+      ManiobraService,
       SubirArchivoService,
       ModalUploadService,
       LoginGuardGuard,

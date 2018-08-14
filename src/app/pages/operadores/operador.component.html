@@ -1,0 +1,31 @@
+<div class="row animated fadeIn">
+
+    <div class="col-md-6">
+        <div class="card card-body">
+            <h3 class="box-title m-b-0">Operador: {{ operador.operador }}</h3>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarOperador(f)">
+                        <div class="form-group">
+                            <label>Nombre del Operador</label>
+                            <input [(ngModel)]="operador.operador" name="operador" type="text" class="form-control" placeholder="Nombre del operador" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                          <i class="fa fa-save"></i>
+                          Guardar
+                        </button>
+                        <a routerLink="/operadores" class="btn btn-inverse waves-effect waves-light">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3" *ngIf="operador._id">
+        <div class="card card-body">
+            <h4 class="box-title m-b-0">Fotografía</h4>
+
+            <img (click)="cambiarFoto()" [src]="operador.img | imagen:'operador'" class="img-circle img-fluid pointer">
+        </div>
+    </div>
+</div>

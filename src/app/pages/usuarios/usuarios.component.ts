@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from '../../models/usuarios.model';
-import { URL_SERVICIOS } from '../../config/config';
 import { UsuarioService } from '../../services/service.index';
 import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
 
@@ -100,7 +99,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   guardarUsuario(usuario: Usuario) {
-    this._usuarioService.actulizarUsuario(usuario)
+    this._usuarioService.actualizarUsuario(usuario)
     .subscribe(resp => {
       this.cargarUsuarios();
     });
