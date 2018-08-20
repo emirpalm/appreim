@@ -102,5 +102,6 @@ export class ManiobrasComponent implements OnInit {
     .subscribe( maniobras =>  this.maniobras = maniobras );
   }
   }
-}
+
+
 
