@@ -37,7 +37,7 @@ export class UsuariosComponent implements OnInit {
       this.totalRegistros = resp.total;
       this.usuarios = resp.usuarios;
       this.cargando = false;
-      console.log(this.totalRegistros);
+     // console.log(this.totalRegistros);
     });
 
 
@@ -46,7 +46,7 @@ export class UsuariosComponent implements OnInit {
   cambiarDesde(valor: number) {
     // tslint:disable-next-line:prefer-const
     let desde = this.desde + valor;
-    console.log(desde);
+    // console.log(desde);
     if (desde >= this.totalRegistros) {
       return;
     }
@@ -73,7 +73,7 @@ export class UsuariosComponent implements OnInit {
   }
 
   borrarUsuario(usuario: Usuario) {
-    console.log(usuario);
+    // console.log(usuario);
     if (usuario._id === this._usuarioService.usuario._id) {
     swal('Error!', 'No se puede borrar a si mismo' , 'error');
     return;
@@ -89,7 +89,7 @@ export class UsuariosComponent implements OnInit {
         if (borrar) {
           this._usuarioService.borrarUsuario(usuario._id)
           .subscribe(borrado => {
-            console.log(borrado);
+          //  console.log(borrado);
             this.cargarUsuarios();
           });
 

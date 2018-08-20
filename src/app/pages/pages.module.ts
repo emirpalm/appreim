@@ -23,7 +23,8 @@ import { ContenedorComponent } from './contenedores/contenedor.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { ClienteComponent } from './clientes/cliente.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
-
+import { RefreshTokenInterceptor } from '../services/service.index';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 // Pipes Modulos
 import { PipesModule } from '../pipes/pipes.module';
 // import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
@@ -36,6 +37,7 @@ import {
     MatInputModule,
     MatSelectModule
   } from '@angular/material';
+
 
 @NgModule({
     declarations: [
@@ -74,7 +76,14 @@ import {
         MatNativeDateModule,
         MatInputModule,
         MatSelectModule
-    ]
+    ],
+    providers: [
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: RefreshTokenInterceptor,
+          multi: true
+        }
+      ]
     })
 
 export class PagesModules {}
