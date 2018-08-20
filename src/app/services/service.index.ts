@@ -9,7 +9,9 @@ export { ContenedorService } from './contenedor/contenedor.service';
 export { ManiobraService } from './maniobra/maniobra.service';
 export { SubirArchivoService } from './subirArchivo/subir-archivo.service';
 // Guards
-export { LoginGuardGuard } from './guards/login-guard.guard';
+export { LoginGuard } from './guards/login-guard';
 export { AdminGuard } from './guards/admin.guard';
 export { VerificaTokenGuard } from './guards/verifica-token.guard';
+// Interceptors
+export { RefreshTokenInterceptor } from './interceptors/token-interceptor.service';
 

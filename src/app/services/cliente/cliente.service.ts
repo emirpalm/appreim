@@ -20,7 +20,13 @@ export class ClienteService {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/cliente?desde=' + desde;
-    return this.http.get(url);
+    return this.http.get(url)
+    .map( (resp: any) => {
+
+      this.totalClientes = resp.total;
+      console.log(resp.total);
+    return resp.cliente;
+    });
   }
 
   cargarCliente( id: string ) {

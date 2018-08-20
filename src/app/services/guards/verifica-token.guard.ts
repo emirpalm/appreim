@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
 import { UsuarioService } from '../usuario/usuario.service';
 import { Router } from '@angular/router';
+import { CanActivateChild } from '@angular/router/src/interfaces';
+
+declare var swal: any;
 
 @Injectable()
-export class VerificaTokenGuard implements CanActivate {
+export class VerificaTokenGuard implements CanActivateChild {
 
   constructor(
     public _usuarioService: UsuarioService,
     public router: Router
   ) { }
 
-  canActivate(): Promise<boolean> | boolean {
-
+  canActivateChild(): Promise<boolean> | boolean {
     console.log('Token guard');
 
     // tslint:disable-next-line:prefer-const
@@ -27,10 +27,9 @@ export class VerificaTokenGuard implements CanActivate {
     if ( expirado ) {
       this.router.navigate(['/login']);
       return false;
+    } else {
+      return this.verificaRenueva( payload.exp );
     }
-
-
-    return this.verificaRenueva( payload.exp );
   }
 
 
@@ -45,20 +44,19 @@ export class VerificaTokenGuard implements CanActivate {
 
       ahora.setTime( ahora.getTime() + ( 1 * 60 * 60 * 1000 ) );
 
-      // console.log( tokenExp );
-      // console.log( ahora );
+       console.log( tokenExp );
+       console.log( ahora );
 
       if ( tokenExp.getTime() > ahora.getTime() ) {
         resolve(true);
       } else {
-
         this._usuarioService.renuevaToken()
-              .subscribe( () => {
-                resolve(true);
-              }, () => {
-                this.router.navigate(['/login']);
-                reject(false);
-              });
+        .subscribe( () => {
+          resolve(true);
+        }, () => {
+          this.router.navigate(['/login']);
+          reject(false);
+        });
 
       }
 
@@ -69,11 +67,12 @@ export class VerificaTokenGuard implements CanActivate {
 
   expirado( fechaExp: number ) {
 
+    // tslint:disable-next-line:prefer-const
     let ahora = new Date().getTime() / 1000;
 
     if ( fechaExp < ahora ) {
       return true;
-    }else {
+    } else {
       return false;
     }
 

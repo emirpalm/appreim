@@ -26,19 +26,18 @@ export class ContenedoresComponent implements OnInit {
   cargarContenedores() {
     this.cargando = true;
     this._contenedorService.cargarContenedores(this.desde)
-    .subscribe((resp: any) => {
-      this.totalRegistros = resp.total;
-      this.contenedor = resp.contenedor;
-      this.cargando = false;
-      console.log(this.totalRegistros);
-    });
+    .subscribe(contenedor =>
+      // this.totalRegistros = resp.total;
+      this.contenedor = contenedor
+
+    );
   }
 
   cambiarDesde(valor: number) {
     // tslint:disable-next-line:prefer-const
     let desde = this.desde + valor;
     console.log(desde);
-    if (desde >= this.totalRegistros) {
+    if (desde >= this._contenedorService.totalContenedores) {
       return;
     }
     if (desde < 0) {

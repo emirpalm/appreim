@@ -14,9 +14,10 @@ import {
     ContenedorService,
     ManiobraService,
     SubirArchivoService,
-    LoginGuardGuard,
+    LoginGuard,
     AdminGuard,
-    VerificaTokenGuard
+    VerificaTokenGuard,
+    RefreshTokenInterceptor
    } from './service.index';
 
 
@@ -37,9 +38,10 @@ import {
       ManiobraService,
       SubirArchivoService,
       ModalUploadService,
-      LoginGuardGuard,
+      LoginGuard,
       AdminGuard,
-      VerificaTokenGuard
+      VerificaTokenGuard,
+      RefreshTokenInterceptor
     ],
     declarations: []
   })

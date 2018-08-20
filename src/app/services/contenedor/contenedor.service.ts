@@ -20,7 +20,13 @@ export class ContenedorService {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/contenedor?desde=' + desde;
-    return this.http.get(url);
+    return this.http.get(url)
+    .map( (resp: any) => {
+
+      this.totalContenedores = resp.total;
+      console.log(resp.total);
+    return resp.contenedor;
+    });
   }
 
   cargarContenedor( id: string ) {

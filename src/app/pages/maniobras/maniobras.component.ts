@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Maniobra } from '../../models/maniobras.models';
 import { ManiobraService } from '../../services/service.index';
+import * as jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
 
+declare var jQuery: any;
 @Component({
   selector: 'app-maniobras',
   templateUrl: './maniobras.component.html',
@@ -21,23 +24,45 @@ export class ManiobrasComponent implements OnInit {
   ngOnInit() {
     this.cargarManiobras();
   }
+  public exportpdf() {
+    // tslint:disable-next-line:no-var-keyword
+    // tslint:disable-next-line:prefer-const
+    let data = document.getElementById('contentToConvert');
+    html2canvas(data).then(canvas => {
+      // Few necessary setting options
+      // tslint:disable-next-line:prefer-const
+      let imgWidth = 208;
+        // tslint:disable-next-line:prefer-const
+      let pageHeight = 295;
+        // tslint:disable-next-line:prefer-const
+      let imgHeight = canvas.height * imgWidth / canvas.width;
+        // tslint:disable-next-line:prefer-const
+      let heightLeft = imgHeight;
+
+      const contentDataURL = canvas.toDataURL('image/png');
+        // tslint:disable-next-line:prefer-const
+      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
+        // tslint:disable-next-line:prefer-const
+      let position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+      pdf.save('MYPdf.pdf'); // Generated PDF
+    });
+  }
 
   cargarManiobras() {
     this.cargando = true;
     this._maniobraService.cargarManiobras(this.desde)
-    .subscribe((resp: any) => {
-      this.totalRegistros = resp.total;
-      this.maniobras = resp.maniobras;
-      this.cargando = false;
-      console.log(this.totalRegistros);
-    });
-  }
+    .subscribe(maniobras =>
+      // this.totalRegistros = resp.total;
+      this.maniobras = maniobras
+    );
+}
 
   cambiarDesde(valor: number) {
     // tslint:disable-next-line:prefer-const
     let desde = this.desde + valor;
     console.log(desde);
-    if (desde >= this.totalRegistros) {
+    if (desde >= this._maniobraService.totalManiobras) {
       return;
     }
     if (desde < 0) {
@@ -55,11 +80,7 @@ export class ManiobrasComponent implements OnInit {
     }
     this.cargando = true;
     this._maniobraService.buscarManiobra(termino)
-    .subscribe((maniobras: Maniobra[]) => {
-      this.maniobras = maniobras;
-      this.cargando = false;
-
-    });
+    .subscribe( maniobras =>  this.maniobras = maniobras );
   }
 
   borrarManiobra( maniobras: Maniobra ) {
@@ -67,6 +88,19 @@ export class ManiobrasComponent implements OnInit {
     this._maniobraService.borrarManiobra( maniobras._id )
             .subscribe( () =>  this.cargarManiobras() );
 
+  }
+
+  buscarManiobraFecha(fechaIncio: string, fechaFin: string) {
+    console.log(fechaIncio);
+    console.log(fechaFin);
+    if (fechaIncio.length <= 0 || fechaFin.length <= 0) {
+      this.cargarManiobras();
+      return;
+    }
+    this.cargando = true;
+    this._maniobraService.buscarManiobraFecha(fechaIncio, fechaFin)
+    .subscribe( maniobras =>  this.maniobras = maniobras );
+  }
   }
 }
 

@@ -7,25 +7,25 @@
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon"><i class="ti-user"></i></div>
-                            <input formControlName="nombre" name="nombre" class="form-control" type="text" required placeholder="Nombre">
+                            <input matInput formControlName="nombre" name="nombre" class="form-control" type="text" required placeholder="Nombre">
                         </div>
                     </div>
                     <div class="form-group ">
                         <div class="input-group">
                             <div class="input-group-addon"><i class="ti-email"></i></div>
-                            <input formControlName="email" name="email" class="form-control" type="email" required placeholder="Correo">
+                            <input matInput formControlName="email" name="email" class="form-control" type="email" required placeholder="Correo">
                         </div>
                     </div>
                     <div class="form-group ">
                         <div class="input-group">
                             <div class="input-group-addon"><i class="ti-unlock"></i></div>
-                            <input formControlName="password" name="password" class="form-control" type="password" required placeholder="Password">
+                            <input matInput formControlName="password" name="password" class="form-control" type="password" required placeholder="Password">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
                             <div class="input-group-addon"><i class="ti-unlock"></i></div>
-                            <input formControlName="password2" name="password2" class="form-control" type="password" required placeholder="Confirmar Password">
+                            <input matInput formControlName="password2" name="password2" class="form-control" type="password" required placeholder="Confirmar Password">
                         </div>
                     </div>
                     <div class="form-group" *ngIf="!!forma.errors?.sonIguales && !forma.pristine">

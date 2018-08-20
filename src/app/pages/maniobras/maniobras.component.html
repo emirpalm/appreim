@@ -22,9 +22,23 @@
             </button>
                 </div>
 
-                <h3 class="card-title">Maniobras registrados ( <small>{{totalRegistros}}</small> )</h3>
+                <h3 class="card-title">Maniobras registrados ( <small>{{_maniobraService.totalManiobras}}</small> )</h3>
+                <div class="form-group">
+                    <input type="button" value="Exportar a pdf" (click)="exportpdf()" />
+                </div>
+                <div class="form-group">
+                    <input #inputInicio matInput [matDatepicker]="picker" name="fechaInicio" placeholder="Ingresar fecha">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <input #inputFin matInput [matDatepicker]="picker1" name="fechaFin" placeholder="Ingresar fecha">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                    <mat-datepicker #picker1></mat-datepicker>
+                    <button type="buttom" (click)='buscarManiobraFecha(inputInicio.value,inputFin.value )' class="btn btn-success waves-effect waves-light m-r-10"><i class="fa fa-save"></i>
+                            Buscar
+                            </button>
+                </div>
 
-                <table class="table table-hover">
+                <table id="contentToConvert" class="table table-sm table-hover table-responsive">
                     <thead>
                         <tr>
                             <th>Entrada</th>
@@ -32,11 +46,16 @@
                             <th>Operador</th>
                             <th>Placas</th>
                             <th>Fletera</th>
-                            <th>Contenedor</th>
+                            <th>Contetedor</th>
+                            <th>AA</th>
+                            <th>Cliente</th>
                             <th>Inicio</th>
                             <th>Fin</th>
-                            <th>Carga</th>
-                            <th>Descarga</th>
+                            <th>Transporte</th>
+                            <th>Lavado</th>
+                            <th>Rep</th>
+                            <th>Tipo</th>
+                            <th>Grado</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -44,16 +63,24 @@
                         <tr *ngFor="let maniobra of maniobras">
                             <td>{{maniobra.entrada}}</td>
                             <td>{{maniobra.salida}}</td>
-                            <td>{{maniobra.operador}}</td>
-                            <td>{{maniobra.placas}}</td>
+                            <td>{{maniobra.operador.operador}}</td>
+                            <td>{{maniobra.placas.placa}}</td>
                             <td>{{maniobra.fletera}}</td>
-                            <td>{{maniobra.contenedor}}</td>
+                            <td>{{maniobra.contenedor.contenedor}}</td>
+                            <td>{{maniobra.aa}}</td>
+                            <td>{{maniobra.cliente.cliente}}</td>
                             <td>{{maniobra.inicio}}</td>
                             <td>{{maniobra.fin}}</td>
                             <td>
-                                <input type="checkbox" [checked]="maniobra.carga" name="carga" class="form-control">
+                                <select disabled [(ngModel)]="maniobra.transporte" name="role" class="form-control">
+                              <option value="Carga">Carga</option>
+                              <option value="Descarga">Descarga</option>
+                          </select>
                             </td>
-                            <td>{{maniobra.desc}}</td>
+                            <td>{{maniobra.lavado}}</td>
+                            <td>{{maniobra.rep}}</td>
+                            <td>{{maniobra.tipo}}</td>
+                            <td>{{maniobra.grado}}</td>
                             <td>
                                 <button [routerLink]="['/maniobra', maniobra._id ]" class="btn btn-primary">
                           <i class="fa fa-edit"></i>

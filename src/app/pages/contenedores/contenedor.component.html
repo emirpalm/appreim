@@ -6,16 +6,17 @@
             <div class="row">
                 <div class="col-sm-12 col-xs-12">
                     <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarContenedor(f)">
-                        <div class="form-group">
-                            <label>Numero del Contenedor</label>
-                            <input [(ngModel)]="contenedor.contenedor" name="contenedor" type="text" class="form-control" placeholder="Numero del contenedor" required>
+                        <div class="my-container">
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="contenedor.contenedor" name="contenedor" type="text" class="form-control" placeholder="Numero del contenedor" required>
+                            </mat-form-field>
                         </div>
 
                         <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
                           <i class="fa fa-save"></i>
                           Guardar
                         </button>
-                        <a routerLink="/contenedores" class="btn btn-inverse waves-effect waves-light">Cancelar</a>
+                        <a routerLink="/contenedores" class="btn btn-danger waves-effect waves-light">Cancelar</a>
                     </form>
                 </div>
             </div>

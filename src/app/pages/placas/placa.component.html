@@ -6,16 +6,16 @@
             <div class="row">
                 <div class="col-sm-12 col-xs-12">
                     <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarPlaca(f)">
-                        <div class="form-group">
-                            <label>Placas del camion</label>
-                            <input [(ngModel)]="placa.placa" name="placa" type="text" class="form-control" placeholder="Ingrese las placas" required>
+                        <div class="my-container">
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="placa.placa" name="placa" type="text" class="form-control" placeholder="Ingrese las placas" required>
+                            </mat-form-field>
                         </div>
-
                         <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
                           <i class="fa fa-save"></i>
                           Guardar
                         </button>
-                        <a routerLink="/placas" class="btn btn-inverse waves-effect waves-light">Cancelar</a>
+                        <a routerLink="/placas" class="btn btn-danger waves-effect waves-light">Cancelar</a>
                     </form>
                 </div>
             </div>

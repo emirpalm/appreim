@@ -26,21 +26,17 @@ export class OperadoresComponent implements OnInit {
   cargarOperadores() {
     this.cargando = true;
     this._operadorService.cargarOperadores(this.desde)
-    .subscribe((resp: any) => {
-      this.totalRegistros = resp.total;
-      this.operadores = resp.operadores;
-      this.cargando = false;
-      console.log(this.totalRegistros);
-    });
-
-
+    .subscribe(operadores =>
+      // this.totalRegistros = resp.total;
+      this.operadores = operadores
+    );
   }
 
   cambiarDesde(valor: number) {
     // tslint:disable-next-line:prefer-const
     let desde = this.desde + valor;
     console.log(desde);
-    if (desde >= this.totalRegistros) {
+    if (desde >= this._operadorService.totalOperadores) {
       return;
     }
     if (desde < 0) {

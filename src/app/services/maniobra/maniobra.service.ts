@@ -20,7 +20,13 @@ export class ManiobraService {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/maniobra?desde=' + desde;
-    return this.http.get(url);
+    return this.http.get( url )
+    .map( (resp: any) => {
+
+      this.totalManiobras = resp.total;
+      console.log(resp.total);
+    return resp.maniobras;
+    });
   }
 
   cargarManiobra( id: string ) {
@@ -73,6 +79,15 @@ export class ManiobraService {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/busqueda/coleccion/maniobras/' + termino;
+    return this.http.get( url )
+                .map( (resp: any) => resp.maniobras );
+
+  }
+
+  buscarManiobraFecha( fechaIncio: string, fechaFin: string ) {
+
+    // tslint:disable-next-line:prefer-const
+    let url = URL_SERVICIOS + '/maniobra/rangofecha?fechaInicio=' + fechaIncio + '&fechaFin=' + fechaFin;
     return this.http.get( url )
                 .map( (resp: any) => resp.maniobras );
 

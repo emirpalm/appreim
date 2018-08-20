@@ -8,7 +8,7 @@ import { ModalUploadService } from '../../components/modal-upload/modal-upload.s
 @Component({
   selector: 'app-operador',
   templateUrl: './operador.component.html',
-  styles: []
+  styleUrls: ['./operador.component.css'],
 })
 export class OperadorComponent implements OnInit {
 

@@ -3,9 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../services/usuario/usuario.service';
 import { Usuario } from '../../models/usuarios.model';
-import * as swal from 'sweetalert';
-
-declare function init_plugins();
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-register',
@@ -44,8 +42,6 @@ export class RegisterComponent implements OnInit {
 
 
   ngOnInit() {
-      init_plugins();
-
       this.forma = new FormGroup({
         nombre: new FormControl( null , Validators.required ),
         email: new FormControl( null , [Validators.required, Validators.email] ),

@@ -23,7 +23,9 @@ export class UsuarioService {
   ) {
     this.cargarStorage();
   }
-
+  getAuthToken() {
+    return this.token;
+}
   renuevaToken() {
 
     let url = URL_SERVICIOS + '/login/renuevatoken';

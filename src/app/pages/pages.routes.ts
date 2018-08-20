@@ -20,18 +20,21 @@ import { ClienteComponent } from './clientes/cliente.component';
 // import { LoginGuardGuard } from '../services/service.index';
 import { AdminGuard } from '../services/service.index';
 import { VerificaTokenGuard } from '../services/guards/verifica-token.guard';
+import { ManiobraComponent } from './maniobras/maniobra.component';
+import { BusquedaComponent } from './busqueda/busqueda.component';
 
 
 const pagesRoutes: Routes = [
     {
         path: 'dashboard',
         component: DashboardComponent,
-        canActivate: [ VerificaTokenGuard ],
         data: { titulo: 'Dashboard' }
     },
             {path: 'maniobras', component: ManiobrasComponent, data: {titulo: 'Maniobras'}},
+            {path: 'maniobra/:id', component: ManiobraComponent, data: {titulo: 'Maniobra'}},
             {path: 'account-settings', component: AccountSettingsComponent, data: {titulo: 'Configuración de la cuenta'}},
             {path: 'profile', component: ProfileComponent, data: {titulo: 'Mi perfil'}},
+            { path: 'busqueda/:termino', component: BusquedaComponent, data: { titulo: 'Buscador' } },
     // Register
     {
         path: 'register',

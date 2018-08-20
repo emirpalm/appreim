@@ -6,16 +6,16 @@
             <div class="row">
                 <div class="col-sm-12 col-xs-12">
                     <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarOperador(f)">
-                        <div class="form-group">
-                            <label>Nombre del Operador</label>
-                            <input [(ngModel)]="operador.operador" name="operador" type="text" class="form-control" placeholder="Nombre del operador" required>
+                        <div class="my-container">
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="operador.operador" name="operador" type="text" class="form-control" placeholder="Nombre del operador" required>
+                            </mat-form-field>
                         </div>
-
                         <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
                           <i class="fa fa-save"></i>
                           Guardar
                         </button>
-                        <a routerLink="/operadores" class="btn btn-inverse waves-effect waves-light">Cancelar</a>
+                        <a routerLink="/operadores" class="btn btn-danger waves-effect waves-light">Cancelar</a>
                     </form>
                 </div>
             </div>

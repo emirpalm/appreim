@@ -20,7 +20,13 @@ export class PlacaService {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/placas?desde=' + desde;
-    return this.http.get(url);
+    return this.http.get(url)
+    .map( (resp: any) => {
+
+      this.totalPlacas = resp.total;
+      console.log(resp.total);
+    return resp.placas;
+    });
   }
 
   cargarPlaca( id: string ) {

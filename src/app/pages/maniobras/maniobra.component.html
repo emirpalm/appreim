@@ -1,0 +1,122 @@
+<div class="row animated fadeIn">
+
+    <div class="col-md-9">
+        <mat-card>
+            <!--<h3 class="box-title m-b-0">Maniobra: {{ maniobra.entrada }}</h3>-->
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarManiobra(f)">
+                        <div class="my-container">
+                            <h3>Datos de la maniobra</h3>
+                            <div class="my-container2">
+                                <mat-form-field class="time">
+                                    <input matInput [(ngModel)]="maniobra.entrada" name="entrada" type="time" placeholder="Entrada requerida" required>
+                                </mat-form-field>
+                                <mat-form-field class="time">
+                                    <input matInput [(ngModel)]="maniobra.salida" name="salida" type="time" placeholder="Salida requerida" required>
+                                </mat-form-field>
+                                <mat-form-field class="time">
+                                    <input matInput [(ngModel)]="maniobra.inicio" name="inicio" type="time" placeholder="Inicio requerida" required>
+                                </mat-form-field>
+                                <mat-form-field class="time">
+                                    <input matInput [(ngModel)]="maniobra.fin" name="fin" type="time" placeholder="Fin requerida" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="my-container2">
+                                <!--========Combombox Operador=========-->
+                                <mat-form-field>
+                                    <mat-select placeholder="Seleccione un Operador" (change)="cambioOperador( $event.target.value )" [(ngModel)]="maniobra.operador" name="operador" required>
+                                        <mat-option *ngFor="let operador of operadores" [value]="operador._id">
+                                            {{ operador.operador }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+
+                                <!--========Combombox Placas=========-->
+                                <mat-form-field>
+                                    <mat-select placeholder="Seleccione una placa" (change)="cambioPlaca( $event.target.value )" [(ngModel)]="maniobra.placas" name="placas" required>
+                                        <mat-option *ngFor="let placa of placas" [value]="placa._id">
+                                            {{ placa.placa }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="my-container2">
+                                <mat-form-field>
+                                    <input matInput [(ngModel)]="maniobra.fletera" name="fletera" type="text" placeholder="Fletera requerida" required>
+                                </mat-form-field>
+                                <!--========Combombox Contenedor=========-->
+                                <mat-form-field>
+                                    <mat-select placeholder="Seleccione un contenedor" (change)="cambioContenedor( $event.target.value )" [(ngModel)]="maniobra.contenedor" name="contenedor" required>
+                                        <mat-option *ngFor="let contenedor of contenedores" [value]="contenedor._id">
+                                            {{ contenedor.contenedor }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="my-container2">
+                                <mat-form-field>
+                                    <input matInput [(ngModel)]="maniobra.aa" name="aa" type="text" placeholder="AA requerida" required>
+                                </mat-form-field>
+                                <!--========Combombox Cliente=========-->
+                                <mat-form-field>
+                                    <mat-select placeholder="Seleccione un cliente" (change)="cambioCliente( $event.target.value )" [(ngModel)]="maniobra.cliente" name="cliente" required>
+                                        <mat-option *ngFor="let cliente of clientes" [value]="cliente._id">
+                                            {{ cliente.cliente }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="my-container2">
+                                <!--========Combombox Transporte=========-->
+                                <mat-form-field>
+                                    <mat-select placeholder="Seleccione un tipo de transporte" [(ngModel)]="maniobra.transporte" name="transporte">
+                                        <mat-option value="Carga">Carga</mat-option>
+                                        <mat-option value="Descarga">Descarga</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <input matInput [(ngModel)]="maniobra.lavado" name="lavado" type="text" placeholder="Lavado requerida" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="my-container2">
+                                <mat-form-field>
+                                    <input matInput [(ngModel)]="maniobra.rep" name="rep" type="text" placeholder="Rep requerida" required>
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <input matInput [(ngModel)]="maniobra.tipo" name="tipo" type="text" placeholder="Tipo requerida" required>
+                                </mat-form-field>
+                                <mat-form-field>
+                                    <input matInput [(ngModel)]="maniobra.grado" name="grado" type="text" placeholder="Grado requerida" required>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                          <i class="fa fa-save"></i>
+                          Guardar
+                        </button>
+                        <a routerLink="/maniobras" class="btn btn-danger waves-effect waves-light">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+
+
+    <div class="col-md-3">
+        <mat-card>
+            <h4 class="box-title m-b-0">Fotografia del Operador</h4>
+
+            <img [src]="operador.img | imagen:'operador'" class="rounded img-fluid">
+        </mat-card>
+    </div>
+
+    <!--<div class="col-md-3" *ngIf="medico._id">
+        <div class="card card-body">
+            <h4 class="box-title m-b-0">Fotografía</h4>
+
+            <img (click)="cambiarFoto()" [src]="medico.img | imagen:'medico'" class="img-circle img-fluid pointer">
+        </div>
+    </div>-->
+
+</div>

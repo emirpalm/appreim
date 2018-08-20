@@ -25,19 +25,18 @@ export class ClientesComponent implements OnInit {
   cargarClientes() {
     this.cargando = true;
     this._clienteService.cargarClientes(this.desde)
-    .subscribe((resp: any) => {
-      this.totalRegistros = resp.total;
-      this.clientes = resp.cliente;
-      this.cargando = false;
-      console.log(this.totalRegistros);
-    });
+    .subscribe(clientes =>
+      // this.totalRegistros = resp.total;
+      this.clientes = clientes
+
+    );
   }
 
   cambiarDesde(valor: number) {
     // tslint:disable-next-line:prefer-const
     let desde = this.desde + valor;
     console.log(desde);
-    if (desde >= this.totalRegistros) {
+    if (desde >= this._clienteService.totalClientes) {
       return;
     }
     if (desde < 0) {
