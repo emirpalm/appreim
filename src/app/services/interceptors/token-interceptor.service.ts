@@ -1,38 +1,49 @@
 import { UsuarioService } from '../usuario/usuario.service';
 import { Injectable } from '@angular/core';
-import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpResponse, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/fromPromise';
+import {
+  HttpEvent,
+  HttpInterceptor,
+  HttpHandler,
+  HttpRequest,
+  HttpErrorResponse
+} from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError} from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class RefreshTokenInterceptor implements HttpInterceptor {
 
-  constructor(public _usuarioService: UsuarioService) {}
+  constructor(public _usuarioService: UsuarioService, private router: Router) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return Observable.fromPromise(this.handleAccess(request, next));
-  }
 
-  private async handleAccess(request: HttpRequest<any>, next: HttpHandler):
-      Promise<HttpEvent<any>> {
-    const token = await this._usuarioService.getToken();
-    let changedRequest = request;
-    // HttpHeader object immutable - copy values
-    const headerSettings: {[name: string]: string | string[]; } = {};
+    const token = this._usuarioService.getToken();
 
-    for (const key of request.headers.keys()) {
-      headerSettings[key] = request.headers.getAll(key);
-    }
-    if (token) {
-      headerSettings['Authorization'] = 'Bearer ' + token;
-    }
-    headerSettings['Content-Type'] = 'application/json';
-    const newHeader = new HttpHeaders(headerSettings);
+    // modify request
+    request = request.clone({
+      setHeaders: {
+        authorization: 'Bearer ' + token
+      }
+    });
 
-    changedRequest = request.clone({
-      headers: newHeader});
-    return next.handle(changedRequest).toPromise();
-  }
+    console.log(request);
+
+     return next.handle(request)
+     .pipe(
+      catchError(err => {
+        if (err instanceof HttpErrorResponse && err.status === 0) {
+          console.log('Check Your Internet Connection And Try again Later');
+        } else if (err instanceof HttpErrorResponse && err.status === 401) {
+          // auth.setToken(null);
+          this.router.navigate(['/login']);
+        }
+        return throwError(err);
+      })
+    );
+
+   }
+
 
 }
 

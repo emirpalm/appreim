@@ -15,6 +15,8 @@ export class UsuarioService {
   usuario: Usuario;
   token: string;
   menu: any[] = [];
+  messages: string[] = [];
+
 
   constructor(
     public http: HttpClient,
