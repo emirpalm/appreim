@@ -8,18 +8,20 @@ import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { OperadoresComponent } from './operadores/operadores.component';
 import { OperadorComponent } from './operadores/operador.component';
-import { PlacasComponent } from './placas/placas.component';
-import { PlacaComponent } from './placas/placa.component';
+import { CamionesComponent } from './camiones/camiones.component';
+import { CamionComponent } from './camiones/camion.component';
 import { ContenedoresComponent } from './contenedores/contenedores.component';
 import { ContenedorComponent } from './contenedores/contenedor.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { ClienteComponent } from './clientes/cliente.component';
-
-
+import { AgenciasComponent } from './agencias/agencias.component';
+import { AgenciaComponent } from './agencias/agencia.component';
+import { FleterasComponent } from './fleteras/fleteras.component';
+import { FleteraComponent } from './fleteras/fletera.component';
 // Guards
 // import { LoginGuardGuard } from '../services/service.index';
 import { AdminGuard } from '../services/service.index';
-import { VerificaTokenGuard } from '../services/guards/verifica-token.guard';
+// import { VerificaTokenGuard } from '../services/guards/verifica-token.guard';
 import { ManiobraComponent } from './maniobras/maniobra.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 
@@ -56,15 +58,27 @@ const pagesRoutes: Routes = [
     },
     {path: 'operador/:id', component: OperadorComponent, data: {titulo: 'Actualizacion de datos'}},
     {
-        path: 'placas',
-        component: PlacasComponent,
-        data: { titulo: 'Mantenimiento de Placas' }
+        path: 'camiones',
+        component: CamionesComponent,
+        data: { titulo: 'Mantenimiento de camiones' }
     },
-    {path: 'placa/:id', component: PlacaComponent, data: {titulo: 'Actualizacion de placas'}},
+    {path: 'camion/:id', component: CamionComponent, data: {titulo: 'Actualizacion de camiones'}},
     {
         path: 'contenedores',
         component: ContenedoresComponent,
         data: { titulo: 'Mantenimiento de Contenedores' }
+    },
+    {path: 'agencia/:id', component: AgenciaComponent, data: {titulo: 'Actualizacion de agencia'}},
+    {
+        path: 'agencias',
+        component: AgenciasComponent,
+        data: { titulo: 'Mantenimiento de Agencias' }
+    },
+    {path: 'fletera/:id', component: FleteraComponent, data: {titulo: 'Actualizacion de fletera'}},
+    {
+        path: 'fleteras',
+        component: FleterasComponent,
+        data: { titulo: 'Mantenimiento de Fleteras' }
     },
     {path: 'contenedor/:id', component: ContenedorComponent, data: {titulo: 'Actualizacion de contenedores'}},
     {

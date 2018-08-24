@@ -1,7 +1,8 @@
-export class Placa {
+export class Fletera {
 
     constructor(
-        public placa?: string,
+        public nombre?: string,
+        public rfc?: string,
         public usuario?: string,
         public _id?: string
 

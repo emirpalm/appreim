@@ -16,16 +16,21 @@ import { ProfileComponent } from './profile/profile.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
 import { OperadoresComponent } from './operadores/operadores.component';
 import { OperadorComponent } from './operadores/operador.component';
-import { PlacasComponent } from './placas/placas.component';
-import { PlacaComponent } from './placas/placa.component';
+import { CamionesComponent } from './camiones/camiones.component';
+import { CamionComponent } from './camiones/camion.component';
 import { ContenedoresComponent } from './contenedores/contenedores.component';
 import { ContenedorComponent } from './contenedores/contenedor.component';
 import { ClientesComponent } from './clientes/clientes.component';
 import { ClienteComponent } from './clientes/cliente.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
+import { AgenciasComponent } from './agencias/agencias.component';
+import { AgenciaComponent } from './agencias/agencia.component';
+import { FleterasComponent } from './fleteras/fleteras.component';
+import { FleteraComponent } from './fleteras/fletera.component';
 // Pipes Modulos
 import { PipesModule } from '../pipes/pipes.module';
 // import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
+
 
 import {
     MatDatepickerModule,
@@ -49,12 +54,16 @@ import {
         UsuariosComponent,
         OperadoresComponent,
         OperadorComponent,
-        PlacasComponent,
-        PlacaComponent,
+        CamionesComponent,
+        CamionComponent,
         ContenedoresComponent,
         ContenedorComponent,
         ClientesComponent,
         ClienteComponent,
+        AgenciasComponent,
+        AgenciaComponent,
+        FleterasComponent,
+        FleteraComponent,
         BusquedaComponent
        // ModalUploadComponent
     ],

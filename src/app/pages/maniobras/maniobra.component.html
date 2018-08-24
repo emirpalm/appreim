@@ -13,61 +13,72 @@
                                     <input matInput [(ngModel)]="maniobra.entrada" name="entrada" type="time" placeholder="Entrada requerida" required>
                                 </mat-form-field>
                                 <mat-form-field class="time">
-                                    <input matInput [(ngModel)]="maniobra.salida" name="salida" type="time" placeholder="Salida requerida" required>
+                                    <input matInput [(ngModel)]="maniobra.inicio" name="inicio" type="time" placeholder="Inicio">
                                 </mat-form-field>
                                 <mat-form-field class="time">
-                                    <input matInput [(ngModel)]="maniobra.inicio" name="inicio" type="time" placeholder="Inicio requerida" required>
+                                    <input matInput [(ngModel)]="maniobra.fin" name="fin" type="time" placeholder="Fin">
                                 </mat-form-field>
                                 <mat-form-field class="time">
-                                    <input matInput [(ngModel)]="maniobra.fin" name="fin" type="time" placeholder="Fin requerida" required>
+                                    <input matInput [(ngModel)]="maniobra.salida" name="salida" type="time" placeholder="Salida">
                                 </mat-form-field>
                             </div>
-                            <div class="my-container2">
+                            <div class="my-container3">
                                 <!--========Combombox Operador=========-->
-                                <mat-form-field>
-                                    <mat-select placeholder="Seleccione un Operador" (change)="cambioOperador( $event.target.value )" [(ngModel)]="maniobra.operador" name="operador" required>
+                                <mat-form-field class="operador">
+                                    <mat-select placeholder="Seleccione un Operador" (selectionChange)="cambioOperador( $event.value )" [(ngModel)]="maniobra.operador" name="operador" required>
                                         <mat-option *ngFor="let operador of operadores" [value]="operador._id">
                                             {{ operador.operador }}
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
 
-                                <!--========Combombox Placas=========-->
-                                <mat-form-field>
-                                    <mat-select placeholder="Seleccione una placa" (change)="cambioPlaca( $event.target.value )" [(ngModel)]="maniobra.placas" name="placas" required>
-                                        <mat-option *ngFor="let placa of placas" [value]="placa._id">
-                                            {{ placa.placa }}
+                                <!--========Combombox Tracto=========-->
+                                <mat-form-field class="input">
+                                    <mat-select placeholder="Tracto" (selectionChange)="cambioCamion( $event.value )" [(ngModel)]="maniobra.camion" name="camion" required>
+                                        <mat-option *ngFor="let camion of camiones" [value]="camion._id">
+                                            {{ camion.numbereconomico }}
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
-                            </div>
-                            <div class="my-container2">
-                                <mat-form-field>
-                                    <input matInput [(ngModel)]="maniobra.fletera" name="fletera" type="text" placeholder="Fletera requerida" required>
+                                <mat-form-field class="input">
+                                    <input disabled matInput value="{{ camion.placa }}" name="placa" type="text" placeholder="Placas requerida" required>
                                 </mat-form-field>
+                                <mat-form-field class="input">
+                                    <input disabled matInput value="{{camion.fletera.nombre}}" name="nombre" type="text" placeholder="Fletera requerida" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="my-container4">
                                 <!--========Combombox Contenedor=========-->
                                 <mat-form-field>
-                                    <mat-select placeholder="Seleccione un contenedor" (change)="cambioContenedor( $event.target.value )" [(ngModel)]="maniobra.contenedor" name="contenedor" required>
+                                    <mat-select placeholder="Seleccione un contenedor" (selectionChange)="cambioContenedor( $event.value )" [(ngModel)]="maniobra.contenedor" name="contenedor" required>
                                         <mat-option *ngFor="let contenedor of contenedores" [value]="contenedor._id">
                                             {{ contenedor.contenedor }}
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
-                            </div>
-                            <div class="my-container2">
                                 <mat-form-field>
-                                    <input matInput [(ngModel)]="maniobra.aa" name="aa" type="text" placeholder="AA requerida" required>
+                                    <input disabled matInput value="{{ contenedor.tipo }}" name="tipo" type="text" placeholder="Tipo requerida" required>
+                                </mat-form-field>
+                            </div>
+                            <div class="my-container4">
+                                <!--========Combombox agencia=========-->
+                                <mat-form-field>
+                                    <mat-select placeholder="Seleccione una agencia" (selectionChange)="cambioAgencia( $event.value )" [(ngModel)]="maniobra.agencia" name="agencia" required>
+                                        <mat-option *ngFor="let agencia of agencias" [value]="agencia._id">
+                                            {{ agencia.nombre }}
+                                        </mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                                 <!--========Combombox Cliente=========-->
                                 <mat-form-field>
-                                    <mat-select placeholder="Seleccione un cliente" (change)="cambioCliente( $event.target.value )" [(ngModel)]="maniobra.cliente" name="cliente" required>
+                                    <mat-select placeholder="Seleccione un cliente" (selectionChange)="cambioCliente( $event.value )" [(ngModel)]="maniobra.cliente" name="cliente" required>
                                         <mat-option *ngFor="let cliente of clientes" [value]="cliente._id">
                                             {{ cliente.cliente }}
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
                             </div>
-                            <div class="my-container2">
+                            <div class="my-container4">
                                 <!--========Combombox Transporte=========-->
                                 <mat-form-field>
                                     <mat-select placeholder="Seleccione un tipo de transporte" [(ngModel)]="maniobra.transporte" name="transporte">
@@ -79,15 +90,17 @@
                                     <input matInput [(ngModel)]="maniobra.lavado" name="lavado" type="text" placeholder="Lavado requerida" required>
                                 </mat-form-field>
                             </div>
-                            <div class="my-container2">
+                            <div class="my-container4">
                                 <mat-form-field>
                                     <input matInput [(ngModel)]="maniobra.rep" name="rep" type="text" placeholder="Rep requerida" required>
                                 </mat-form-field>
+                                <!--========Combombox Transporte=========-->
                                 <mat-form-field>
-                                    <input matInput [(ngModel)]="maniobra.tipo" name="tipo" type="text" placeholder="Tipo requerida" required>
-                                </mat-form-field>
-                                <mat-form-field>
-                                    <input matInput [(ngModel)]="maniobra.grado" name="grado" type="text" placeholder="Grado requerida" required>
+                                    <mat-select placeholder="Grado" [(ngModel)]="maniobra.grado" name="grado">
+                                        <mat-option value="A">A</mat-option>
+                                        <mat-option value="B">B</mat-option>
+                                        <mat-option value="C">C</mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -102,14 +115,22 @@
         </mat-card>
     </div>
 
-
     <div class="col-md-3">
         <mat-card>
             <h4 class="box-title m-b-0">Fotografia del Operador</h4>
 
             <img [src]="operador.img | imagen:'operador'" class="rounded img-fluid">
+
+            <h4 class="box-title m-b-0">Datos de la agencia</h4>
+            <h3 class="box-title m-b-0">RFC: {{ agencia.rfc }}</h3>
+            <h3 class="box-title m-b-0">Patente: {{ agencia.patente }}</h3>
+            <h4 class="box-title m-b-0">Datos de la fletera</h4>
         </mat-card>
     </div>
+
+
+
+
 
     <!--<div class="col-md-3" *ngIf="medico._id">
         <div class="card card-body">

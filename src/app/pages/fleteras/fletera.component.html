@@ -2,16 +2,16 @@
 
     <div class="col-md-6">
         <div class="card card-body">
-            <h3 class="box-title m-b-0">Contenedor: {{ contenedor.contenedor }}</h3>
+            <h3 class="box-title m-b-0">Fletera: {{ fletera.nombre }}</h3>
             <div class="row">
                 <div class="col-sm-12 col-xs-12">
-                    <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarContenedor(f)">
+                    <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarFletera(f)">
                         <div class="my-container">
                             <mat-form-field>
-                                <input matInput [(ngModel)]="contenedor.contenedor" name="contenedor" type="text" class="form-control" placeholder="Numero del contenedor" required>
+                                <input matInput [(ngModel)]="fletera.nombre" name="nombre" type="text" class="form-control" placeholder="Nombre de la fletera" required>
                             </mat-form-field>
                             <mat-form-field>
-                                <input matInput [(ngModel)]="contenedor.tipo" name="tipo" type="text" class="form-control" placeholder="Tipo de contenedor" required>
+                                <input matInput [(ngModel)]="fletera.rfc" name="rfc" type="text" class="form-control" placeholder="RFC" required>
                             </mat-form-field>
                         </div>
 
@@ -19,10 +19,8 @@
                           <i class="fa fa-save"></i>
                           Guardar
                         </button>
-                        <a routerLink="/contenedores" class="btn btn-danger waves-effect waves-light">Cancelar</a>
+                        <a routerLink="/fleteras" class="btn btn-danger waves-effect waves-light">Cancelar</a>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
-</div>

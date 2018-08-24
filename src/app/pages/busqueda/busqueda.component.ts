@@ -4,9 +4,11 @@ import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { Usuario } from '../../models/usuarios.model';
 import { Operador } from '../../models/operadores.models';
-import { Placa } from '../../models/placas.models';
+import { Camion } from '../../models/camiones.models';
 import { Cliente } from '../../models/clientes.models';
 import { Contenedor } from '../../models/contenedores.models';
+import { Agencia } from '../../models/agencias.models';
+import { Fletera } from '../../models/fleteras.models';
 
 @Component({
   selector: 'app-busqueda',
@@ -17,9 +19,11 @@ export class BusquedaComponent implements OnInit {
 
   usuarios: Usuario[] = [];
   operadores: Operador[] = [];
-  placas: Placa[] = [];
+  camiones: Camion[] = [];
   contenedores: Contenedor[] = [];
   clientes: Cliente[] = [];
+  agencias: Agencia[] = [];
+  fleteras: Fletera[] = [];
 
 
   constructor(
@@ -49,9 +53,11 @@ export class BusquedaComponent implements OnInit {
 
           console.log( resp );
           this.operadores = resp.operadores;
-          this.placas = resp.placas;
+          this.camiones = resp.camiones;
           this.contenedores = resp.contenedores;
           this.clientes = resp.clientes;
+          this.agencias = resp.agencias;
+          this.fleteras = resp.fleteras;
           this.usuarios = resp.usuarios;
         });
 

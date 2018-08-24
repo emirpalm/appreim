@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UsuarioService } from '../usuario/usuario.service';
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 import { CanActivateChild } from '@angular/router/src/interfaces';
 
 declare var swal: any;
@@ -10,7 +10,7 @@ export class VerificaTokenGuard implements CanActivateChild {
 
   constructor(
     public _usuarioService: UsuarioService,
-    public router: Router
+    // public router: Router
   ) { }
 
   canActivateChild(): Promise<boolean> | boolean {
@@ -25,7 +25,8 @@ export class VerificaTokenGuard implements CanActivateChild {
     let expirado = this.expirado( payload.exp );
 
     if ( expirado ) {
-      this.router.navigate(['/login']);
+      this._usuarioService.logout();
+      location.reload(true);
       return false;
     } else {
       return this.verificaRenueva( payload.exp );
@@ -54,7 +55,8 @@ export class VerificaTokenGuard implements CanActivateChild {
         .subscribe( () => {
           resolve(true);
         }, () => {
-          this.router.navigate(['/login']);
+          this._usuarioService.logout();
+          location.reload(true);
           reject(false);
         });
 

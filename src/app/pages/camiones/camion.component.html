@@ -1,0 +1,36 @@
+<div class="row animated fadeIn">
+
+    <div class="col-md-6">
+        <div class="card card-body">
+            <h3 class="box-title m-b-0">Camion: {{ camion.numbereconomico }}</h3>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarCamion(f)">
+                        <div class="my-container">
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="camion.numbereconomico" name="numbereconomico" type="text" class="form-control" placeholder="Ingrese el numero economico" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="camion.placa" name="placa" type="text" class="form-control" placeholder="Ingrese las placas" required>
+                            </mat-form-field>
+                            <!--========Combombox Contenedor=========-->
+                            <!--========Combombox fletera=========-->
+                            <mat-form-field>
+                                <mat-select placeholder="Seleccione una fletera" (selectionChange)="cambioFletera( $event.value )" [(ngModel)]="camion.fletera" name="fletera" required>
+                                    <mat-option *ngFor="let fletera of fleteras" [value]="fletera._id">
+                                        {{ fletera.nombre }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                          <i class="fa fa-save"></i>
+                          Guardar
+                        </button>
+                        <a routerLink="/camiones" class="btn btn-danger waves-effect waves-light">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
