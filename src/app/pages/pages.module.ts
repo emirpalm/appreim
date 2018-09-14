@@ -27,6 +27,8 @@ import { AgenciasComponent } from './agencias/agencias.component';
 import { AgenciaComponent } from './agencias/agencia.component';
 import { FleterasComponent } from './fleteras/fleteras.component';
 import { FleteraComponent } from './fleteras/fletera.component';
+import { ViajesComponent } from './viajes/viajes.component';
+import { ViajeComponent } from './viajes/viaje.component';
 // Pipes Modulos
 import { PipesModule } from '../pipes/pipes.module';
 // import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
@@ -38,7 +40,8 @@ import {
     MatCardModule,
     MatNativeDateModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSlideToggleModule
   } from '@angular/material';
 
 
@@ -64,6 +67,8 @@ import {
         AgenciaComponent,
         FleterasComponent,
         FleteraComponent,
+        ViajesComponent,
+        ViajeComponent,
         BusquedaComponent
        // ModalUploadComponent
     ],
@@ -82,7 +87,8 @@ import {
         MatDatepickerModule,
         MatNativeDateModule,
         MatInputModule,
-        MatSelectModule
+        MatSelectModule,
+        MatSlideToggleModule
     ],
     providers: [
       ]

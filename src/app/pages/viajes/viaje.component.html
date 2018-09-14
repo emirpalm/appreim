@@ -1,0 +1,67 @@
+<div class="row animated fadeIn">
+
+    <div class="col-md-6">
+        <div class="card card-body">
+            <h3 class="box-title m-b-0">Viaje: {{ viaje.viaje }}</h3>
+            <div class="row">
+                <div class="col-sm-12 col-xs-12">
+                    <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarViaje(f)">
+                        <div class="my-container">
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="viaje.viaje" name="viaje" type="text" class="form-control" placeholder="Ingrese el viaje" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="viaje.contenedor" name="contenedor" type="text" class="form-control" placeholder="Ingrese los contenedores" required>
+                            </mat-form-field>
+                            <div *ngFor="let contenedor of contenedores; let i = index">
+                                <mat-slide-toggle [checked]="flagArray[i]">
+                                    {{contenedor.contenedor}}
+                                </mat-slide-toggle>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
+                              <i class="fa fa-save"></i>
+                              Guardar
+                            </button>
+                        <a routerLink="/viajes" class="btn btn-danger waves-effect waves-light">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="margin-top: 15px;text-align: -webkit-center;">
+    <div class="panel panel-default" style="width: 70%;text-align: -webkit-center;">
+
+        <!-- This is panel Body -->
+        <div class="panel-body" style="text-align: -webkit-center;">
+            <div *ngFor="let data of myItems;let i= index" class="alert alert-info" style="width: 50%;">
+                {{data.Value}}
+                <a href="#" (click)="DeleteItem(i)" style="float: right;">
+                    <span class="fa fa-save"></span>
+                </a>
+                <a href="#" (click)="EditItem(i)" style="float: right;padding-right: 8px;">
+                    <span class="fa fa-save"></span>
+                </a>
+            </div>
+            <div *ngIf="myItems.length == 0" class="alert alert-info" style="width: 50%;">
+                Items Are Empty !!!
+            </div>
+        </div>
+        <!-- This is panel footer -->
+        <div class="panel-footer">
+            <div class="form-group">
+                <!-- Form that gets user input -->
+                <form name="itemForm">
+                    <input id="Value" name="Value" required [(ngModel)]="newItem.Value" minlength="3" maxlength="10" style="width: 50%;" placeholder="Enter Any Item" class="form-control">
+                </form>
+                <br>
+                <!-- Add button to add record -->
+                <button type="submit" (click)="AddItem()" [disabled]="IsForUpdate == true" class="btn btn-default">Add</button>
+                <!-- Update button to submit updated value -->
+                <button type="submit" (click)="UpdateItem()" [disabled]="IsForUpdate == false" class="btn btn-default">Update</button>
+            </div>
+        </div>
+    </div>
+</div>

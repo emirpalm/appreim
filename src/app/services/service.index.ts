@@ -7,6 +7,7 @@ export { ClienteService } from './cliente/cliente.service';
 export { CamionService } from './camion/camion.service';
 export { ContenedorService } from './contenedor/contenedor.service';
 export { ManiobraService } from './maniobra/maniobra.service';
+export { ViajeService } from './viaje/viaje.service';
 export { AgenciaService } from './agencia/agencia.service';
 export { FleteraService } from './fletera/fletera.service';
 export { SubirArchivoService } from './subirArchivo/subir-archivo.service';

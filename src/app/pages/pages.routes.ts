@@ -18,6 +18,8 @@ import { AgenciasComponent } from './agencias/agencias.component';
 import { AgenciaComponent } from './agencias/agencia.component';
 import { FleterasComponent } from './fleteras/fleteras.component';
 import { FleteraComponent } from './fleteras/fletera.component';
+import { ViajesComponent } from './viajes/viajes.component';
+import { ViajeComponent } from './viajes/viaje.component';
 // Guards
 // import { LoginGuardGuard } from '../services/service.index';
 import { AdminGuard } from '../services/service.index';
@@ -79,6 +81,12 @@ const pagesRoutes: Routes = [
         path: 'fleteras',
         component: FleterasComponent,
         data: { titulo: 'Mantenimiento de Fleteras' }
+    },
+    {path: 'viaje/:id', component: ViajeComponent, data: {titulo: 'Actualizacion de viajes'}},
+    {
+        path: 'viajes',
+        component: ViajesComponent,
+        data: { titulo: 'Mantenimiento de viajes' }
     },
     {path: 'contenedor/:id', component: ContenedorComponent, data: {titulo: 'Actualizacion de contenedores'}},
     {
