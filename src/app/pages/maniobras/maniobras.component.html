@@ -24,7 +24,7 @@
 
                 <h3 class="card-title">Maniobras registrados ( <small>{{_maniobraService.totalManiobras}}</small> )</h3>
                 <div class="form-group">
-                    <input type="button" value="Exportar a pdf" (click)="exportpdf()" />
+                    <input type="button" value="Exportar a excel" (click)="exportAsXLSX()" />
                 </div>
                 <div class="form-group">
                     <input #inputInicio matInput [matDatepicker]="picker" name="fechaInicio" placeholder="Ingresar fecha">
@@ -63,7 +63,7 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let maniobra of maniobras">
-                            <td>{{maniobra.fechaCreado}}</td>
+                            <td>{{maniobra.fechaCreado.toString()}}</td>
                             <td>{{maniobra.entrada}}</td>
                             <td>{{maniobra.salida}}</td>
                             <td>{{maniobra.operador.operador}}</td>

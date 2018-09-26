@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Maniobra } from '../../models/maniobras.models';
 import { ManiobraService } from '../../services/service.index';
 import { NgForm } from '@angular/forms';
@@ -15,7 +15,7 @@ import { AgenciaService } from '../../services/service.index';
 import { Fletera } from '../../models/fleteras.models';
 import { FleteraService } from '../../services/service.index';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
+import { ModalDropzoneService } from '../../components/modal-dropzone/modal-dropzone.service';
 
 
 @Component({
@@ -39,6 +39,7 @@ export class ManiobraComponent implements OnInit {
   fleteras: Fletera[] = [];
   fletera: Fletera = new Fletera('', '');
 
+
   constructor(
     public _maniobraService: ManiobraService,
     public _operadorService: OperadorService,
@@ -49,7 +50,7 @@ export class ManiobraComponent implements OnInit {
     public _fleteraService: FleteraService,
     public router: Router,
     public activatedRoute: ActivatedRoute,
-    public _modalUploadService: ModalUploadService
+    public _modalDropzoneService: ModalDropzoneService
   ) {
 
     activatedRoute.params.subscribe( params => {
@@ -162,6 +163,18 @@ export class ManiobraComponent implements OnInit {
           .subscribe( fletera => this.fletera = fletera );
 
   }
+  onUploadError(args: any): void {
+    console.log('onUploadError:', args);
+  }
 
+  onUploadSuccess(args: any): void {
+    console.log('onUploadSuccess:', args);
+  }
+
+  cambiarFoto() {
+
+    this._modalDropzoneService.mostrarModal( this.maniobra._id );
+
+  }
 
 }

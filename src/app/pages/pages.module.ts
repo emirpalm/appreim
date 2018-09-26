@@ -70,7 +70,6 @@ import {
         ViajesComponent,
         ViajeComponent,
         BusquedaComponent
-       // ModalUploadComponent
     ],
     exports: [
         DashboardComponent
@@ -89,9 +88,7 @@ import {
         MatInputModule,
         MatSelectModule,
         MatSlideToggleModule
-    ],
-    providers: [
-      ]
+    ]
     })
 
 export class PagesModules {}

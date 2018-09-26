@@ -24,7 +24,7 @@ export class ManiobraService {
     .map( (resp: any) => {
 
       this.totalManiobras = resp.total;
-      console.log(resp.total);
+      console.log(resp.maniobras);
     return resp.maniobras;
     });
   }

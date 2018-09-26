@@ -11,6 +11,7 @@ export { ViajeService } from './viaje/viaje.service';
 export { AgenciaService } from './agencia/agencia.service';
 export { FleteraService } from './fletera/fletera.service';
 export { SubirArchivoService } from './subirArchivo/subir-archivo.service';
+export { ExcelService } from './excel/excel.service';
 // Guards
 export { LoginGuard } from './guards/login-guard';
 export { AdminGuard } from './guards/admin.guard';

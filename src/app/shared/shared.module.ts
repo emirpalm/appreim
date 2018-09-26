@@ -10,6 +10,8 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 // Pipes
 import { PipesModule } from '../pipes/pipes.module';
 import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
+import { ModalDropzoneComponent } from '../components/modal-dropzone/modal-dropzone.component';
+
 
 @NgModule({
 
@@ -18,19 +20,21 @@ import { ModalUploadComponent } from '../components/modal-upload/modal-upload.co
         CommonModule,
         PipesModule,
         FormsModule,
-        ReactiveFormsModule,
+        ReactiveFormsModule
         ],
     declarations: [
         HeaderComponent,
         SidebarComponent,
         BreadcrumbsComponent,
-        ModalUploadComponent
+        ModalUploadComponent,
+        ModalDropzoneComponent
     ],
     exports: [
         HeaderComponent,
         SidebarComponent,
         BreadcrumbsComponent,
-        ModalUploadComponent
+        ModalUploadComponent,
+        ModalDropzoneComponent
      ]
     })
     export class SharedModule {}

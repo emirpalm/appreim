@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl} from '@angular/forms';
 import { Maniobra } from '../../models/maniobras.models';
 import { ManiobraService } from '../../services/service.index';
+import { ExcelService } from '../../services/service.index';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
 import {MomentDateAdapter} from '@angular/material-moment-adapter';
@@ -49,13 +50,14 @@ export class ManiobrasComponent implements OnInit {
   date = new FormControl(moment());
    // tslint:disable-next-line:typedef-whitespace
    maniobras: Maniobra[] = [];
+   data: any = {fechaCreado: ''};
    // tslint:disable-next-line:no-inferrable-types
    cargando: boolean = true;
    // tslint:disable-next-line:no-inferrable-types
    totalRegistros: number = 0;
    // tslint:disable-next-line:no-inferrable-types
    desde: number = 0;
-   constructor(public _maniobraService: ManiobraService) { }
+   constructor(public _maniobraService: ManiobraService, public _excelService: ExcelService) { }
 
   ngOnInit() {
     this.cargarManiobras();
@@ -83,6 +85,11 @@ export class ManiobrasComponent implements OnInit {
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
       pdf.save('MYPdf.pdf'); // Generated PDF
     });
+  }
+
+  exportAsXLSX(): void {
+    // console.log(this.data);
+    this._excelService.exportAsExcelFile(this.maniobras, 'maniobras');
   }
 
   cargarManiobras() {

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule  } from '@angular/common/http';
 import { ModalUploadService } from '../components/modal-upload/modal-upload.service';
+import { ModalDropzoneService } from '../components/modal-dropzone/modal-dropzone.service';
 
 import {
     SettingsService,
@@ -17,6 +18,7 @@ import {
     ManiobraService,
     ViajeService,
     SubirArchivoService,
+    ExcelService,
     LoginGuard,
     AdminGuard,
     VerificaTokenGuard,
@@ -43,7 +45,9 @@ import {
       ManiobraService,
       ViajeService,
       SubirArchivoService,
+      ExcelService,
       ModalUploadService,
+      ModalDropzoneService,
       LoginGuard,
       AdminGuard,
       VerificaTokenGuard,

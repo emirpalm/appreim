@@ -110,6 +110,10 @@
                         </button>
                         <a routerLink="/maniobras" class="btn btn-danger waves-effect waves-light">Cancelar</a>
                     </form>
+                    <button (click)="cambiarFoto()" class="btn btn-success waves-effect waves-light m-r-10">
+                            <i class="fa fa-save"></i>
+                            Subir Imagenes
+                          </button>
                 </div>
             </div>
         </mat-card>
@@ -127,17 +131,5 @@
             <h4 class="box-title m-b-0">Datos de la fletera</h4>
         </mat-card>
     </div>
-
-
-
-
-
-    <!--<div class="col-md-3" *ngIf="medico._id">
-        <div class="card card-body">
-            <h4 class="box-title m-b-0">Fotografía</h4>
-
-            <img (click)="cambiarFoto()" [src]="medico.img | imagen:'medico'" class="img-circle img-fluid pointer">
-        </div>
-    </div>-->
 
 </div>
