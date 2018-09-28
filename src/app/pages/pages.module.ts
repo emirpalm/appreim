@@ -41,9 +41,11 @@ import {
     MatNativeDateModule,
     MatInputModule,
     MatSelectModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatTabsModule
   } from '@angular/material';
-
+import { FotosComponent } from './fotos/fotos.component';
+import { NgDropFilesDirective } from '.././directives/ng-drop-files.directive';
 
 @NgModule({
     declarations: [
@@ -69,7 +71,9 @@ import {
         FleteraComponent,
         ViajesComponent,
         ViajeComponent,
-        BusquedaComponent
+        BusquedaComponent,
+        FotosComponent,
+        NgDropFilesDirective
     ],
     exports: [
         DashboardComponent
@@ -87,7 +91,8 @@ import {
         MatNativeDateModule,
         MatInputModule,
         MatSelectModule,
-        MatSlideToggleModule
+        MatSlideToggleModule,
+        MatTabsModule
     ]
     })
 

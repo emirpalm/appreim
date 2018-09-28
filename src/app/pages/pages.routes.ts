@@ -20,6 +20,7 @@ import { FleterasComponent } from './fleteras/fleteras.component';
 import { FleteraComponent } from './fleteras/fletera.component';
 import { ViajesComponent } from './viajes/viajes.component';
 import { ViajeComponent } from './viajes/viaje.component';
+import { FotosComponent } from './fotos/fotos.component';
 // Guards
 // import { LoginGuardGuard } from '../services/service.index';
 import { AdminGuard } from '../services/service.index';
@@ -36,6 +37,7 @@ const pagesRoutes: Routes = [
     },
             {path: 'maniobras', component: ManiobrasComponent, data: {titulo: 'Maniobras'}},
             {path: 'maniobra/:id', component: ManiobraComponent, data: {titulo: 'Maniobra'}},
+            {path: 'fotos/:id', component: FotosComponent, data: {titulo: 'Fotos'}},
             {path: 'account-settings', component: AccountSettingsComponent, data: {titulo: 'Configuración de la cuenta'}},
             {path: 'profile', component: ProfileComponent, data: {titulo: 'Mi perfil'}},
             { path: 'busqueda/:termino', component: BusquedaComponent, data: { titulo: 'Buscador' } },
