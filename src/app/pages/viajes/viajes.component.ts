@@ -33,7 +33,7 @@ export class ViajesComponent implements OnInit {
     this._viajeService.cargarViajes(this.desde)
     .subscribe(viajes =>
       // this.totalRegistros = resp.total;
-      this.viajes = viajes
+    this.viajes = viajes
 
     );
   }

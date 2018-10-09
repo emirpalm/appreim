@@ -28,18 +28,24 @@
                     <thead>
                         <tr>
                             <th>Viaje</th>
+                            <th>Buque</th>
+                            <th>Naviera</th>
                             <th>Contenedor</th>
+                            <th>Tipo</th>
+                            <th>Vacio / Importación</th>
+                            <th>Fecha de Arrivo</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let viaje of viajes">
                             <td>{{viaje.viaje}}</td>
-                            <ul>
-                                <li *ngFor="let cont of viaje.contenedor">
-                                    <td>{{cont.contenedor}}</td>
-                                </li>
-                            </ul>
+                            <td>{{viaje.buque.buque}}</td>
+                            <td>{{viaje.naviera.naviera}}</td>
+                            <td>{{viaje.contenedor}}</td>
+                            <td>{{viaje.tipo}}</td>
+                            <td>{{viaje.vacioimportacion}}</td>
+                            <td>{{viaje.fechaArrivo}}</td>
                             <td>
                                 <button [routerLink]="['/viaje', viaje._id ]" class="btn btn-primary">
                           <i class="fa fa-edit"></i>

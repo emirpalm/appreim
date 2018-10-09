@@ -24,7 +24,7 @@ export class ViajeService {
     .map( (resp: any) => {
 
       this.totalViajes = resp.total;
-      console.log(resp.viaje);
+      // console.log(resp.viaje);
     return resp.viaje || [];
     });
   }

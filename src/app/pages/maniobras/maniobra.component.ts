@@ -6,6 +6,8 @@ import { Operador } from '../../models/operadores.models';
 import { OperadorService } from '../../services/service.index';
 import { Camion } from '../../models/camiones.models';
 import { CamionService } from '../../services/service.index';
+import { Viaje } from '../../models/viajes.models';
+import { ViajeService } from '../../services/service.index';
 import { Contenedor } from '../../models/contenedores.models';
 import { ContenedorService } from '../../services/service.index';
 import { Cliente } from '../../models/clientes.models';
@@ -38,10 +40,13 @@ export class ManiobraComponent implements OnInit {
   agencia: Agencia = new Agencia('', '');
   fleteras: Fletera[] = [];
   fletera: Fletera = new Fletera('', '');
+  viajes: Viaje[] = [];
+  viaje: Viaje = new Viaje('', '', '', '', '');
 
 
   constructor(
     public _maniobraService: ManiobraService,
+    public _viajeService: ViajeService,
     public _operadorService: OperadorService,
     public _camionService: CamionService,
     public _contenedorService: ContenedorService,
@@ -80,6 +85,8 @@ export class ManiobraComponent implements OnInit {
           .subscribe( agencias => this.agencias = agencias );
     this._fleteraService.cargarFleteras()
           .subscribe( fleteras => this.fleteras = fleteras );
+    this._viajeService.cargarViajes()
+          .subscribe( viajes => this.viajes = viajes );
 
   }
 

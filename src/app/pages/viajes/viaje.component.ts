@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Camion } from '../../models/camiones.models';
-import { CamionService } from '../../services/service.index';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
@@ -23,30 +21,20 @@ export class MyItems {
   })
 
   export class ViajeComponent implements OnInit {
-      // Used To Specify Title using Interpolation
-  // tslint:disable-next-line:member-ordering
-  title = 'Working With Array In Angular 5';
-  // Array where we are going to do CRUD operations
-  // tslint:disable-next-line:member-ordering
-  myItems: MyItems[] = new Array();
 
-  // Other variables
-  // tslint:disable-next-line:member-ordering
-  // tslint:disable-next-line:no-inferrable-types
-  // tslint:disable-next-line:member-ordering
-  IsForUpdate: boolean = false;
-  // tslint:disable-next-line:member-ordering
-  newItem: any = {};
-  // tslint:disable-next-line:member-ordering
-  updatedItem;
+  // title = 'Working With Array In Angular 5';
+  // myItems: MyItems[] = new Array();
+  // IsForUpdate: boolean = false;
+  // newItem: any = {};
+  // updatedItem;
 
-    viajes: Viaje[] = [];
-    viaje: Viaje = new Viaje('');
-      // tslint:disable-next-line:typedef-whitespace
-   contenedores: Contenedor[] = [];
-   flagArray = [];
+  viajes: Viaje[] = [];
+  viaje: Viaje = new Viaje('');
+  // tslint:disable-next-line:typedef-whitespace
+  contenedores: Contenedor[] = [];
+
     constructor(public _viajeService: ViajeService,
-        public _contenedorService: ContenedorService,
+      public _contenedorService: ContenedorService,
       public router: Router,
       public activatedRoute: ActivatedRoute,
       public _modalUploadService: ModalUploadService) {
@@ -77,7 +65,7 @@ export class MyItems {
 
               console.log( viaje );
               this.viaje = viaje;
-              this.viaje.contenedor = viaje.contenedor._id;
+              // this.viaje.contenedor = viaje.contenedor._id;
               // this.cambioFletera( this.camion.fletera );
               // this.camion.usuario = camion.usuario._id;
             });
@@ -102,42 +90,5 @@ export class MyItems {
               });
 
     }
-   // cambioContenedor( id: string ) {
-
-     // this._fleteraService.cargarFletera( id )
-       //     .subscribe( fletera => this.fletera = fletera );
-
-    // }
-
-  AddItem() {
-    this.myItems.push(
-      this.newItem
-    );
-    this.newItem = {};
-  }
-// When user selects edit option
-EditItem(i) {
-  this.newItem.Value = this.myItems[i].Value;
-  this.updatedItem = i;
-  this.IsForUpdate = true;
-}
-
-// When user clicks on update button to submit updated value
-UpdateItem() {
-  // tslint:disable-next-line:prefer-const
-  let data = this.updatedItem;
-  for (let i = 0; i < this.myItems.length; i++) {
-    if (i === data) {
-      this.myItems[i].Value = this.newItem.Value;
-    }
-  }
-  this.IsForUpdate = false;
-  this.newItem = {};
-}
-
-// To delete specific item
-DeleteItem(i) {
-  this.myItems.splice(i, 1);
-}
 
   }

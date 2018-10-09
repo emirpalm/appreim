@@ -34,6 +34,9 @@
 
                                 <!--========Combombox Tracto=========-->
                                 <mat-form-field class="input">
+                                    <input matInput placeholder="Numero del viaje" (keyup)="buscarNumeroViaje( input.value )" [(ngModel)]="viaje.viaje" name="viaje" required>
+                                </mat-form-field>
+                                <mat-form-field class="input">
                                     <mat-select placeholder="Tracto" (selectionChange)="cambioCamion( $event.value )" [(ngModel)]="maniobra.camion" name="camion" required>
                                         <mat-option *ngFor="let camion of camiones" [value]="camion._id">
                                             {{ camion.numbereconomico }}
