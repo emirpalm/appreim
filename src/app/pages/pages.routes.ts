@@ -27,6 +27,7 @@ import { AdminGuard } from '../services/service.index';
 // import { VerificaTokenGuard } from '../services/guards/verifica-token.guard';
 import { ManiobraComponent } from './maniobras/maniobra.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
+import { AddcontainersComponent } from './addcontainers/addcontainers.component';
 
 
 const pagesRoutes: Routes = [
@@ -85,6 +86,7 @@ const pagesRoutes: Routes = [
         data: { titulo: 'Mantenimiento de Fleteras' }
     },
     {path: 'viaje/:id', component: ViajeComponent, data: {titulo: 'Actualizacion de viajes'}},
+    {path: 'addcontainers/:id', component: AddcontainersComponent, data: {titulo: 'Actualizacion de contenedores del viaje'}},
     {
         path: 'viajes',
         component: ViajesComponent,

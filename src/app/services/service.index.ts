@@ -1,3 +1,5 @@
+export { NavieraService } from './naviera/naviera.service';
+export { BuqueService } from './buque/buque.service';
 export { SharedService } from './shared/shared.service';
 export { SettingsService } from './settings/settings.service';
 export { SidebarService } from './shared/sidebar.service';

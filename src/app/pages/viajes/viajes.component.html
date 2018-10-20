@@ -30,9 +30,9 @@
                             <th>Viaje</th>
                             <th>Buque</th>
                             <th>Naviera</th>
-                            <th>Contenedor</th>
+                            <!--<th>Contenedor</th>
                             <th>Tipo</th>
-                            <th>Vacio / Importación</th>
+                            <th>Vacio / Importación</th>-->
                             <th>Fecha de Arrivo</th>
                             <th></th>
                         </tr>
@@ -42,18 +42,21 @@
                             <td>{{viaje.viaje}}</td>
                             <td>{{viaje.buque.buque}}</td>
                             <td>{{viaje.naviera.naviera}}</td>
-                            <td>{{viaje.contenedor}}</td>
-                            <td>{{viaje.tipo}}</td>
-                            <td>{{viaje.vacioimportacion}}</td>
+                            <!--<td>{{viaje.contenedores.contenedor.contenedor}}</td>
+                            <td>{{viaje.contenedores.contenedor.tipo}}</td>
+                            <td>{{viaje.vacioimportacion}}</td>-->
                             <td>{{viaje.fechaArrivo}}</td>
                             <td>
                                 <button [routerLink]="['/viaje', viaje._id ]" class="btn btn-primary">
-                          <i class="fa fa-edit"></i>
+                          <i class="fa fa-edit"> Editar</i>
                         </button>
 
                                 <button (click)="borrarViaje( viaje )" class="btn btn-danger">
-                          <i class="fa fa-trash-o"></i>
+                          <i class="fa fa-trash-o"> Eliminar</i>
                         </button>
+                                <button [routerLink]="['/addcontainers', viaje._id ]" class="btn btn-primary">
+                            <i class="fa fa-edit"> Añadir Contenedores</i>
+                          </button>
                             </td>
                         </tr>
                     </tbody>

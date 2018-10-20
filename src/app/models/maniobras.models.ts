@@ -14,6 +14,7 @@ export class Maniobra {
         public contenedor?: string,
         public cliente?: string,
         public agencia?: string,
+        public viaje?: string,
         public usuario?: string,
         public _id?: string,
         public fechaCreado?: Date,

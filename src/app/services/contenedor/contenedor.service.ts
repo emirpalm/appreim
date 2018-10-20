@@ -24,7 +24,7 @@ export class ContenedorService {
     .map( (resp: any) => {
 
       this.totalContenedores = resp.total;
-      console.log(resp.total);
+      // console.log(resp.total);
     return resp.contenedor;
     });
   }

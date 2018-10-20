@@ -13,8 +13,8 @@ export class ViajesComponent implements OnInit {
    // tslint:disable-next-line:typedef-whitespace
    viajes: Viaje[] = [];
   // viajes: Viaje = new Viaje('', []);
-  // contenedores: Contenedor[] = [];
-    contenedor: Contenedor = new Contenedor('');
+   contenedores: Contenedor[] = [];
+    // contenedor: Contenedor = new Contenedor('');
    // tslint:disable-next-line:no-inferrable-types
    cargando: boolean = true;
    // tslint:disable-next-line:no-inferrable-types
@@ -22,7 +22,7 @@ export class ViajesComponent implements OnInit {
    // tslint:disable-next-line:no-inferrable-types
    desde: number = 0;
 
-  constructor(public _viajeService: ViajeService,   public _contenedorService: ContenedorService) { }
+  constructor(public _viajeService: ViajeService) { }
 
   ngOnInit() {
     this.cargarViajes();
@@ -41,7 +41,7 @@ export class ViajesComponent implements OnInit {
   cambiarDesde(valor: number) {
     // tslint:disable-next-line:prefer-const
     let desde = this.desde + valor;
-    console.log(desde);
+    // console.log(desde);
     if (desde >= this._viajeService.totalViajes) {
       return;
     }

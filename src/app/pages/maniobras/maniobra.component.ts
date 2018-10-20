@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Maniobra } from '../../models/maniobras.models';
 import { ManiobraService } from '../../services/service.index';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormControl } from '@angular/forms';
 import { Operador } from '../../models/operadores.models';
 import { OperadorService } from '../../services/service.index';
 import { Camion } from '../../models/camiones.models';
@@ -18,6 +18,8 @@ import { Fletera } from '../../models/fleteras.models';
 import { FleteraService } from '../../services/service.index';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalDropzoneService } from '../../components/modal-dropzone/modal-dropzone.service';
+import {Observable} from 'rxjs';
+import {map, startWith} from 'rxjs/operators';
 
 
 @Component({
@@ -42,7 +44,9 @@ export class ManiobraComponent implements OnInit {
   fletera: Fletera = new Fletera('', '');
   viajes: Viaje[] = [];
   viaje: Viaje = new Viaje('', '', '', '', '');
-
+  viajec: Viaje = new Viaje('');
+  myControl = new FormControl();
+  filteredOptions: Observable<Viaje[]>;
 
   constructor(
     public _maniobraService: ManiobraService,
@@ -69,6 +73,12 @@ export class ManiobraComponent implements OnInit {
 
     });
 
+    this.filteredOptions = this.myControl.valueChanges
+      .pipe(
+        startWith(''),
+        map(viaje => viaje ? this._filter(viaje) : this.viajes.slice())
+      );
+
   }
 
   ngOnInit() {
@@ -77,8 +87,8 @@ export class ManiobraComponent implements OnInit {
           .subscribe( operadores => this.operadores = operadores );
     this._camionService.cargarCamiones()
           .subscribe( camiones => this.camiones = camiones );
-    this._contenedorService.cargarContenedores()
-          .subscribe( contenedores => this.contenedores = contenedores );
+    /* this._contenedorService.cargarContenedores()
+          .subscribe( contenedores => this.contenedores = contenedores );*/
     this._clienteService.cargarClientes()
           .subscribe( clientes => this.clientes = clientes );
     this._agenciaService.cargarAgencias()
@@ -88,7 +98,25 @@ export class ManiobraComponent implements OnInit {
     this._viajeService.cargarViajes()
           .subscribe( viajes => this.viajes = viajes );
 
+    /* this.filteredOptions = this.myControl.valueChanges
+          .pipe(
+            startWith<string | Viaje>(''),
+            map(value => typeof value === 'string' ? value : value.viaje),
+            map(viaje => viaje ? this._filter(viaje) : this.viajes.slice())
+          );*/
+
   }
+
+  /*displayFn(viaje?: Viaje): string | undefined {
+    return viaje ? viaje.viaje : undefined;
+  }*/
+
+  private _filter(viaje: string): Viaje[] {
+    const filterValue = viaje.toLowerCase();
+
+    return this.viajes.filter(option => option.viaje.toLowerCase().indexOf(filterValue) === 0);
+  }
+
 
   cargarManiobra( id: string ) {
     this._maniobraService.cargarManiobra( id )
@@ -100,12 +128,16 @@ export class ManiobraComponent implements OnInit {
             this.cambioOperador( this.maniobra.operador );
             this.maniobra.camion = maniobra.camiones._id;
             this.cambioCamion( this.maniobra.camion );
-            this.maniobra.contenedor = maniobra.contenedor._id;
-            this.cambioContenedor( this.maniobra.contenedor );
+            /*this.maniobra.contenedor = maniobra.contenedor._id;
+            this.cambioContenedor( this.maniobra.contenedor );*/
             this.maniobra.cliente = maniobra.cliente._id;
             this.cambioCliente( this.maniobra.cliente );
             this.maniobra.agencia = maniobra.agencia._id;
             this.cambioAgencia( this.maniobra.agencia );
+            this.maniobra.agencia = maniobra.agencia._id;
+            this.cambioAgencia( this.maniobra.agencia );
+            this.maniobra.viaje = maniobra.viaje._id;
+            this.cambioViaje( this.maniobra.viaje );
           });
   }
 
@@ -126,6 +158,12 @@ export class ManiobraComponent implements OnInit {
               this.router.navigate(['/maniobra', maniobra._id ]);
 
             });
+
+  }
+
+  cambioViaje( id: string ) {
+    this._viajeService.cargarViaje( id )
+          .subscribe( viaje => this.viaje = viaje );
 
   }
 

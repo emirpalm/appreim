@@ -42,10 +42,12 @@ import {
     MatInputModule,
     MatSelectModule,
     MatSlideToggleModule,
-    MatTabsModule
+    MatTabsModule,
+    MatAutocompleteModule
   } from '@angular/material';
 import { FotosComponent } from './fotos/fotos.component';
 import { NgDropFilesDirective } from '.././directives/ng-drop-files.directive';
+import { AddcontainersComponent } from './addcontainers/addcontainers.component';
 
 @NgModule({
     declarations: [
@@ -73,7 +75,8 @@ import { NgDropFilesDirective } from '.././directives/ng-drop-files.directive';
         ViajeComponent,
         BusquedaComponent,
         FotosComponent,
-        NgDropFilesDirective
+        NgDropFilesDirective,
+        AddcontainersComponent
     ],
     exports: [
         DashboardComponent
@@ -92,7 +95,8 @@ import { NgDropFilesDirective } from '.././directives/ng-drop-files.directive';
         MatInputModule,
         MatSelectModule,
         MatSlideToggleModule,
-        MatTabsModule
+        MatTabsModule,
+        MatAutocompleteModule
     ]
     })
 
