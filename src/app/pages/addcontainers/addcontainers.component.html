@@ -3,8 +3,8 @@
     <div class="col-md-6">
         <div class="card card-body">
             <h3 class="box-title m-b-0">Viaje: {{ viaje.viaje }}</h3>
-            <h3 class="box-title m-b-0" *ngFor="let buque of buques">Buque: {{ buque.buque }}</h3>
-            <h3 class="box-title m-b-0" *ngFor="let naviera of navieras">Naviera: {{ naviera.naviera }}</h3>
+            <h3 class="box-title m-b-0">Buque: {{ viaje.buque.buque }}</h3>
+            <h3 class="box-title m-b-0">Naviera: {{ viaje.naviera.naviera }}</h3>
             <div class="row">
                 <div class="col-sm-12 col-xs-12">
                     <form #f="ngForm" ngNativeValidate (ngSubmit)="actualizarContenedor(f)">

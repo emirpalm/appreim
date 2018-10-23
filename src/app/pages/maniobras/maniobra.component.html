@@ -27,7 +27,7 @@
                                 <mat-form-field class="operador">
                                     <mat-select placeholder="Seleccione un Operador" (selectionChange)="cambioOperador( $event.value )" [(ngModel)]="maniobra.operador" name="operador" required>
                                         <mat-option *ngFor="let operador of operadores" [value]="operador._id">
-                                            {{ operador.operador }}
+                                            <span>{{ operador.operador }}</span>
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
@@ -46,14 +46,6 @@
                                         </mat-option>
                                     </mat-autocomplete>
                                 </mat-form-field>-->
-
-                                <mat-form-field class="input">
-                                    <mat-select placeholder="Numero del viaje" (selectionChange)="cambioViaje( $event.value )" name="viaje" required>
-                                        <mat-option *ngFor="let viaje of viajes" [value]="viaje._id">
-                                            {{ viaje.viaje }}
-                                        </mat-option>
-                                    </mat-select>
-                                </mat-form-field>
                                 <mat-form-field class="input">
                                     <mat-select placeholder="Tracto" (selectionChange)="cambioCamion( $event.value )" [(ngModel)]="maniobra.camion" name="camion" required>
                                         <mat-option *ngFor="let camion of camiones" [value]="camion._id">
@@ -69,16 +61,22 @@
                                 </mat-form-field>
                             </div>
                             <div class="my-container4">
-                                <!--========Combombox Contenedor=========-->
                                 <mat-form-field>
-                                    <mat-select placeholder="Seleccione un contenedor" [(ngModel)]="maniobra.contenedor" name="contenedor" required>
-                                        <mat-option *ngFor="let viaje of viaje.contenedores" [value]="viaje.contenedor.contenedor">
-                                            {{ viaje.contenedor.contenedor }}
+                                    <mat-select placeholder="Numero del viaje" (selectionChange)="cambioViaje( $event.value )" [(ngModel)]="maniobra.viaje" name="viaje" required>
+                                        <mat-option *ngFor="let viaje of viajes" [value]="viaje._id">
+                                            {{ viaje.viaje }}
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>
+                                <!--========Combombox Contenedor=========-->
                                 <mat-form-field>
-                                    <input disabled matInput value="{{ contenedor.tipo }}" name="tipo" type="text" placeholder="Tipo requerida" required>
+                                    <mat-select placeholder="Seleccione un contenedor" [(ngModel)]="maniobra.contenedor" name="contenedor" required>
+                                        <mat-option *ngFor="let viajec of viaje.contenedores" [value]="viajec.contenedor._id">
+                                            <span>{{ viajec.contenedor.contenedor }}</span>
+                                            <span> | Tipo: {{viajec.contenedor.tipo}}</span>
+                                            <span> | {{ viajec.vacioimportacion }}</span>
+                                        </mat-option>
+                                    </mat-select>
                                 </mat-form-field>
                             </div>
                             <div class="my-container4">

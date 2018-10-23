@@ -134,8 +134,6 @@ export class ManiobraComponent implements OnInit {
             this.cambioCliente( this.maniobra.cliente );
             this.maniobra.agencia = maniobra.agencia._id;
             this.cambioAgencia( this.maniobra.agencia );
-            this.maniobra.agencia = maniobra.agencia._id;
-            this.cambioAgencia( this.maniobra.agencia );
             this.maniobra.viaje = maniobra.viaje._id;
             this.cambioViaje( this.maniobra.viaje );
           });

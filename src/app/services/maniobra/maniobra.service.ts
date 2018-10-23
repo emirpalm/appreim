@@ -3,17 +3,20 @@ import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { UsuarioService } from '../usuario/usuario.service';
 import { Maniobra } from '../../models/maniobras.models';
+import { SubirArchivoService } from '../subirArchivo/subir-archivo.service';
 
 import swal from 'sweetalert';
+import { FileItem } from '../../models/file-item.models';
 
 @Injectable()
 export class ManiobraService {
   // tslint:disable-next-line:no-inferrable-types
   totalManiobras: number = 0;
-
+  maniobra: Maniobra;
   constructor(
     public http: HttpClient,
-    public _usuarioService: UsuarioService
+    public _usuarioService: UsuarioService,
+    public _subirArchivoService: SubirArchivoService
   ) { }
 
   cargarManiobras(desde: number = 0) {
@@ -92,6 +95,7 @@ export class ManiobraService {
                 .map( (resp: any) => resp.maniobras );
 
   }
+
 
 
 }

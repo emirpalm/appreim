@@ -39,7 +39,7 @@ export class ViajeService {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/viaje/' + id;
     return this.http.get( url )
-                .map( (resp: any) => resp.viaje );
+                .map( (resp: any) => resp.viaje  );
 
   }
 

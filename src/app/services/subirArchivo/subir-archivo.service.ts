@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { URL_SERVICIOS } from '../../config/config';
+import { FileItem } from '../../models/file-item.models';
 
 @Injectable()
 export class SubirArchivoService {
@@ -82,4 +83,52 @@ export class SubirArchivoService {
 
     });
   }
+
+cargarImagenesMongo(imagenes: FileItem[], tipo: string, id: string) {
+// tslint:disable-next-line:prefer-const
+/* for (let item of imagenes) {
+  item.estaSubiendo = true;
+  if (item.progreso >= 100) {
+    continue;
+  }
+}*/
+
+ // tslint:disable-next-line:no-shadowed-variable
+ return new Promise((resolve, reject) => {
+
+  // tslint:disable-next-line:prefer-const
+
+for ( let i = 0; i < imagenes.length; i++) {
+  // tslint:disable-next-line:prefer-const
+  let formData: any = new FormData();
+// tslint:disable-next-line:prefer-const
+let xhr = new XMLHttpRequest();
+formData.append('imagen', imagenes[i].archivo, imagenes[i].nombreArchivo);
+xhr.onreadystatechange = function() {
+
+  if (xhr.readyState === 4) {
+
+    if (xhr.status === 200) {
+      console.log('Imagen Subida');
+      resolve(JSON.parse(xhr.response));
+    } else {
+      console.log('Fallo la subida');
+      reject(xhr.response);
+    }
+
+  }
+
+};
+
+// tslint:disable-next-line:prefer-const
+let url = URL_SERVICIOS + '/upload/' + tipo + '/' + id;
+
+xhr.open('put', url , true);
+xhr.send(formData);
+
+}
+});
+}
+
+private guardarImagen() {}
 }

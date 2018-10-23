@@ -70,10 +70,10 @@ export class AddcontainersComponent implements OnInit {
     this._viajeService.cargarViaje( id )
           .subscribe( viaje => {
 
-           // console.log( viaje );
+            console.log( viaje );
             this.viaje = viaje;
-            // this.viaje.contenedor = viaje.contenedor._id;
-            // this.cambioContenedor( this.viaje.contenedor );
+            // this.viaje.buque = viaje.buque._id;
+            // this.cambioBuque( this.viaje.contenedor );
           });
   }
 
