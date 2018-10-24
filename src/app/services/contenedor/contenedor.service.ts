@@ -3,8 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { UsuarioService } from '../usuario/usuario.service';
 import { Contenedor } from '../../models/contenedores.models';
-
 import swal from 'sweetalert';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError} from 'rxjs/operators';
 
 @Injectable()
 export class ContenedorService {
@@ -21,12 +22,12 @@ export class ContenedorService {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/contenedor?desde=' + desde;
     return this.http.get(url)
-    .map( (resp: any) => {
+    .pipe(map( (resp: any) => {
 
       this.totalContenedores = resp.total;
       // console.log(resp.total);
     return resp.contenedor;
-    });
+    }));
   }
 
   cargarContenedor( id: string ) {
@@ -34,7 +35,7 @@ export class ContenedorService {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/contenedor/' + id;
     return this.http.get( url )
-                .map( (resp: any) => resp.contenedor );
+                .pipe(map( (resp: any) => resp.contenedor ));
 
   }
 
@@ -44,7 +45,7 @@ export class ContenedorService {
     url += '?token=' + this._usuarioService.token;
 
     return this.http.delete( url )
-                .map( resp => swal('Contenedor Borrado', 'Eliminado correctamente', 'success') );
+                .pipe(map( resp => swal('Contenedor Borrado', 'Eliminado correctamente', 'success') ));
 
   }
 
@@ -58,20 +59,20 @@ export class ContenedorService {
       url += '?token=' + this._usuarioService.token;
 
       return this.http.put( url, contenedor )
-                .map( (resp: any) => {
+                .pipe(map( (resp: any) => {
                   swal('Contenedor Actualizado', contenedor.contenedor, 'success');
                   return resp.contenedor;
 
-                });
+                }));
 
     } else {
       // creando
       url += '?token=' + this._usuarioService.token;
       return this.http.post( url, contenedor )
-              .map( (resp: any) => {
+              .pipe(map( (resp: any) => {
                 swal('Contenedor Creado', contenedor.contenedor, 'success');
                 return resp.contenedor;
-              });
+              }));
     }
 
   }
@@ -80,7 +81,7 @@ export class ContenedorService {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/busqueda/coleccion/contenedores/' + termino;
     return this.http.get( url )
-                .map( (resp: any) => resp.contenedores );
+                .pipe(map( (resp: any) => resp.contenedores ));
 
   }
 

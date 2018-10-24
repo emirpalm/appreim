@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { UsuarioService } from '../usuario/usuario.service';
 import { Operador } from '../../models/operadores.models';
-
+import { Observable, throwError } from 'rxjs';
+import { map, catchError} from 'rxjs/operators';
 import swal from 'sweetalert';
 
 @Injectable()
@@ -21,12 +22,12 @@ export class OperadorService {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/operador?desde=' + desde;
     return this.http.get(url)
-    .map( (resp: any) => {
+    .pipe(map( (resp: any) => {
 
       this.totalOperadores = resp.total;
       console.log(resp.total);
     return resp.operadores;
-    });
+    }));
   }
 
   cargarOperador( id: string ) {
@@ -34,7 +35,7 @@ export class OperadorService {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/operador/' + id;
     return this.http.get( url )
-                .map( (resp: any) => resp.operadores );
+                .pipe(map( (resp: any) => resp.operadores ));
 
   }
 
@@ -44,7 +45,7 @@ export class OperadorService {
     url += '?token=' + this._usuarioService.token;
 
     return this.http.delete( url )
-                .map( resp => swal('Operador Borrado', 'Eliminado correctamente', 'success') );
+                .pipe(map( resp => swal('Operador Borrado', 'Eliminado correctamente', 'success') ));
 
   }
 
@@ -59,20 +60,20 @@ export class OperadorService {
       url += '?token=' + this._usuarioService.token;
 
       return this.http.put( url, operador )
-                .map( (resp: any) => {
+                .pipe(map( (resp: any) => {
                   swal('Operador Actualizado', operador.operador, 'success');
                   return resp.operador;
 
-                });
+                }));
 
     } else {
       // creando
       url += '?token=' + this._usuarioService.token;
       return this.http.post( url, operador )
-              .map( (resp: any) => {
+              .pipe(map( (resp: any) => {
                 swal('Operador Creado', operador.operador, 'success');
                 return resp.operador;
-              });
+              }));
     }
 
   }
@@ -81,7 +82,7 @@ export class OperadorService {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/busqueda/coleccion/operadores/' + termino;
     return this.http.get( url )
-                .map( (resp: any) => resp.operadores );
+                .pipe(map( (resp: any) => resp.operadores ));
 
   }
 

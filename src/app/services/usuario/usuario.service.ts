@@ -1,3 +1,4 @@
+import {throwError as observableThrowError } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Usuario } from '../../models/usuarios.model';
 import { HttpClient } from '@angular/common/http';
@@ -5,10 +6,9 @@ import { URL_SERVICIOS } from '../../config/config';
 import { Router } from '@angular/router';
 import { SubirArchivoService } from '../subirArchivo/subir-archivo.service';
 import swal from 'sweetalert';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/Observable/throw';
-import 'rxjs/add/operator/map';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError} from 'rxjs/operators';
+
 
 @Injectable()
 export class UsuarioService {
@@ -34,19 +34,20 @@ export class UsuarioService {
     url += '?token=' + this.token;
 
     return this.http.get( url )
-                .map( (resp: any) => {
+    .pipe(
+                map( (resp: any) => {
 
                   this.token = resp.token;
                   localStorage.setItem('token', this.token );
                   console.log('Token renovado');
 
                   return true;
-                })
-                .catch( err => {
+                }),
+                catchError( err => {
                   this.router.navigate(['/login']);
                   swal( 'No se pudo renovar token', 'No fue posible renovar token', 'error' );
-                  return Observable.throw( err );
-                });
+                  return throwError(err);
+                }));
 
 
   }
@@ -101,15 +102,16 @@ export class UsuarioService {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/login';
     return this.http.post( url, usuario )
-                .map( (resp: any) => {
+    .pipe(
+                map( (resp: any) => {
                   this.guardarStorage( resp.id, resp.token, resp.usuario, resp.menu );
                   return true;
-                })
-                .catch( err => {
+                }),
+                catchError( err => {
 
                   swal( 'Error en el login', err.error.mensaje, 'error' );
-                  return Observable.throw( err );
-                });
+                  return throwError(err);
+                }));
 
   }
 
@@ -119,15 +121,16 @@ export class UsuarioService {
     let url = URL_SERVICIOS + '/usuario';
 
     return this.http.post( url, usuario )
-              .map( (resp: any) => {
+    .pipe(
+              map( (resp: any) => {
 
                 swal('Usuario creado', usuario.email, 'success' );
                 return resp.usuario;
-              })
-              .catch( err => {
+              }),
+              catchError( err => {
                 swal( err.error.mensaje, err.error.errores.message, 'error' );
-                return Observable.throw( err );
-              });
+                return throwError(err);
+              }));
   }
 
   actualizarUsuario( usuario: Usuario ) {
@@ -136,7 +139,8 @@ export class UsuarioService {
     url += '?token=' + this.token;
 
     return this.http.put( url, usuario )
-                .map( (resp: any) => {
+    .pipe(
+                map( (resp: any) => {
 
                   if ( usuario._id === this.usuario._id ) {
                     // tslint:disable-next-line:prefer-const
@@ -147,11 +151,11 @@ export class UsuarioService {
                   swal('Usuario actualizado', usuario.nombre, 'success' );
 
                   return true;
-                })
-                .catch( err => {
+                }),
+                catchError( err => {
                   swal( err.error.mensaje, err.error.errores.message, 'error' );
-                  return Observable.throw( err );
-                });
+                  return throwError(err);
+                }));
 
   }
 
@@ -183,7 +187,7 @@ export class UsuarioService {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/busqueda/coleccion/usuarios/' + termino;
     return this.http.get( url )
-                .map( (resp: any) => resp.usuarios );
+    .pipe( map( (resp: any) => resp.usuarios ));
 
   }
 
@@ -193,10 +197,11 @@ export class UsuarioService {
     url += '?token=' + this.token;
 
     return this.http.delete( url )
-                .map( resp => {
+    .pipe(
+                map( resp => {
                   swal('Usuario borrado', 'El usuario a sido eliminado correctamente', 'success');
                   return true;
-                });
+                }));
 
   }
 

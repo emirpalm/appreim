@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { UsuarioService } from '../usuario/usuario.service';
 import { Camion } from '../../models/camiones.models';
-
+import { Observable, throwError } from 'rxjs';
+import { map, catchError} from 'rxjs/operators';
 import swal from 'sweetalert';
 
 @Injectable()
@@ -21,12 +22,13 @@ export class CamionService {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/camion?desde=' + desde;
     return this.http.get(url)
-    .map( (resp: any) => {
+    .pipe(
+    map( (resp: any) => {
 
       this.totalCamiones = resp.total;
       console.log(resp.total);
     return resp.camiones;
-    });
+    }));
   }
 
   cargarCamion( id: string ) {
@@ -34,7 +36,7 @@ export class CamionService {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/camion/' + id;
     return this.http.get( url )
-                .map( (resp: any) => resp.camiones );
+           .pipe( map( (resp: any) => resp.camiones ));
 
   }
 
@@ -44,7 +46,7 @@ export class CamionService {
     url += '?token=' + this._usuarioService.token;
 
     return this.http.delete( url )
-                .map( resp => swal('Camion Borrada', 'Eliminado correctamente', 'success') );
+            .pipe( map( resp => swal('Camion Borrada', 'Eliminado correctamente', 'success') ));
 
   }
 
@@ -58,20 +60,22 @@ export class CamionService {
       url += '?token=' + this._usuarioService.token;
 
       return this.http.put( url, camion )
-                .map( (resp: any) => {
+      .pipe(
+                map( (resp: any) => {
                   swal('Placa Actualizada', camion.numbereconomico, 'success');
                   return resp.camion;
 
-                });
+                }));
 
     } else {
       // creando
       url += '?token=' + this._usuarioService.token;
       return this.http.post( url, camion )
-              .map( (resp: any) => {
+        .pipe(
+              map( (resp: any) => {
                 swal('camion Creada', camion.numbereconomico, 'success');
                 return resp.camion;
-              });
+              }));
     }
 
   }
@@ -80,7 +84,7 @@ export class CamionService {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/busqueda/coleccion/camiones/' + termino;
     return this.http.get( url )
-                .map( (resp: any) => resp.camiones );
+    .pipe( map( (resp: any) => resp.camiones ));
 
   }
 

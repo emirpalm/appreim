@@ -3,8 +3,9 @@ import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { UsuarioService } from '../usuario/usuario.service';
 import { Agencia } from '../../models/agencias.models';
-
 import swal from 'sweetalert';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError} from 'rxjs/operators';
 
 @Injectable()
 export class AgenciaService {
@@ -21,12 +22,13 @@ export class AgenciaService {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/agencia?desde=' + desde;
     return this.http.get(url)
-    .map( (resp: any) => {
+    .pipe(
+    map( (resp: any) => {
 
       this.totalAgencias = resp.total;
       console.log(resp.total);
     return resp.agencia;
-    });
+    }));
   }
 
   cargarAgencia( id: string ) {
@@ -34,7 +36,7 @@ export class AgenciaService {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/agencia/' + id;
     return this.http.get( url )
-                .map( (resp: any) => resp.agencia );
+    .pipe( map( (resp: any) => resp.agencia ));
 
   }
 
@@ -44,7 +46,7 @@ export class AgenciaService {
     url += '?token=' + this._usuarioService.token;
 
     return this.http.delete( url )
-                .map( resp => swal('Agencia Borrado', 'Eliminado correctamente', 'success') );
+    .pipe(map( resp => swal('Agencia Borrado', 'Eliminado correctamente', 'success') ));
 
   }
 
@@ -58,20 +60,22 @@ export class AgenciaService {
       url += '?token=' + this._usuarioService.token;
 
       return this.http.put( url, agencia )
-                .map( (resp: any) => {
+      .pipe(
+                map( (resp: any) => {
                   swal('Agencia Actualizado', agencia.nombre, 'success');
                   return resp.agencia;
 
-                });
+                }));
 
     } else {
       // creando
       url += '?token=' + this._usuarioService.token;
       return this.http.post( url, agencia )
-              .map( (resp: any) => {
+      .pipe(
+              map( (resp: any) => {
                 swal('Agencia Creada', agencia.nombre, 'success');
                 return resp.agencia;
-              });
+              }));
     }
 
   }
@@ -80,7 +84,7 @@ export class AgenciaService {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/busqueda/coleccion/agencias/' + termino;
     return this.http.get( url )
-                .map( (resp: any) => resp.agencias );
+    .pipe(map( (resp: any) => resp.agencias ));
 
   }
 

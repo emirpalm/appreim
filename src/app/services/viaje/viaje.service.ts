@@ -4,10 +4,9 @@ import { URL_SERVICIOS } from '../../config/config';
 import { UsuarioService } from '../usuario/usuario.service';
 import { Viaje } from '../../models/viajes.models';
 import swal from 'sweetalert';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/Observable/throw';
-import 'rxjs/add/operator/map';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError} from 'rxjs/operators';
+
 
 @Injectable()
 export class ViajeService {
@@ -26,12 +25,12 @@ export class ViajeService {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/viaje?desde=' + desde;
     return this.http.get(url)
-    .map( (resp: any) => {
+    .pipe(map( (resp: any) => {
 
       this.totalViajes = resp.total;
       // console.log(resp.viaje);
     return resp.viaje || [];
-    });
+    }));
   }
 
   cargarViaje( id: string ) {
@@ -39,7 +38,7 @@ export class ViajeService {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/viaje/' + id;
     return this.http.get( url )
-                .map( (resp: any) => resp.viaje  );
+                .pipe(map( (resp: any) => resp.viaje  ));
 
   }
 
@@ -48,7 +47,7 @@ export class ViajeService {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/viaje/numero/' + viaje;
     return this.http.get( url )
-                .map( (resp: any) => resp.viaje );
+                .pipe(map( (resp: any) => resp.viaje ));
 
   }
 
@@ -59,7 +58,7 @@ export class ViajeService {
     url += '?token=' + this._usuarioService.token;
 
     return this.http.delete( url )
-                .map( resp => swal('Viaje Borrado', 'Eliminado correctamente', 'success') );
+                .pipe(map( resp => swal('Viaje Borrado', 'Eliminado correctamente', 'success') ));
 
   }
 
@@ -73,24 +72,24 @@ export class ViajeService {
       url += '?token=' + this._usuarioService.token;
 
       return this.http.put( url, viaje )
-                .map( (resp: any) => {
+                .pipe(map( (resp: any) => {
                   swal('Viaje Actualizado', viaje.viaje, 'success');
                   return resp.viaje;
 
-                });
+                }));
 
     } else {
       // creando
       url += '?token=' + this._usuarioService.token;
       return this.http.post( url, viaje )
-              .map( (resp: any) => {
+              .pipe(map( (resp: any) => {
                 swal('Viaje Creado', viaje.viaje, 'success');
                 return resp.viaje;
-              })
-              .catch( err => {
+              }),
+              catchError( err => {
                 swal( err.error.mensaje, err.error.errors.message, 'error' );
-                return Observable.throw( err );
-              });
+                return throwError( err );
+              }));
     }
 
   }
@@ -99,7 +98,7 @@ export class ViajeService {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/busqueda/coleccion/viajes/' + termino;
     return this.http.get( url )
-    .map( (resp: any) => resp.viajes );
+    .pipe(map( (resp: any) => resp.viajes ));
 
 }
 
@@ -109,11 +108,11 @@ actualizarContenedor(viaje: Viaje ) {
       url += '?token=' + this._usuarioService.token;
 
       return this.http.put( url, viaje )
-                .map( (resp: any) => {
+                .pipe(map( (resp: any) => {
                   swal('Viaje Actualizado', viaje.viaje, 'success');
                   return resp.viaje;
 
-                });
+                }));
 
     }
 
@@ -122,12 +121,12 @@ removerContenedor(id: string, viaje: Viaje ) {
   let url = URL_SERVICIOS + '/viaje/remove/' + id + '&' + viaje;
   url += '?token=' + this._usuarioService.token;
       return this.http.put( url, viaje )
-                .map( (resp: any) => {
+                .pipe(map( (resp: any) => {
                   swal('Viaje Actualizado', 'success');
                   // console.log(resp.viaje);
                   return resp.viaje;
 
-                });
+                }));
 
 }
 

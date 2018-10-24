@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivationEnd } from '@angular/router';
 import { Title, Meta, MetaDefinition } from '@angular/platform-browser';
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/map';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError, filter } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -34,8 +35,9 @@ this.getDataRouter()
   }
 getDataRouter() {
     return this.router.events
-    .filter( evento => evento instanceof ActivationEnd )
-    .filter( (evento: ActivationEnd) => evento.snapshot.firstChild === null )
-    .map( (evento: ActivationEnd) => evento.snapshot.data);
+    .pipe(
+    filter( evento => evento instanceof ActivationEnd ),
+    filter( (evento: ActivationEnd) => evento.snapshot.firstChild === null ),
+    map( (evento: ActivationEnd) => evento.snapshot.data));
 }
  }

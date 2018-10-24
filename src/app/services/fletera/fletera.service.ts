@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { UsuarioService } from '../usuario/usuario.service';
 import { Fletera } from '../../models/fleteras.models';
-
+import { Observable, throwError } from 'rxjs';
+import { map, catchError} from 'rxjs/operators';
 import swal from 'sweetalert';
 
 @Injectable()
@@ -21,12 +22,12 @@ export class FleteraService {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/fletera?desde=' + desde;
     return this.http.get(url)
-    .map( (resp: any) => {
+    .pipe(map( (resp: any) => {
 
       this.totalFleteras = resp.total;
       console.log(resp.total);
     return resp.fletera;
-    });
+    }));
   }
 
   cargarFletera( id: string ) {
@@ -34,7 +35,7 @@ export class FleteraService {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/fletera/' + id;
     return this.http.get( url )
-                .map( (resp: any) => resp.fletera );
+                .pipe(map( (resp: any) => resp.fletera ));
 
   }
 
@@ -44,7 +45,7 @@ export class FleteraService {
     url += '?token=' + this._usuarioService.token;
 
     return this.http.delete( url )
-                .map( resp => swal('Fltera Borrado', 'Eliminado correctamente', 'success') );
+                .pipe(map( resp => swal('Fltera Borrado', 'Eliminado correctamente', 'success') ));
 
   }
 
@@ -58,20 +59,20 @@ export class FleteraService {
       url += '?token=' + this._usuarioService.token;
 
       return this.http.put( url, fletera )
-                .map( (resp: any) => {
+                .pipe(map( (resp: any) => {
                   swal('Fletera Actualizado', fletera.nombre, 'success');
                   return resp.fletera;
 
-                });
+                }));
 
     } else {
       // creando
       url += '?token=' + this._usuarioService.token;
       return this.http.post( url, fletera )
-              .map( (resp: any) => {
+              .pipe(map( (resp: any) => {
                 swal('Fletera Creada', fletera.nombre, 'success');
                 return resp.fletera;
-              });
+              }));
     }
 
   }
@@ -80,7 +81,7 @@ export class FleteraService {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/busqueda/coleccion/fleteras/' + termino;
     return this.http.get( url )
-                .map( (resp: any) => resp.fleteras );
+                .pipe(map( (resp: any) => resp.fleteras ));
 
   }
 

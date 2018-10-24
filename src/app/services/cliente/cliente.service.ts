@@ -3,7 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { UsuarioService } from '../usuario/usuario.service';
 import { Cliente } from '../../models/clientes.models';
-
+import { Observable, throwError } from 'rxjs';
+import { map, catchError} from 'rxjs/operators';
 import swal from 'sweetalert';
 
 @Injectable()
@@ -21,12 +22,13 @@ export class ClienteService {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/cliente?desde=' + desde;
     return this.http.get(url)
-    .map( (resp: any) => {
+    .pipe(
+    map( (resp: any) => {
 
       this.totalClientes = resp.total;
       console.log(resp.total);
     return resp.cliente;
-    });
+    }));
   }
 
   cargarCliente( id: string ) {
@@ -34,7 +36,7 @@ export class ClienteService {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/cliente/' + id;
     return this.http.get( url )
-                .map( (resp: any) => resp.cliente );
+              .pipe( map( (resp: any) => resp.cliente ));
 
   }
 
@@ -44,7 +46,7 @@ export class ClienteService {
     url += '?token=' + this._usuarioService.token;
 
     return this.http.delete( url )
-                .map( resp => swal('Cliente Borrado', 'Eliminado correctamente', 'success') );
+              .pipe( map( resp => swal('Cliente Borrado', 'Eliminado correctamente', 'success') ));
 
   }
 
@@ -58,20 +60,20 @@ export class ClienteService {
       url += '?token=' + this._usuarioService.token;
 
       return this.http.put( url, cliente )
-                .map( (resp: any) => {
+                .pipe (map( (resp: any) => {
                   swal('Cliente Actualizado', cliente.cliente, 'success');
                   return resp.cliente;
 
-                });
+                }));
 
     } else {
       // creando
       url += '?token=' + this._usuarioService.token;
       return this.http.post( url, cliente )
-              .map( (resp: any) => {
+              .pipe(map( (resp: any) => {
                 swal('Cliente Creado', cliente.cliente, 'success');
                 return resp.cliente;
-              });
+              }));
     }
 
   }
@@ -80,7 +82,7 @@ export class ClienteService {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/busqueda/coleccion/clientes/' + termino;
     return this.http.get( url )
-                .map( (resp: any) => resp.clientes );
+                .pipe(map( (resp: any) => resp.clientes ));
 
   }
 
