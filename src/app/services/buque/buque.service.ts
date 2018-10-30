@@ -17,7 +17,7 @@ export class BuqueService {
     public _usuarioService: UsuarioService
   ) { }
 
-  cargarBuques(desde: number = 0) {
+  cargarBuques(desde: number = 0): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/buque?desde=' + desde;
@@ -31,7 +31,7 @@ export class BuqueService {
     }));
   }
 
-  cargarBuque( id: string ) {
+  cargarBuque( id: string ): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/buque/' + id;
@@ -40,7 +40,7 @@ export class BuqueService {
 
   }
 
-  borrarBuque( id: string ) {
+  borrarBuque( id: string ): Observable<any> {
 
     let url = URL_SERVICIOS + '/buque/' + id;
     url += '?token=' + this._usuarioService.token;
@@ -50,7 +50,7 @@ export class BuqueService {
 
   }
 
-  guardarBuque( buque: Buque ) {
+  guardarBuque( buque: Buque ): Observable<any> {
 
     let url = URL_SERVICIOS + '/cliente';
 
@@ -64,7 +64,10 @@ export class BuqueService {
                 map( (resp: any) => {
                   swal('Cliente Actualizado', buque.buque, 'success');
                   return resp.buque;
-
+                }),
+                catchError( err => {
+                  swal( err.error.mensaje, err.error.errores.message, 'error' );
+                  return throwError(err);
                 }));
 
     } else {
@@ -75,11 +78,15 @@ export class BuqueService {
               map( (resp: any) => {
                 swal('Buque Creado', buque.buque, 'success');
                 return resp.buque;
+              }),
+              catchError( err => {
+                swal( err.error.mensaje, err.error.errores.message, 'error' );
+                return throwError(err);
               }));
     }
 
   }
-  buscarBuque( termino: string ) {
+  buscarBuque( termino: string ): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/busqueda/coleccion/buques/' + termino;

@@ -3,6 +3,7 @@ import { FileItem } from '../../models/file-item.models';
 import { ManiobraService } from '../../services/maniobra/maniobra.service';
 import { Maniobra } from '../../models/maniobras.models';
 import { SubirArchivoService } from 'src/app/services/service.index';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-fotos',
@@ -10,15 +11,43 @@ import { SubirArchivoService } from 'src/app/services/service.index';
   styleUrls: ['./fotos.component.css']
 })
 export class FotosComponent implements OnInit {
-  maniobra: Maniobra;
+  // maniobra: Maniobra;
   estaSobreElemento = false;
   archivos: FileItem[] = [];
-  constructor(public _maniobraService: ManiobraService, public _subirArchivoService: SubirArchivoService) { }
+  maniobra: Maniobra = new Maniobra();
+  selected = 'fotos_lavado';
+  constructor(public _maniobraService: ManiobraService, public _subirArchivoService: SubirArchivoService, public router: Router,
+    public activatedRoute: ActivatedRoute) {
+      activatedRoute.params.subscribe( params => {
+
+        // tslint:disable-next-line:prefer-const
+        let id = params['id'];
+
+        if ( id !== 'nuevo' ) {
+          this.cargarManiobra( id );
+        }
+
+      });
+    }
 
   ngOnInit() {
   }
+
+  cargarManiobra( id: string) {
+    this._maniobraService.cargarManiobra( id )
+          .subscribe( maniobra => {
+
+            console.log( maniobra );
+            this.maniobra = maniobra;
+            // this.viaje.buque = viaje.buque._id;
+            // this.cambioBuque( this.viaje.contenedor );
+          });
+  }
+
   cargarImagenes() {
-    this._subirArchivoService.cargarImagenesMongo(this.archivos, 'maniobras', '5bce1b54e86b493cf07a0589');
+    console.log(this.selected);
+    this._subirArchivoService.cargarImagenesMongo(this.archivos, this.selected, this.maniobra._id);
+
   }
 
   limpiarArchivos() {

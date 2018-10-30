@@ -17,7 +17,7 @@ export class CamionService {
     public _usuarioService: UsuarioService
   ) { }
 
-  cargarCamiones(desde: number = 0) {
+  cargarCamiones(desde: number = 0): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/camion?desde=' + desde;
@@ -31,7 +31,7 @@ export class CamionService {
     }));
   }
 
-  cargarCamion( id: string ) {
+  cargarCamion( id: string ): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/camion/' + id;
@@ -40,7 +40,7 @@ export class CamionService {
 
   }
 
-  borrarCamion( id: string ) {
+  borrarCamion( id: string ): Observable<any> {
 
     let url = URL_SERVICIOS + '/camion/' + id;
     url += '?token=' + this._usuarioService.token;
@@ -50,7 +50,7 @@ export class CamionService {
 
   }
 
-  guardarCamion( camion: Camion ) {
+  guardarCamion( camion: Camion ): Observable<any> {
 
     let url = URL_SERVICIOS + '/camion';
 
@@ -64,7 +64,10 @@ export class CamionService {
                 map( (resp: any) => {
                   swal('Placa Actualizada', camion.numbereconomico, 'success');
                   return resp.camion;
-
+                }),
+                catchError( err => {
+                  swal( err.error.mensaje, err.error.errores.message, 'error' );
+                  return throwError(err);
                 }));
 
     } else {
@@ -75,11 +78,15 @@ export class CamionService {
               map( (resp: any) => {
                 swal('camion Creada', camion.numbereconomico, 'success');
                 return resp.camion;
+              }),
+              catchError( err => {
+                swal( err.error.mensaje, err.error.errores.message, 'error' );
+                return throwError(err);
               }));
     }
 
   }
-  buscarCamion( termino: string ) {
+  buscarCamion( termino: string ): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/busqueda/coleccion/camiones/' + termino;

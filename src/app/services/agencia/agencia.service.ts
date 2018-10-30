@@ -17,7 +17,7 @@ export class AgenciaService {
     public _usuarioService: UsuarioService
   ) { }
 
-  cargarAgencias(desde: number = 0) {
+  cargarAgencias(desde: number = 0): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/agencia?desde=' + desde;
@@ -31,7 +31,7 @@ export class AgenciaService {
     }));
   }
 
-  cargarAgencia( id: string ) {
+  cargarAgencia( id: string ): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/agencia/' + id;
@@ -40,7 +40,7 @@ export class AgenciaService {
 
   }
 
-  borrarAgencia( id: string ) {
+  borrarAgencia( id: string ): Observable<any> {
 
     let url = URL_SERVICIOS + '/agencia/' + id;
     url += '?token=' + this._usuarioService.token;
@@ -50,7 +50,7 @@ export class AgenciaService {
 
   }
 
-  guardarAgencia( agencia: Agencia ) {
+  guardarAgencia( agencia: Agencia ): Observable<any> { // probar
 
     let url = URL_SERVICIOS + '/agencia';
 
@@ -65,6 +65,10 @@ export class AgenciaService {
                   swal('Agencia Actualizado', agencia.nombre, 'success');
                   return resp.agencia;
 
+                }),
+                catchError( err => {
+                  swal( err.error.mensaje, err.error.errores.message, 'error' );
+                  return throwError(err);
                 }));
 
     } else {
@@ -75,11 +79,17 @@ export class AgenciaService {
               map( (resp: any) => {
                 swal('Agencia Creada', agencia.nombre, 'success');
                 return resp.agencia;
+              }),
+              catchError( err => {
+                swal( err.error.mensaje, err.error.errores.message, 'error' );
+                return throwError(err);
               }));
     }
 
   }
-  buscarAgencia( termino: string ) {
+
+
+  buscarAgencia( termino: string ): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/busqueda/coleccion/agencias/' + termino;
@@ -87,6 +97,7 @@ export class AgenciaService {
     .pipe(map( (resp: any) => resp.agencias ));
 
   }
+
 
 
 }

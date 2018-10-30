@@ -17,7 +17,7 @@ export class OperadorService {
     public _usuarioService: UsuarioService
   ) { }
 
-  cargarOperadores(desde: number = 0) {
+  cargarOperadores(desde: number = 0): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/operador?desde=' + desde;
@@ -30,7 +30,7 @@ export class OperadorService {
     }));
   }
 
-  cargarOperador( id: string ) {
+  cargarOperador( id: string ): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/operador/' + id;
@@ -39,7 +39,7 @@ export class OperadorService {
 
   }
 
-  borrarOperador( id: string ) {
+  borrarOperador( id: string ): Observable<any> {
 
     let url = URL_SERVICIOS + '/operador/' + id;
     url += '?token=' + this._usuarioService.token;
@@ -50,7 +50,7 @@ export class OperadorService {
   }
 
 
-  guardarOperador( operador: Operador ) {
+  guardarOperador( operador: Operador ): Observable<any> {
 
     let url = URL_SERVICIOS + '/operador';
 
@@ -63,7 +63,10 @@ export class OperadorService {
                 .pipe(map( (resp: any) => {
                   swal('Operador Actualizado', operador.operador, 'success');
                   return resp.operador;
-
+                }),
+                catchError( err => {
+                  swal( err.error.mensaje, err.error.errores.message, 'error' );
+                  return throwError(err);
                 }));
 
     } else {
@@ -73,11 +76,15 @@ export class OperadorService {
               .pipe(map( (resp: any) => {
                 swal('Operador Creado', operador.operador, 'success');
                 return resp.operador;
+              }),
+              catchError( err => {
+                swal( err.error.mensaje, err.error.errores.message, 'error' );
+                return throwError(err);
               }));
     }
 
   }
-  buscarOperador( termino: string ) {
+    buscarOperador( termino: string ): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/busqueda/coleccion/operadores/' + termino;

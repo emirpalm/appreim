@@ -17,7 +17,7 @@ export class ClienteService {
     public _usuarioService: UsuarioService
   ) { }
 
-  cargarClientes(desde: number = 0) {
+  cargarClientes(desde: number = 0): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/cliente?desde=' + desde;
@@ -31,7 +31,7 @@ export class ClienteService {
     }));
   }
 
-  cargarCliente( id: string ) {
+  cargarCliente( id: string ): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/cliente/' + id;
@@ -40,7 +40,7 @@ export class ClienteService {
 
   }
 
-  borrarCliente( id: string ) {
+  borrarCliente( id: string ): Observable<any> {
 
     let url = URL_SERVICIOS + '/cliente/' + id;
     url += '?token=' + this._usuarioService.token;
@@ -50,7 +50,7 @@ export class ClienteService {
 
   }
 
-  guardarCliente( cliente: Cliente ) {
+  guardarCliente( cliente: Cliente ): Observable<any> {
 
     let url = URL_SERVICIOS + '/cliente';
 
@@ -63,7 +63,10 @@ export class ClienteService {
                 .pipe (map( (resp: any) => {
                   swal('Cliente Actualizado', cliente.cliente, 'success');
                   return resp.cliente;
-
+                }),
+                catchError( err => {
+                  swal( err.error.mensaje, err.error.errores.message, 'error' );
+                  return throwError(err);
                 }));
 
     } else {
@@ -73,11 +76,15 @@ export class ClienteService {
               .pipe(map( (resp: any) => {
                 swal('Cliente Creado', cliente.cliente, 'success');
                 return resp.cliente;
+              }),
+              catchError( err => {
+                swal( err.error.mensaje, err.error.errores.message, 'error' );
+                return throwError(err);
               }));
     }
 
   }
-  buscarCliente( termino: string ) {
+  buscarCliente( termino: string ): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/busqueda/coleccion/clientes/' + termino;

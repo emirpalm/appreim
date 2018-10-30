@@ -3,6 +3,7 @@ import { SubirArchivoService } from '../../services/service.index';
 import { ModalUploadService } from './modal-upload.service';
 import { ViewChild } from '@angular/core';
 import swal from 'sweetalert';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-modal-upload',
@@ -23,7 +24,7 @@ export class ModalUploadComponent implements OnInit {
   }
 
   clearForm() {
-    console.log('Aqui obtienes el elemento para atribuir algo vazio: ', this.inputFile.nativeElement);
+   // console.log('Aqui obtienes el elemento para atribuir algo vazio: ', this.inputFile.nativeElement);
 
     this.inputFile.nativeElement.value = '';
   }
@@ -38,14 +39,15 @@ export class ModalUploadComponent implements OnInit {
     this.clearForm();
     this._subirArchivoService.subirArchivo(this.imagenSubir, this._modalUplodaService.tipo, this._modalUplodaService.id)
     .then(resp => {
-      console.log(resp);
+      // console.log(resp);
       this._modalUplodaService.notification.emit(resp);
       this.cerrarModal();
 
     })
     .catch(err => {
-      console.log('Error en la carga...');
-
+      // console.log('Error en la carga...');
+      swal( err.error.mensaje, err.error.errores.message, 'error' );
+      return throwError(err);
     });
 
   }

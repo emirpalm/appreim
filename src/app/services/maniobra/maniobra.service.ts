@@ -20,7 +20,7 @@ export class ManiobraService {
     public _subirArchivoService: SubirArchivoService
   ) { }
 
-  cargarManiobras(desde: number = 0) {
+  cargarManiobras(desde: number = 0): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/maniobra?desde=' + desde;
@@ -33,7 +33,7 @@ export class ManiobraService {
     }));
   }
 
-  cargarManiobra( id: string ) {
+  cargarManiobra( id: string ): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/maniobra/' + id;
@@ -42,7 +42,7 @@ export class ManiobraService {
 
   }
 
-  borrarManiobra( id: string ) {
+  borrarManiobra( id: string ): Observable<any> {
 
     let url = URL_SERVICIOS + '/maniobra/' + id;
     url += '?token=' + this._usuarioService.token;
@@ -52,7 +52,7 @@ export class ManiobraService {
 
   }
 
-  guardarManiobra( maniobra: Maniobra ) {
+  guardarManiobra( maniobra: Maniobra ): Observable<any> {
 
     let url = URL_SERVICIOS + '/maniobra';
 
@@ -65,7 +65,10 @@ export class ManiobraService {
                 .pipe(map( (resp: any) => {
                   swal('Maniobra Actualizado', 'test', 'success');
                   return resp.maniobra;
-
+                }),
+                catchError( err => {
+                  swal( err.error.mensaje, err.error.errores.message, 'error' );
+                  return throwError(err);
                 }));
 
     } else {
@@ -75,11 +78,15 @@ export class ManiobraService {
               .pipe(map( (resp: any) => {
                 swal('Contenedor Creado', 'test', 'success');
                 return resp.maniobra;
+              }),
+              catchError( err => {
+                swal( err.error.mensaje, err.error.errores.message, 'error' );
+                return throwError(err);
               }));
     }
 
   }
-  buscarManiobra( termino: string ) {
+  buscarManiobra( termino: string ): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/busqueda/coleccion/maniobras/' + termino;
@@ -88,7 +95,7 @@ export class ManiobraService {
 
   }
 
-  buscarManiobraFecha( fechaIncio: string, fechaFin: string ) {
+  buscarManiobraFecha( fechaIncio: string, fechaFin: string ): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/maniobra/rangofecha?fechaInicio=' + fechaIncio + '&fechaFin=' + fechaFin;

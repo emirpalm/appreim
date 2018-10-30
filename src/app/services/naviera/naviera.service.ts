@@ -17,7 +17,7 @@ export class NavieraService {
     public _usuarioService: UsuarioService
   ) { }
 
-  cargarNavieras(desde: number = 0) {
+  cargarNavieras(desde: number = 0): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/naviera?desde=' + desde;
@@ -30,7 +30,7 @@ export class NavieraService {
     }));
   }
 
-  cargarNaviera( id: string ) {
+  cargarNaviera( id: string ): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/naviera/' + id;
@@ -39,7 +39,7 @@ export class NavieraService {
 
   }
 
-  borrarNaviera( id: string ) {
+  borrarNaviera( id: string ): Observable<any> {
 
     let url = URL_SERVICIOS + '/naviera/' + id;
     url += '?token=' + this._usuarioService.token;
@@ -50,7 +50,7 @@ export class NavieraService {
   }
 
 
-  guardarNaviera( naviera: Naviera ) {
+  guardarNaviera( naviera: Naviera ): Observable<any> {
 
     let url = URL_SERVICIOS + '/naviera';
 
@@ -63,7 +63,10 @@ export class NavieraService {
                 .pipe(map( (resp: any) => {
                   swal('Naviera Actualizado', naviera.naviera, 'success');
                   return resp.naviera;
-
+                }),
+                catchError( err => {
+                  swal( err.error.mensaje, err.error.errores.message, 'error' );
+                  return throwError(err);
                 }));
 
     } else {
@@ -73,11 +76,15 @@ export class NavieraService {
               .pipe(map( (resp: any) => {
                 swal('Naviera Creado', naviera.naviera, 'success');
                 return resp.naviera;
+              }),
+              catchError( err => {
+                swal( err.error.mensaje, err.error.errores.message, 'error' );
+                return throwError(err);
               }));
     }
 
   }
-  buscarNaviera( termino: string ) {
+  buscarNaviera( termino: string ): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/busqueda/coleccion/navieras/' + termino;

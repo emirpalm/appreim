@@ -28,7 +28,7 @@ export class UsuarioService {
   public getToken(): string {
     return localStorage.getItem('token');
   }
-  renuevaToken() {
+  renuevaToken(): Observable<any> {
 
     let url = URL_SERVICIOS + '/login/renuevatoken';
     url += '?token=' + this.token;
@@ -91,7 +91,7 @@ export class UsuarioService {
     this.router.navigate(['/login']);
   }
 
-  login( usuario: Usuario, recordar: boolean = false ) {
+  login( usuario: Usuario, recordar: boolean = false ): Observable<any> {
 
     if ( recordar ) {
       localStorage.setItem('email', usuario.email );
@@ -115,7 +115,7 @@ export class UsuarioService {
 
   }
 
-  crearUsuario( usuario: Usuario ) {
+  crearUsuario( usuario: Usuario ): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/usuario';
@@ -133,7 +133,7 @@ export class UsuarioService {
               }));
   }
 
-  actualizarUsuario( usuario: Usuario ) {
+  actualizarUsuario( usuario: Usuario ): Observable<any> {
 
     let url = URL_SERVICIOS + '/usuario/' + usuario._id;
     url += '?token=' + this.token;
@@ -175,14 +175,14 @@ export class UsuarioService {
 
   }
 
-   cargarUsuarios(desde: number = 0) {
+   cargarUsuarios(desde: number = 0): Observable<any> {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/usuario?desde=' + desde;
 
     return this.http.get(url);
 
   }
-  buscarUsuarios( termino: string ) {
+  buscarUsuarios( termino: string ): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/busqueda/coleccion/usuarios/' + termino;
@@ -191,7 +191,7 @@ export class UsuarioService {
 
   }
 
-   borrarUsuario( id: string ) {
+   borrarUsuario( id: string ): Observable<any> {
 
     let url = URL_SERVICIOS + '/usuario/' + id;
     url += '?token=' + this.token;

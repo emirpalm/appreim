@@ -17,7 +17,7 @@ export class ContenedorService {
     public _usuarioService: UsuarioService
   ) { }
 
-  cargarContenedores(desde: number = 0) {
+  cargarContenedores(desde: number = 0): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/contenedor?desde=' + desde;
@@ -30,7 +30,7 @@ export class ContenedorService {
     }));
   }
 
-  cargarContenedor( id: string ) {
+  cargarContenedor( id: string ): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/contenedor/' + id;
@@ -39,7 +39,7 @@ export class ContenedorService {
 
   }
 
-  borrarContenedor( id: string ) {
+  borrarContenedor( id: string ): Observable<any> {
 
     let url = URL_SERVICIOS + '/contenedor/' + id;
     url += '?token=' + this._usuarioService.token;
@@ -49,7 +49,7 @@ export class ContenedorService {
 
   }
 
-  guardarContenedor( contenedor: Contenedor ) {
+  guardarContenedor( contenedor: Contenedor ): Observable<any> {
 
     let url = URL_SERVICIOS + '/contenedor';
 
@@ -62,7 +62,10 @@ export class ContenedorService {
                 .pipe(map( (resp: any) => {
                   swal('Contenedor Actualizado', contenedor.contenedor, 'success');
                   return resp.contenedor;
-
+                }),
+                catchError( err => {
+                  swal( err.error.mensaje, err.error.errores.message, 'error' );
+                  return throwError(err);
                 }));
 
     } else {
@@ -72,11 +75,15 @@ export class ContenedorService {
               .pipe(map( (resp: any) => {
                 swal('Contenedor Creado', contenedor.contenedor, 'success');
                 return resp.contenedor;
+              }),
+              catchError( err => {
+                swal( err.error.mensaje, err.error.errores.message, 'error' );
+                return throwError(err);
               }));
     }
 
   }
-  buscarContenedor( termino: string ) {
+  buscarContenedor( termino: string ): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/busqueda/coleccion/contenedores/' + termino;

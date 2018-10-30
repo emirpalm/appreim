@@ -20,7 +20,7 @@ export class ViajeService {
     public _usuarioService: UsuarioService
   ) { }
 
-  cargarViajes(desde: number = 0) {
+  cargarViajes(desde: number = 0): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/viaje?desde=' + desde;
@@ -33,7 +33,7 @@ export class ViajeService {
     }));
   }
 
-  cargarViaje( id: string ) {
+  cargarViaje( id: string ): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/viaje/' + id;
@@ -42,7 +42,7 @@ export class ViajeService {
 
   }
 
-  cargarViajeNumero( viaje: string ) {
+  cargarViajeNumero( viaje: string ): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/viaje/numero/' + viaje;
@@ -52,7 +52,7 @@ export class ViajeService {
   }
 
 
-  borrarViaje( id: string ) {
+  borrarViaje( id: string ): Observable<any> {
 
     let url = URL_SERVICIOS + '/viaje/' + id;
     url += '?token=' + this._usuarioService.token;
@@ -62,7 +62,7 @@ export class ViajeService {
 
   }
 
-  guardarViaje( viaje: Viaje ) {
+  guardarViaje( viaje: Viaje ): Observable<any> {
 
     let url = URL_SERVICIOS + '/viaje';
 
@@ -75,7 +75,10 @@ export class ViajeService {
                 .pipe(map( (resp: any) => {
                   swal('Viaje Actualizado', viaje.viaje, 'success');
                   return resp.viaje;
-
+                }),
+                catchError( err => {
+                  swal( err.error.mensaje, err.error.errores.message, 'error' );
+                  return throwError(err);
                 }));
 
     } else {
@@ -93,7 +96,7 @@ export class ViajeService {
     }
 
   }
-  buscarViaje( termino: string ) {
+  buscarViaje( termino: string ): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/busqueda/coleccion/viajes/' + termino;
@@ -102,7 +105,7 @@ export class ViajeService {
 
 }
 
-actualizarContenedor(viaje: Viaje ) {
+actualizarContenedor(viaje: Viaje ): Observable<any> {
 
   let url = URL_SERVICIOS + '/viaje/add/' + viaje._id;
       url += '?token=' + this._usuarioService.token;
@@ -112,12 +115,16 @@ actualizarContenedor(viaje: Viaje ) {
                   swal('Viaje Actualizado', viaje.viaje, 'success');
                   return resp.viaje;
 
+                }),
+                catchError( err => {
+                  swal( err.error.mensaje, err.error.errores.message, 'error' );
+                  return throwError(err);
                 }));
 
     }
 
 
-removerContenedor(id: string, viaje: Viaje ) {
+removerContenedor(id: string, viaje: Viaje ): Observable<any> {
   let url = URL_SERVICIOS + '/viaje/remove/' + id + '&' + viaje;
   url += '?token=' + this._usuarioService.token;
       return this.http.put( url, viaje )
@@ -126,6 +133,10 @@ removerContenedor(id: string, viaje: Viaje ) {
                   // console.log(resp.viaje);
                   return resp.viaje;
 
+                }),
+                catchError( err => {
+                  swal( err.error.mensaje, err.error.errores.message, 'error' );
+                  return throwError(err);
                 }));
 
 }

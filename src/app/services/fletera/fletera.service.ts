@@ -17,7 +17,7 @@ export class FleteraService {
     public _usuarioService: UsuarioService
   ) { }
 
-  cargarFleteras(desde: number = 0) {
+  cargarFleteras(desde: number = 0): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/fletera?desde=' + desde;
@@ -30,7 +30,7 @@ export class FleteraService {
     }));
   }
 
-  cargarFletera( id: string ) {
+  cargarFletera( id: string ): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/fletera/' + id;
@@ -39,7 +39,7 @@ export class FleteraService {
 
   }
 
-  borrarFletera( id: string ) {
+  borrarFletera( id: string ): Observable<any> {
 
     let url = URL_SERVICIOS + '/fletera/' + id;
     url += '?token=' + this._usuarioService.token;
@@ -49,7 +49,7 @@ export class FleteraService {
 
   }
 
-  guardarFletera( fletera: Fletera ) {
+  guardarFletera( fletera: Fletera ): Observable<any> {
 
     let url = URL_SERVICIOS + '/fletera';
 
@@ -62,7 +62,10 @@ export class FleteraService {
                 .pipe(map( (resp: any) => {
                   swal('Fletera Actualizado', fletera.nombre, 'success');
                   return resp.fletera;
-
+                }),
+                catchError( err => {
+                  swal( err.error.mensaje, err.error.errores.message, 'error' );
+                  return throwError(err);
                 }));
 
     } else {
@@ -72,11 +75,15 @@ export class FleteraService {
               .pipe(map( (resp: any) => {
                 swal('Fletera Creada', fletera.nombre, 'success');
                 return resp.fletera;
+              }),
+              catchError( err => {
+                swal( err.error.mensaje, err.error.errores.message, 'error' );
+                return throwError(err);
               }));
     }
 
   }
-  buscarFletera( termino: string ) {
+  buscarFletera( termino: string ): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/busqueda/coleccion/fleteras/' + termino;
