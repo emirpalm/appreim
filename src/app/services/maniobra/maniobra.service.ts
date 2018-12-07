@@ -104,6 +104,39 @@ export class ManiobraService {
 
   }
 
+  removerFotosLavados(id: string, foto: string ): Observable<any> {
+    let url = URL_SERVICIOS + '/maniobra/removeimgl/' + id + '&' + foto;
+    url += '?token=' + this._usuarioService.token;
+        return this.http.put( url, foto )
+                  .pipe(map( (resp: any) => {
+                    swal('Foto borrada', 'La foto a sido eliminada correctamente', 'success');
+                    console.log(resp.maniobra);
+                    return resp.maniobra;
+
+                  }),
+                  catchError( err => {
+                    swal( err.error.mensaje, err.error.errores.message, 'error' );
+                    return throwError(err);
+                  }));
+
+  }
+
+  removerFotosReparados(id: string, foto: string ): Observable<any> {
+    let url = URL_SERVICIOS + '/maniobra/removeimgr/' + id + '&' + foto;
+    url += '?token=' + this._usuarioService.token;
+        return this.http.put( url, foto )
+                  .pipe(map( (resp: any) => {
+                    swal('Foto borrado', 'La foto a sido eliminada correctamente', 'success');
+                    console.log(resp.maniobra);
+                    return resp.maniobra;
+
+                  }),
+                  catchError( err => {
+                    swal( err.error.mensaje, err.error.errores.message, 'error' );
+                    return throwError(err);
+                  }));
+
+  }
 
 
 }

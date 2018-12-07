@@ -100,7 +100,7 @@ export class AddcontainersComponent implements OnInit {
   removerContenedor(id: string, viaje: Viaje) {
    // console.log(viaje);
    this._viajeService.removerContenedor( id, viaje )
-   .subscribe( aiaje => {
+   .subscribe( cviaje => {
     this.viaje._id = this.viaje._id;
     // console.log(this.viaje);
     this.cargarViaje(this.viaje._id);

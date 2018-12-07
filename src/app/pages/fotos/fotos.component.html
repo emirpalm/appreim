@@ -1,20 +1,26 @@
 <mat-tab-group>
     <mat-tab label="Fotos Lavados">
         <div class="card-columns">
-            <div class="card" *ngFor="let maniobra of maniobra.imgl">
-                <img class="card-img-top" [src]="maniobra.img | imagen:'fotos_lavado'" alt="Card image cap">
+            <div class="card" *ngFor="let foto of maniobra.imgl">
+                <img class="card-img-top" [src]="foto.img | imagen:'fotos_lavado'" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">{{maniobra.img}}</h5>
+                    <h5 class="card-title">{{foto._id}}</h5>
+                    <button (click)="borrarFotoLavado( maniobra._id, foto.img )" class="btn btn-danger">
+                        <i class="fa fa-trash-o"> Eliminar</i>
+                      </button>
                 </div>
             </div>
         </div>
     </mat-tab>
     <mat-tab label="Fotos Repararación">
         <div class="card-columns">
-            <div class="card" *ngFor="let maniobra of maniobra.imgr">
-                <img class="card-img-top" [src]="maniobra.img | imagen:'fotos_reparacion'" alt="Card image cap">
+            <div class="card" *ngFor="let foto of maniobra.imgr">
+                <img class="card-img-top" [src]="foto.img | imagen:'fotos_reparacion'" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title">{{maniobra.img}}</h5>
+                    <h5 class="card-title">{{foto.img}}</h5>
+                    <button (click)="borrarFotoReparado( maniobra._id, foto.img )" class="btn btn-danger">
+                        <i class="fa fa-trash-o"> Eliminar</i>
+                      </button>
                 </div>
             </div>
         </div>
@@ -25,9 +31,10 @@
             <div class="col-md-4">
                 <h3>Seleccione archivos</h3>
                 <div appNgDropFiles [archivos]="archivos" (mouseSobre)="estaSobreElemento = $event" [ngClass]="{'file-over': estaSobreElemento}" class="well drop-zone">
-                    <h4>Dehe caer aqui los archivos</h4>
+                    <h4>Deje caer aqui los archivos</h4>
                     <img src="assets/images/drop-images.png">
                 </div>
+                <input class="hidden" (change)="seleccionImagen($event.target.files[0])" type="file" multiple />
             </div>
             <div class="col-md-8">
                 <h4>Cargar archivos</h4>

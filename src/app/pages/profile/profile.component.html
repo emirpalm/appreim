@@ -34,7 +34,7 @@
                 <h6 class="card-subtitle">{{usuario.nombre}}</h6>
                 <img *ngIf="!imagenTemp" [src]="usuario.img | imagen" class="w150">
                 <img *ngIf="imagenTemp" [src]="imagenTemp" class="w150">
-                <input (change)="seleccionImagen($event.target.files[0])" type="file">
+                <input (change)="seleccionImagen($event.target.files[0])" type="file" accept="image/*" capture="camera">
                 <br>
                 <br>
                 <button (click)="cambiarImagen()" [disabled]="!imagenSubir" type="button" class="btn btn-block btn-success waves-effect waves-light m-r-10"><i class="fas fa-save"> Actulizar</i></button>

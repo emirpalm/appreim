@@ -44,10 +44,13 @@
                                 <td>{{usuario.nombre}}</td>
                                 <td>
                                     <select [(ngModel)]="usuario.role" name="role" class="form-control">
-                                  <option value="ADMIN_ROLE">ADMIN_ROLE</option>
-                                  <option value="REIM_ADMIN">REIM_ADMIN</option>
-                                  <option value="REIM_USER">REIM_USER</option>
-                                  <option value="NAVIERA">NAVIERA</option>
+                                  <option value="ADMIN_ROLE">ADMINISTRADOR</option>
+                                  <option value="REIMADMIN_ROLE">REIM ADMIN</option>
+                                  <option value="REIM_ROLE">REIM USER</option>
+                                  <option value="NAVIERA_ROLE">NAVIERA USER</option>
+                                  <option value="TRANSPORTISTA_ROLE">TRANSPORTISTA USER</option>
+                                  <option value="AA_ROLE">AGENCIA ADUANAL USER</option>
+                                  <option value="CLIENT_ROLE">CLIENTE</option>
                               </select>
                                 </td>
                                 <td>

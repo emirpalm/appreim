@@ -14,7 +14,9 @@ export class FotosComponent implements OnInit {
   // maniobra: Maniobra;
   estaSobreElemento = false;
   archivos: FileItem[] = [];
+  imagenSubir:  FileItem[] = [];
   maniobra: Maniobra = new Maniobra();
+  foto: Maniobra = new Maniobra('');
   selected = 'fotos_lavado';
   constructor(public _maniobraService: ManiobraService, public _subirArchivoService: SubirArchivoService, public router: Router,
     public activatedRoute: ActivatedRoute) {
@@ -50,7 +52,38 @@ export class FotosComponent implements OnInit {
 
   }
 
+  cargarImgenesSelect() {
+    console.log();
+  }
+
   limpiarArchivos() {
     this.archivos = [];
   }
+
+  borrarFotoLavado( id: string, foto: string ) {
+    console.log(id);
+    console.log(foto);
+    this._maniobraService.removerFotosLavados(id, foto)
+    .subscribe(maniobra => {
+          this.maniobra._id = this.maniobra._id;
+          this.cargarManiobra(this.maniobra._id);
+    });
+
+  }
+
+  borrarFotoReparado( id: string, foto: string ) {
+    console.log(id);
+    console.log(foto);
+    this._maniobraService.removerFotosReparados(id, foto)
+    .subscribe(maniobra => {
+          this.maniobra._id = this.maniobra._id;
+          this.cargarManiobra(this.maniobra._id);
+    });
+
+  }
+
+  seleccionImagen(archivo: FileItem[] = []) {
+    console.log(archivo);
+  }
+
 }
