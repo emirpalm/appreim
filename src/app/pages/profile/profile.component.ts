@@ -12,6 +12,7 @@ export class ProfileComponent implements OnInit {
   usuario: Usuario;
   imagenSubir: File;
   imagenTemp: any;
+  profile: Usuario = new Usuario('');
 
   constructor(public _usuarioService: UsuarioService) {
     this.usuario = this._usuarioService.usuario;
@@ -51,5 +52,9 @@ export class ProfileComponent implements OnInit {
   cambiarImagen() {
     this._usuarioService.cambiarImagen(this.imagenSubir, this.usuario._id);
 
+  }
+
+  verClientes(usuario: Usuario) {
+    console.log(usuario);
   }
 }

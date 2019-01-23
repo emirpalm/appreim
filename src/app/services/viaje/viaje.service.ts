@@ -117,7 +117,7 @@ actualizarContenedor(viaje: Viaje ): Observable<any> {
 
                 }),
                 catchError( err => {
-                  swal( err.error.mensaje, err.error.errores.message, 'error' );
+                  swal( err.error.mensaje, err.error.errors.message, 'error' );
                   return throwError(err);
                 }));
 
@@ -135,7 +135,7 @@ removerContenedor(id: string, viaje: Viaje ): Observable<any> {
 
                 }),
                 catchError( err => {
-                  swal( err.error.mensaje, err.error.errores.message, 'error' );
+                  swal( err.error.mensaje, err.error.errors.message, 'error' );
                   return throwError(err);
                 }));
 

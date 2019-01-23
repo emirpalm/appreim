@@ -10,7 +10,7 @@ import swal from 'sweetalert';
 @Injectable()
 export class NavieraService {
   // tslint:disable-next-line:no-inferrable-types
-  totalNaviera: number = 0;
+  totalNavieras: number = 0;
 
   constructor(
     public http: HttpClient,
@@ -24,7 +24,7 @@ export class NavieraService {
     return this.http.get(url)
     .pipe(map( (resp: any) => {
 
-      this.totalNaviera = resp.total;
+      this.totalNavieras = resp.total;
       console.log(resp.total);
     return resp.naviera;
     }));
@@ -61,11 +61,11 @@ export class NavieraService {
 
       return this.http.put( url, naviera )
                 .pipe(map( (resp: any) => {
-                  swal('Naviera Actualizado', naviera.naviera, 'success');
+                  swal('Naviera Actualizado', naviera.cliente, 'success');
                   return resp.naviera;
                 }),
                 catchError( err => {
-                  swal( err.error.mensaje, err.error.errores.message, 'error' );
+                  swal( err.error.mensaje, err.error.errors.message, 'error' );
                   return throwError(err);
                 }));
 
@@ -74,11 +74,12 @@ export class NavieraService {
       url += '?token=' + this._usuarioService.token;
       return this.http.post( url, naviera )
               .pipe(map( (resp: any) => {
-                swal('Naviera Creado', naviera.naviera, 'success');
+                swal('Naviera Creado', naviera.cliente, 'success');
                 return resp.naviera;
               }),
               catchError( err => {
-                swal( err.error.mensaje, err.error.errores.message, 'error' );
+                console.log(err);
+                swal( err.error.mensaje, err.error.errors.message, 'error' );
                 return throwError(err);
               }));
     }

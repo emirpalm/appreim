@@ -128,6 +128,7 @@ export class UsuarioService {
                 return resp.usuario;
               }),
               catchError( err => {
+                console.log(err);
                 swal( err.error.mensaje, err.error.errores.message, 'error' );
                 return throwError(err);
               }));
@@ -153,7 +154,7 @@ export class UsuarioService {
                   return true;
                 }),
                 catchError( err => {
-                  swal( err.error.mensaje, err.error.errores.message, 'error' );
+                  swal( err.error.mensaje, err.error.errors.message, 'error' );
                   return throwError(err);
                 }));
 

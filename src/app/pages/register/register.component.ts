@@ -3,7 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UsuarioService } from '../../services/usuario/usuario.service';
 import { Usuario } from '../../models/usuarios.model';
-import swal from 'sweetalert';
+import { Cliente } from 'src/app/models/clientes.models';
+import { ClienteService } from '../../services/cliente/cliente.service';
 
 @Component({
   selector: 'app-register',
@@ -13,9 +14,12 @@ import swal from 'sweetalert';
 export class RegisterComponent implements OnInit {
 
   forma: FormGroup;
+  clientes: Cliente[] = [];
+  cliente: Cliente = new Cliente('');
 
   constructor(
     public _usuarioService: UsuarioService,
+    public _clienteService: ClienteService,
     public router: Router
   ) { }
 
@@ -42,11 +46,14 @@ export class RegisterComponent implements OnInit {
 
 
   ngOnInit() {
+
       this.forma = new FormGroup({
-        nombre: new FormControl( null , Validators.required ),
-        email: new FormControl( null , [Validators.required, Validators.email] ),
-        password: new FormControl( null , Validators.required ),
-        password2: new FormControl( null , Validators.required )
+        nombre: new FormControl(null, Validators.required ),
+        email: new FormControl(null, [Validators.required, Validators.email] ),
+        password: new FormControl(null, Validators.required ),
+        password2: new FormControl(null, Validators.required ),
+        role: new FormControl(null, Validators.required ),
+        empresas: new FormControl(null, Validators.required)
       }, { validators: this.sonIguales( 'password', 'password2' )  } );
 
 
@@ -54,7 +61,9 @@ export class RegisterComponent implements OnInit {
         nombre: 'Test',
         email: 'test@test.com',
         password: '123456',
-        password2: '123456'
+        password2: '123456',
+        role: 'ADMIN_ROLE',
+        empresas: '5bfecd483965fc0b7058ceae'
       });
 
   }
@@ -71,12 +80,21 @@ export class RegisterComponent implements OnInit {
     let usuario = new Usuario(
       this.forma.value.nombre,
       this.forma.value.email,
-      this.forma.value.password
+      this.forma.value.password,
+      this.forma.value.role,
+      this.forma.value.empresas
     );
-
+console.log(usuario);
     this._usuarioService.crearUsuario( usuario )
               .subscribe( resp => this.forma.reset());
 
+
+  }
+
+  cambioRole( role: string ) {
+console.log(role);
+     this._clienteService.cargarClientesRole( role )
+       .subscribe( clientes => this.clientes = clientes );
 
   }
 

@@ -84,7 +84,7 @@
                                 <mat-form-field>
                                     <mat-select placeholder="Seleccione una agencia" (selectionChange)="cambioAgencia( $event.value )" [(ngModel)]="maniobra.agencia" name="agencia" required>
                                         <mat-option *ngFor="let agencia of agencias" [value]="agencia._id">
-                                            {{ agencia.nombre }}
+                                            {{ agencia.cliente }}
                                         </mat-option>
                                     </mat-select>
                                 </mat-form-field>

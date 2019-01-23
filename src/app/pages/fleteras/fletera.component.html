@@ -2,16 +2,58 @@
 
     <div class="col-md-6">
         <div class="card card-body">
-            <h3 class="box-title m-b-0">Fletera: {{ fletera.nombre }}</h3>
+            <h3 class="box-title m-b-0">Fletera: {{ fletera.cliente }}</h3>
             <div class="row">
                 <div class="col-sm-12 col-xs-12">
                     <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarFletera(f)">
                         <div class="my-container">
                             <mat-form-field>
-                                <input matInput [(ngModel)]="fletera.nombre" name="nombre" type="text" class="form-control" placeholder="Nombre de la fletera" required>
+                                <input matInput [(ngModel)]="fletera.cliente" name="cliente" type="text" class="form-control" placeholder="Nombre del cliente" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="fletera.razonSocial" name="razonSocial" type="text" class="form-control" placeholder="Razon Social" required>
                             </mat-form-field>
                             <mat-form-field>
                                 <input matInput [(ngModel)]="fletera.rfc" name="rfc" type="text" class="form-control" placeholder="RFC" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="fletera.calle" name="calle" type="text" class="form-control" placeholder="Dirección" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="fletera.numeroExterior" name="numeroExterior" type="text" class="form-control" placeholder="Numero Exterior" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="fletera.numeroInterior" name="numeroInterior" type="text" class="form-control" placeholder="Numero Interior">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="fletera.colonia" name="colonia" type="text" class="form-control" placeholder="Colonia" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="fletera.municipioDelegacion" name="municipioDelegacion" type="text" class="form-control" placeholder="Municipio/Delegacion" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="fletera.ciudad" name="ciudad" type="text" class="form-control" placeholder="Ciudad" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="fletera.estado" name="estado" type="text" class="form-control" placeholder="Estado" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="fletera.cp" name="cp" type="text" class="form-control" placeholder="Codigo Postal" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="fletera.correo" name="cp" type="text" class="form-control" placeholder="Correo Personal" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="fletera.correoFac" name="correoFac" type="text" class="form-control" placeholder="Correo De facturación" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="fletera.credito" name="credito" type="text" class="form-control" placeholder="Credito" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="fletera.patente" name="patente" type="text" class="form-control" placeholder="Patente" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="fletera.nombreComercial" name="nombreComercial" type="text" class="form-control" placeholder="Nombre Comercial" required>
                             </mat-form-field>
                         </div>
 

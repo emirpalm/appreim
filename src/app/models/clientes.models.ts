@@ -16,6 +16,7 @@ export class Cliente {
         public correo?: string,
         public correoFac?: string,
         public credito?: string,
+        public role?: string,
         public usuario?: string,
         public _id?: string
 

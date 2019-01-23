@@ -17,6 +17,20 @@ export class ClienteService {
     public _usuarioService: UsuarioService
   ) { }
 
+  cargarClientesRole(role: string): Observable<any> {
+    // tslint:disable-next-line:prefer-const
+    let url = URL_SERVICIOS + '/cliente/role/' + role;
+    return this.http.get( url )
+              .pipe( map( (resp: any) => resp.cliente  ));
+  }
+
+  cargarClientesEmpresa(id: string): Observable<any> {
+    // tslint:disable-next-line:prefer-const
+    let url = URL_SERVICIOS + '/cliente/empresa/' + id;
+    return this.http.get( url )
+              .pipe( map( (resp: any) => resp.cliente  ));
+  }
+
   cargarClientes(desde: number = 0): Observable<any> {
 
     // tslint:disable-next-line:prefer-const
@@ -65,7 +79,7 @@ export class ClienteService {
                   return resp.cliente;
                 }),
                 catchError( err => {
-                  swal( err.error.mensaje, err.error.errores.message, 'error' );
+                  swal( err.error.mensaje, err.error.errors.message, 'error' );
                   return throwError(err);
                 }));
 
@@ -78,7 +92,7 @@ export class ClienteService {
                 return resp.cliente;
               }),
               catchError( err => {
-                swal( err.error.mensaje, err.error.errores.message, 'error' );
+                swal( err.error.mensaje, err.error.errors.message, 'error' );
                 return throwError(err);
               }));
     }

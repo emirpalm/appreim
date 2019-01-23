@@ -21,6 +21,12 @@ import { FleteraComponent } from './fleteras/fletera.component';
 import { ViajesComponent } from './viajes/viajes.component';
 import { ViajeComponent } from './viajes/viaje.component';
 import { FotosComponent } from './fotos/fotos.component';
+import { NavierasComponent } from './navieras/navieras.component';
+import { NavieraComponent } from './navieras/naviera.component';
+import { DonwloadrequestComponent } from './donwloadrequest/donwloadrequest.component';
+import { EmpresaComponent } from './empresa/empresa.component';
+import { MisclientesComponent } from './misclientes/misclientes.component';
+
 // Guards
 // import { LoginGuardGuard } from '../services/service.index';
 import { AdminGuard } from '../services/service.index';
@@ -28,6 +34,8 @@ import { AdminGuard } from '../services/service.index';
 import { ManiobraComponent } from './maniobras/maniobra.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { AddcontainersComponent } from './addcontainers/addcontainers.component';
+
+
 
 
 const pagesRoutes: Routes = [
@@ -49,7 +57,14 @@ const pagesRoutes: Routes = [
         canActivate: [ AdminGuard ],
         data: { titulo: 'Registrar Usuarios' }
     },
-    // Mantenimientos
+    // Solicitud Descarga
+    {
+        path: 'aadescarga',
+        component: DonwloadrequestComponent,
+        canActivate: [ AdminGuard ],
+        data: { titulo: 'Solicitud de descargas' }
+    },
+    // Mantenimientos ADMIN ROLE
     {
         path: 'usuarios',
         component: UsuariosComponent,
@@ -59,46 +74,62 @@ const pagesRoutes: Routes = [
     {
         path: 'operadores',
         component: OperadoresComponent,
+        canActivate: [ AdminGuard ],
         data: { titulo: 'Mantenimiento de Operadores' }
     },
-    {path: 'operador/:id', component: OperadorComponent, data: {titulo: 'Actualizacion de datos'}},
+    {path: 'operador/:id', component: OperadorComponent,  canActivate: [ AdminGuard ], data: {titulo: 'Actualizacion de datos'}},
     {
         path: 'camiones',
         component: CamionesComponent,
+        canActivate: [ AdminGuard ],
         data: { titulo: 'Mantenimiento de camiones' }
     },
-    {path: 'camion/:id', component: CamionComponent, data: {titulo: 'Actualizacion de camiones'}},
+    {path: 'camion/:id', component: CamionComponent,  canActivate: [ AdminGuard ], data: {titulo: 'Actualizacion de camiones'}},
     {
         path: 'contenedores',
         component: ContenedoresComponent,
+        canActivate: [ AdminGuard ],
         data: { titulo: 'Mantenimiento de Contenedores' }
     },
-    {path: 'agencia/:id', component: AgenciaComponent, data: {titulo: 'Actualizacion de agencia'}},
+    {path: 'agencia/:id', component: AgenciaComponent,  canActivate: [ AdminGuard ], data: {titulo: 'Actualizacion de agencia'}},
     {
         path: 'agencias',
         component: AgenciasComponent,
+        canActivate: [ AdminGuard ],
         data: { titulo: 'Mantenimiento de Agencias' }
     },
-    {path: 'fletera/:id', component: FleteraComponent, data: {titulo: 'Actualizacion de fletera'}},
+    {path: 'fletera/:id', component: FleteraComponent,  canActivate: [ AdminGuard ], data: {titulo: 'Actualizacion de transportista'}},
     {
         path: 'fleteras',
         component: FleterasComponent,
-        data: { titulo: 'Mantenimiento de Fleteras' }
+        canActivate: [ AdminGuard ],
+        data: { titulo: 'Mantenimiento de transportistas' }
     },
     {path: 'viaje/:id', component: ViajeComponent, data: {titulo: 'Actualizacion de viajes'}},
     {path: 'addcontainers/:id', component: AddcontainersComponent, data: {titulo: 'Actualizacion de contenedores del viaje'}},
     {
         path: 'viajes',
         component: ViajesComponent,
+        canActivate: [ AdminGuard ],
         data: { titulo: 'Mantenimiento de viajes' }
     },
-    {path: 'contenedor/:id', component: ContenedorComponent, data: {titulo: 'Actualizacion de contenedores'}},
+    {path: 'contenedor/:id', component: ContenedorComponent, canActivate: [ AdminGuard ], data: {titulo: 'Actualizacion de contenedores'}},
     {
         path: 'clientes',
         component: ClientesComponent,
+        canActivate: [ AdminGuard ],
         data: { titulo: 'Mantenimiento de Clientes' }
     },
-    {path: 'cliente/:id', component: ClienteComponent, data: {titulo: 'Actualizacion de clientes'}},
-            {path: '', redirectTo: '/dashboard', pathMatch: 'full'}
+    {path: 'cliente/:id', component: ClienteComponent, canActivate: [ AdminGuard ], data: {titulo: 'Actualizacion de clientes'}},
+    {
+        path: 'navieras',
+        component: NavierasComponent,
+        canActivate: [ AdminGuard ],
+        data: { titulo: 'Mantenimiento de Navieras' }
+    },
+    {path: 'naviera/:id', component: NavieraComponent, canActivate: [ AdminGuard ], data: {titulo: 'Actualizacion de datos'}},
+    {path: 'misempresas', component: EmpresaComponent, canActivate: [ AdminGuard ], data: {titulo: 'Actualizacion de datos'}},
+    {path: 'misclientes/:id', component: MisclientesComponent, canActivate: [ AdminGuard ], data: {titulo: 'Actualizacion de datos'}},
+    {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
     ];
     export const PAGES_ROUTES = RouterModule.forChild( pagesRoutes );

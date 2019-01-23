@@ -64,7 +64,7 @@ export class ContenedorService {
                   return resp.contenedor;
                 }),
                 catchError( err => {
-                  swal( err.error.mensaje, err.error.errores.message, 'error' );
+                  swal( err.error.mensaje, err.error.errors.message, 'error' );
                   return throwError(err);
                 }));
 
@@ -77,7 +77,7 @@ export class ContenedorService {
                 return resp.contenedor;
               }),
               catchError( err => {
-                swal( err.error.mensaje, err.error.errores.message, 'error' );
+                swal( err.error.mensaje, err.error.errors.message, 'error' );
                 return throwError(err);
               }));
     }

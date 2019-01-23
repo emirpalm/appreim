@@ -1,0 +1,264 @@
+<!-- Row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header bg-info">
+                <h4 class="m-b-0 text-white">Solicitud de descarga</h4>
+            </div>
+            <div class="card-body">
+                <form action="#">
+                    <div class="form-body">
+                        <h3 class="card-title">Datos generales</h3>
+                        <hr>
+                        <div class="row p-t-20">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label"><b>Agente Aduanal</b></label>
+                                    <input matInput [ngModel]="usuario.empresas.cliente" name="cliente" type="text" class="form-control" placeholder="">
+                                    <small class="form-control-feedback"> This is inline help </small> </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group has-danger">
+                                    <label class="control-label"><b>Naviera</b></label>
+                                    <input matInput [ngModel]="" type="text" id="lastName" class="form-control form-control-danger" placeholder="Naviera Maya">
+                                    <small class="form-control-feedback"> This field has error. </small> </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group has-success">
+                                    <label class="control-label"><b>Transportista</b></label>
+                                    <select class="form-control custom-select">
+                                      <option value="">Emir</option>
+                                      <option value="">Angel</option>
+                                  </select>
+                                    <small class="form-control-feedback"> Seleccione un transportista </small> </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <!-- <label class="control-label">Date of Birth</label>
+                                    <input type="date" class="form-control" placeholder="dd/mm/yyyy">-->
+                                    <label class="control-label"><b>Facturar servicio a:</b></label>
+                                    <div class="form-check">
+                                        <label class="custom-control custom-radio">
+                                          <input id="radio1" name="radio" type="radio" checked class="custom-control-input">
+                                          <span class="custom-control-indicator"></span>
+                                          <span class="custom-control-description">Agencia Aduanal</span>
+                                      </label>
+                                        <label class="custom-control custom-radio">
+                                          <input id="radio2" name="radio" type="radio" class="custom-control-input">
+                                          <span class="custom-control-indicator"></span>
+                                          <span class="custom-control-description">Otro</span>
+                                      </label>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <!--<div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Category</label>
+                                    <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1">
+                                      <option value="Category 1">Category 1</option>
+                                      <option value="Category 2">Category 2</option>
+                                      <option value="Category 3">Category 5</option>
+                                      <option value="Category 4">Category 4</option>
+                                  </select>
+                                </div>
+                            </div>-->
+                        <!--/span-->
+                        <!--<div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Membership</label>
+                                    <div class="form-check">
+                                        <label class="custom-control custom-radio">
+                                          <input id="radio1" name="radio" type="radio" checked class="custom-control-input">
+                                          <span class="custom-control-indicator"></span>
+                                          <span class="custom-control-description">Free</span>
+                                      </label>
+                                        <label class="custom-control custom-radio">
+                                          <input id="radio2" name="radio" type="radio" class="custom-control-input">
+                                          <span class="custom-control-indicator"></span>
+                                          <span class="custom-control-description">Paid</span>
+                                      </label>
+                                    </div>
+                                </div>
+                            </div>
+                      
+                    </div>-->
+                        <!--/span-->
+                        <!--/row-->
+                        <h3 class="box-title m-t-40">Detalles de la descarga</h3>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12 ">
+                                <div class="form-group">
+                                    <label><b>Observaciones</b></label>
+                                    <textarea rows="3" cols="40" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label><b>Anexar BL</b></label>
+                                    <input type="file" class="form-control">
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label><b>Servicios</b></label>
+                                    <br>
+                                    <mat-checkbox>Lavado</mat-checkbox>
+                                    <br>
+                                    <mat-checkbox>Reparación</mat-checkbox>
+
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label><b>Formas de pago</b></label>
+                                    <br>
+                                    <mat-checkbox>Comprobante de pago</mat-checkbox>
+                                    <br>
+                                    <mat-checkbox>Ya cuenta con crédito</mat-checkbox>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label><b>Anexar comprobante</b></label>
+                                    <input type="file" class="form-control">
+                                </div>
+                            </div>
+                            <!--/span-->
+
+                            <!--/span-->
+                        </div>
+
+                        <!--/span-->
+                        <!--/row-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label><b>Correo Folio</b></label>
+                                    <textarea rows="3" cols="40" class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <!--<label>Country</label>
+                                    <select class="form-control custom-select">
+                                      <option>--Select your Country--</option>
+                                      <option>India</option>
+                                      <option>Sri Lanka</option>
+                                      <option>USA</option>
+                                  </select>-->
+                                    <div class="form-group">
+                                        <label><b>Correo Facturación</b></label>
+                                        <textarea rows="3" cols="40" class="form-control"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/span-->
+                        </div>
+                        <h3 class="box-title m-t-40">Detalles del contenedor</h3>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label><b>Contenedor</b></label>
+                                    <input type="text" class="form-control" placeholder="">
+                                </div>
+                            </div>
+                            <!--/span-->
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label class="control-label"><b>Tamaño - Tipo</b></label>
+                                        <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1">
+                                          <option value="Category 1">10</option>
+                                          <option value="Category 2">20</option>
+                                          <option value="Category 3">30</option>
+                                          <option value="Category 4">40</option>
+                                      </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label class="control-label"><b>Estado contenedor</b></label>
+                                        <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1">
+                                          <option value="Category 1">Vacio</option>
+                                          <option value="Category 2">LLeno</option>
+                                      </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+
+                                <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Añadir</button>
+
+                            </div>
+                            <!--/span-->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">Contenedor</th>
+                                                    <th scope="col">Tamaño - Tipo</th>
+                                                    <th scope="col">Estado contenedor</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <th scope="row">1</th>
+                                                    <td>155151</td>
+                                                    <td>10</td>
+                                                    <td>Vacio</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">2</th>
+                                                    <td>65695</td>
+                                                    <td>20</td>
+                                                    <td>Lleno</td>
+                                                </tr>
+                                                <tr>
+                                                    <th scope="row">3</th>
+                                                    <td>989565</td>
+                                                    <td>30</td>
+                                                    <td>Vacio</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Guardar</button>
+                        <button type="button" class="btn btn-inverse">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Row -->

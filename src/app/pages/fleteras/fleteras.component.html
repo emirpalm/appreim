@@ -3,7 +3,7 @@
         <div class="card">
             <div class="card-body">
 
-                <input #input (keyup)="buscarFletera( input.value )" type="text" class="form-control" placeholder="Buscar fletera...">
+                <input #input (keyup)="buscarFletera( input.value )" type="text" class="form-control" placeholder="Buscar transportista...">
 
             </div>
         </div>
@@ -18,24 +18,54 @@
                 <div class="text-right">
                     <button [routerLink]="['/fletera','nuevo']" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
                 <i class="fa fa-plus"></i> 
-                Añadir nueva fletera
+                Añadir nueva transportista
               </button>
                 </div>
 
-                <h3 class="card-title">Fleteras registradas ( <small>{{_fleteraService.totalFleteras}}</small> )</h3>
+                <h3 class="card-title">Transportistas registrados ( <small>{{_fleteraService.totalFleteras}}</small> )</h3>
 
                 <table class="table table-hover table-responsive">
                     <thead>
                         <tr>
-                            <th>Nombre</th>
+                            <!--<th>Cliente</th>-->
+                            <th>Razon Social</th>
                             <th>RFC</th>
+                            <th>Calle</th>
+                            <th>Numero Exterior</th>
+                            <th>Numero Interior</th>
+                            <th>Colonia</th>
+                            <th>Municipio/Delegacion</th>
+                            <th>Ciudad</th>
+                            <th>Estado</th>
+                            <th>Codigo Postal</th>
+                            <th>Formato R1</th>
+                            <th>Correo</th>
+                            <th>Correo de Facturación</th>
+                            <th>Credito</th>
+                            <th>Patente</th>
+                            <th>Nombre Comercial</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let fletera of fleteras">
-                            <td>{{fletera.nombre}}</td>
+                            <!--<td>{{cliente.cliente}}</td>-->
+                            <td>{{fletera.razonSocial}}</td>
                             <td>{{fletera.rfc}}</td>
+                            <td>{{fletera.calle}}</td>
+                            <td>{{fletera.numeroExterior}}</td>
+                            <td>{{fletera.numeroInterior}}</td>
+                            <td>{{fletera.colonia}}</td>
+                            <td>{{fletera.municipioDelegacion}}</td>
+                            <td>{{fletera.ciudad}}</td>
+                            <td>{{fletera.estado}}</td>
+                            <td>{{fletera.cp}}</td>
+                            <td>{{fletera.formatoR1}}</td>
+                            <td>{{fletera.correo}}</td>
+                            <td>{{fletera.correoFac}}</td>
+                            <td>{{fletera.credito}}</td>
+                            <td>{{fletera.patente}}</td>
+                            <td>{{fletera.nombreComercial}}</td>
                             <td>
                                 <button [routerLink]="['/fletera', fletera._id ]" class="btn btn-primary">
                             <i class="fa fa-edit"></i>

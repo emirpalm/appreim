@@ -62,12 +62,12 @@ export class AgenciaService {
       return this.http.put( url, agencia )
       .pipe(
                 map( (resp: any) => {
-                  swal('Agencia Actualizado', agencia.nombre, 'success');
+                  swal('Agencia Actualizado', agencia.cliente, 'success');
                   return resp.agencia;
 
                 }),
                 catchError( err => {
-                  swal( err.error.mensaje, err.error.errores.message, 'error' );
+                  swal( err.error.mensaje, err.error.errors.message, 'error' );
                   return throwError(err);
                 }));
 
@@ -77,11 +77,11 @@ export class AgenciaService {
       return this.http.post( url, agencia )
       .pipe(
               map( (resp: any) => {
-                swal('Agencia Creada', agencia.nombre, 'success');
+                swal('Agencia Creada', agencia.cliente, 'success');
                 return resp.agencia;
               }),
               catchError( err => {
-                swal( err.error.mensaje, err.error.errores.message, 'error' );
+                swal( err.error.mensaje, err.error.errors.message, 'error' );
                 return throwError(err);
               }));
     }

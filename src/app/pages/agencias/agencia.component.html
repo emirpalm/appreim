@@ -2,19 +2,58 @@
 
     <div class="col-md-6">
         <div class="card card-body">
-            <h3 class="box-title m-b-0">Agencia: {{ agencia.nombre }}</h3>
+            <h3 class="box-title m-b-0">Agencia: {{ agencia.cliente }}</h3>
             <div class="row">
                 <div class="col-sm-12 col-xs-12">
                     <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarAgencia(f)">
                         <div class="my-container">
                             <mat-form-field>
-                                <input matInput [(ngModel)]="agencia.nombre" name="nombre" type="text" class="form-control" placeholder="Nombre de la agencia" required>
+                                <input matInput [(ngModel)]="agencia.cliente" name="cliente" type="text" class="form-control" placeholder="Nombre del cliente" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="agencia.razonSocial" name="razonSocial" type="text" class="form-control" placeholder="Razon Social" required>
                             </mat-form-field>
                             <mat-form-field>
                                 <input matInput [(ngModel)]="agencia.rfc" name="rfc" type="text" class="form-control" placeholder="RFC" required>
                             </mat-form-field>
                             <mat-form-field>
+                                <input matInput [(ngModel)]="agencia.calle" name="calle" type="text" class="form-control" placeholder="Dirección" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="agencia.numeroExterior" name="numeroExterior" type="text" class="form-control" placeholder="Numero Exterior" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="agencia.numeroInterior" name="numeroInterior" type="text" class="form-control" placeholder="Numero Interior">
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="agencia.colonia" name="colonia" type="text" class="form-control" placeholder="Colonia" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="agencia.municipioDelegacion" name="municipioDelegacion" type="text" class="form-control" placeholder="Municipio/Delegacion" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="agencia.ciudad" name="ciudad" type="text" class="form-control" placeholder="Ciudad" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="agencia.estado" name="estado" type="text" class="form-control" placeholder="Estado" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="agencia.cp" name="cp" type="text" class="form-control" placeholder="Codigo Postal" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="agencia.correo" name="cp" type="text" class="form-control" placeholder="Correo Personal" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="agencia.correoFac" name="correoFac" type="text" class="form-control" placeholder="Correo De facturación" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="agencia.credito" name="credito" type="text" class="form-control" placeholder="Credito" required>
+                            </mat-form-field>
+                            <mat-form-field>
                                 <input matInput [(ngModel)]="agencia.patente" name="patente" type="text" class="form-control" placeholder="Patente" required>
+                            </mat-form-field>
+                            <mat-form-field>
+                                <input matInput [(ngModel)]="agencia.nombreComercial" name="nombreComercial" type="text" class="form-control" placeholder="Nombre Comercial" required>
                             </mat-form-field>
                         </div>
 

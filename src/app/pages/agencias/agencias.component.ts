@@ -9,7 +9,7 @@ import { AgenciaService } from '../../services/service.index';
 })
 export class AgenciasComponent implements OnInit {
   // tslint:disable-next-line:typedef-whitespace
-  agencias : Agencia[] = [];
+  agencias: Agencia[] = [];
   // tslint:disable-next-line:no-inferrable-types
   cargando: boolean = true;
   // tslint:disable-next-line:no-inferrable-types

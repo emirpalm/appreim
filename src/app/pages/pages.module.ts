@@ -29,6 +29,15 @@ import { FleterasComponent } from './fleteras/fleteras.component';
 import { FleteraComponent } from './fleteras/fletera.component';
 import { ViajesComponent } from './viajes/viajes.component';
 import { ViajeComponent } from './viajes/viaje.component';
+import { AddcontainersComponent } from './addcontainers/addcontainers.component';
+import { NavierasComponent } from './navieras/navieras.component';
+import { NavieraComponent } from './navieras/naviera.component';
+import { DonwloadrequestComponent } from './donwloadrequest/donwloadrequest.component';
+import { FotosComponent } from './fotos/fotos.component';
+import { NgDropFilesDirective } from '.././directives/ng-drop-files.directive';
+import { EmpresaComponent } from './empresa/empresa.component';
+import { MisclientesComponent } from './misclientes/misclientes.component';
+
 // Pipes Modulos
 import { PipesModule } from '../pipes/pipes.module';
 // import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
@@ -43,11 +52,11 @@ import {
     MatSelectModule,
     MatSlideToggleModule,
     MatTabsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatCheckboxModule
   } from '@angular/material';
-import { FotosComponent } from './fotos/fotos.component';
-import { NgDropFilesDirective } from '.././directives/ng-drop-files.directive';
-import { AddcontainersComponent } from './addcontainers/addcontainers.component';
+
+
 
 @NgModule({
     declarations: [
@@ -76,7 +85,12 @@ import { AddcontainersComponent } from './addcontainers/addcontainers.component'
         BusquedaComponent,
         FotosComponent,
         NgDropFilesDirective,
-        AddcontainersComponent
+        AddcontainersComponent,
+        NavierasComponent,
+        NavieraComponent,
+        DonwloadrequestComponent,
+        EmpresaComponent,
+        MisclientesComponent
     ],
     exports: [
         DashboardComponent
@@ -96,7 +110,8 @@ import { AddcontainersComponent } from './addcontainers/addcontainers.component'
         MatSelectModule,
         MatSlideToggleModule,
         MatTabsModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatCheckboxModule
     ]
     })
 

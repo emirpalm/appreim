@@ -60,11 +60,11 @@ export class FleteraService {
 
       return this.http.put( url, fletera )
                 .pipe(map( (resp: any) => {
-                  swal('Fletera Actualizado', fletera.nombre, 'success');
+                  swal('Fletera Actualizado', fletera.cliente, 'success');
                   return resp.fletera;
                 }),
                 catchError( err => {
-                  swal( err.error.mensaje, err.error.errores.message, 'error' );
+                  swal( err.error.mensaje, err.error.errors.message, 'error' );
                   return throwError(err);
                 }));
 
@@ -73,11 +73,11 @@ export class FleteraService {
       url += '?token=' + this._usuarioService.token;
       return this.http.post( url, fletera )
               .pipe(map( (resp: any) => {
-                swal('Fletera Creada', fletera.nombre, 'success');
+                swal('Fletera Creada', fletera.cliente, 'success');
                 return resp.fletera;
               }),
               catchError( err => {
-                swal( err.error.mensaje, err.error.errores.message, 'error' );
+                swal( err.error.mensaje, err.error.errors.message, 'error' );
                 return throwError(err);
               }));
     }
