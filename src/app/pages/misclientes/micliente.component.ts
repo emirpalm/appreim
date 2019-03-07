@@ -1,22 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { Cliente } from '../../models/clientes.models';
 import { ClienteService } from '../../services/service.index';
+import { Usuario } from '../../models/usuarios.model';
+import { UsuarioService } from '../../services/service.index';
 import { NgForm } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
 
 @Component({
-  selector: 'app-cliente',
-  templateUrl: './cliente.component.html',
+  selector: 'app-micliente',
+  templateUrl: './micliente.component.html',
   styles: []
 })
-export class ClienteComponent implements OnInit {
+
+export class MiclienteComponent implements OnInit {
   cliente: Cliente = new Cliente();
   clientes: Cliente[] = [];
+  usuario: Usuario;
+
   constructor(public _clienteService: ClienteService,
+    public _usuarioService: UsuarioService,
     public router: Router,
-    public activatedRoute: ActivatedRoute,
-    public _modalUploadService: ModalUploadService) {
+    public activatedRoute: ActivatedRoute) {
+      this.usuario = this._usuarioService.usuario;
 
       activatedRoute.params.subscribe( params => {
 
@@ -28,21 +33,19 @@ export class ClienteComponent implements OnInit {
         }
 
       });
-    }
+     }
 
   ngOnInit() {
-    this._clienteService.cargarClientes()
-    .subscribe( clientes => this.clientes = clientes );
-
   }
 
   cargarCliente( id: string ) {
+    // this.cargando = true;
     this._clienteService.cargarCliente( id )
           .subscribe( cliente => {
 
             console.log( cliente );
             this.cliente = cliente;
-            this.cliente.usuario = cliente.usuario._id;
+            //this.cliente.usuario = cliente.usuario._id;
           });
   }
 
@@ -60,11 +63,10 @@ export class ClienteComponent implements OnInit {
 
               this.cliente._id = cliente._id;
 
-              this.router.navigate(['/cliente', cliente._id ]);
+              this.router.navigate(['/micliente', cliente._id ]);
 
             });
 
   }
-
 
 }

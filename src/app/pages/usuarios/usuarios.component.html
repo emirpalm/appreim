@@ -43,7 +43,7 @@
                                 <td>{{usuario.email}}</td>
                                 <td>{{usuario.nombre}}</td>
                                 <td>
-                                    <select [(ngModel)]="usuario.role" name="role" class="form-control">
+                                    <select disabled [(ngModel)]="usuario.role" name="role" class="form-control">
                                   <option value="ADMIN_ROLE">ADMINISTRADOR</option>
                                   <option value="REIMADMIN_ROLE">REIM ADMIN</option>
                                   <option value="REIM_ROLE">REIM USER</option>
@@ -52,6 +52,16 @@
                                   <option value="AA_ROLE">AGENCIA ADUANAL USER</option>
                                   <option value="CLIENT_ROLE">CLIENTE</option>
                               </select>
+                                </td>
+                                <td>
+                                    <!--========Combombox EMPRESAS=========-->
+                                    <mat-form-field>
+                                        <mat-select placeholder="Seleccione las empresas" [(ngModel)]="usuario.empresas" name="empresas" multiple required>
+                                            <mat-option *ngFor="let agencia of agencias" [value]="agencia._id">
+                                                {{ agencia.razonSocial }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
                                 </td>
                                 <td>
                                     <button (click)="guardarUsuario(usuario)" class="btn btn-primary">

@@ -14,15 +14,25 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label"><b>Agente Aduanal</b></label>
-                                    <input matInput [ngModel]="usuario.empresas.cliente" name="cliente" type="text" class="form-control" placeholder="">
-                                    <small class="form-control-feedback"> This is inline help </small> </div>
+                                    <mat-select placeholder="Seleccione un cliente" (selectionChange)="cargarDatos($event.value) " [(ngModel)]="usuario.empresas.razonSocial" name="cliente" required>
+                                        <mat-option *ngFor="let usuario of usuario.empresas" [value]="usuario._id">
+                                            {{usuario.razonSocial}}
+                                        </mat-option>
+                                    </mat-select>
+                                </div>
+
+
                             </div>
                             <!--/span-->
                             <div class="col-md-6">
                                 <div class="form-group has-danger">
                                     <label class="control-label"><b>Naviera</b></label>
-                                    <input matInput [ngModel]="" type="text" id="lastName" class="form-control form-control-danger" placeholder="Naviera Maya">
-                                    <small class="form-control-feedback"> This field has error. </small> </div>
+                                    <mat-select placeholder="Seleccione una naviera" [(ngModel)]="naviera.razonSocial" name="naviera" required>
+                                        <mat-option *ngFor="let naviera of navieras" [value]="naviera._id">
+                                            {{naviera.razonSocial}}
+                                        </mat-option>
+                                    </mat-select>
+                                </div>
                             </div>
                             <!--/span-->
                         </div>
@@ -31,109 +41,62 @@
                             <div class="col-md-6">
                                 <div class="form-group has-success">
                                     <label class="control-label"><b>Transportista</b></label>
-                                    <select class="form-control custom-select">
-                                      <option value="">Emir</option>
-                                      <option value="">Angel</option>
-                                  </select>
-                                    <small class="form-control-feedback"> Seleccione un transportista </small> </div>
+                                    <mat-select placeholder="Seleccione un transportista" [(ngModel)]="fletera.razonSocial" name="fletera" required>
+                                        <mat-option *ngFor="let fletera of fleteras" [value]="fletera._id">
+                                            {{fletera.razonSocial}}
+                                        </mat-option>
+                                    </mat-select>
+                                </div>
                             </div>
                             <!--/span-->
-                            <div class="col-md-6">
+                            <div class="col-md-3">
                                 <div class="form-group">
                                     <!-- <label class="control-label">Date of Birth</label>
                                     <input type="date" class="form-control" placeholder="dd/mm/yyyy">-->
-                                    <label class="control-label"><b>Facturar servicio a:</b></label>
-                                    <div class="form-check">
-                                        <label class="custom-control custom-radio">
-                                          <input id="radio1" name="radio" type="radio" checked class="custom-control-input">
-                                          <span class="custom-control-indicator"></span>
-                                          <span class="custom-control-description">Agencia Aduanal</span>
-                                      </label>
-                                        <label class="custom-control custom-radio">
-                                          <input id="radio2" name="radio" type="radio" class="custom-control-input">
-                                          <span class="custom-control-indicator"></span>
-                                          <span class="custom-control-description">Otro</span>
-                                      </label>
-                                    </div>
-
+                                    <label class="control-label"><b>Facturar servicio a: </b></label>
+                                    <mat-radio-group class="example-radio-group" [(ngModel)]="facturaa">
+                                        <mat-radio-button class="example-radio-button" *ngFor="let factura of facturas" [value]="factura">
+                                            {{factura}}
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                    <mat-select placeholder="Seleccione un cliente" [(ngModel)]="cliente.razonSocial" name="cliente" required>
+                                        <mat-option *ngFor="let cliente of clientes" [value]="cliente._id">
+                                            {{cliente.razonSocial}}
+                                        </mat-option>
+                                    </mat-select>
                                 </div>
                             </div>
                             <!--/span-->
                         </div>
-                        <!--/row-->
-                        <!--<div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Category</label>
-                                    <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1">
-                                      <option value="Category 1">Category 1</option>
-                                      <option value="Category 2">Category 2</option>
-                                      <option value="Category 3">Category 5</option>
-                                      <option value="Category 4">Category 4</option>
-                                  </select>
-                                </div>
-                            </div>-->
-                        <!--/span-->
-                        <!--<div class="col-md-6">
-                                <div class="form-group">
-                                    <label class="control-label">Membership</label>
-                                    <div class="form-check">
-                                        <label class="custom-control custom-radio">
-                                          <input id="radio1" name="radio" type="radio" checked class="custom-control-input">
-                                          <span class="custom-control-indicator"></span>
-                                          <span class="custom-control-description">Free</span>
-                                      </label>
-                                        <label class="custom-control custom-radio">
-                                          <input id="radio2" name="radio" type="radio" class="custom-control-input">
-                                          <span class="custom-control-indicator"></span>
-                                          <span class="custom-control-description">Paid</span>
-                                      </label>
-                                    </div>
-                                </div>
-                            </div>
-                      
-                    </div>-->
-                        <!--/span-->
-                        <!--/row-->
+
                         <h3 class="box-title m-t-40">Detalles de la descarga</h3>
                         <hr>
                         <div class="row">
-                            <div class="col-md-12 ">
+                            <div class="col-md-6 ">
                                 <div class="form-group">
                                     <label><b>Observaciones</b></label>
-                                    <textarea rows="3" cols="40" class="form-control"></textarea>
+                                    <textarea matInput rows="3" cols="40" class="form-control"></textarea>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
+
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label><b>Anexar BL</b></label>
                                     <input type="file" class="form-control">
                                 </div>
                             </div>
-                            <!--/span-->
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label><b>Servicios</b></label>
-                                    <br>
-                                    <mat-checkbox>Lavado</mat-checkbox>
-                                    <br>
-                                    <mat-checkbox>Reparación</mat-checkbox>
 
-                                </div>
-                            </div>
-                            <!--/span-->
                         </div>
                         <!--/row-->
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label><b>Formas de pago</b></label>
-                                    <br>
-                                    <mat-checkbox>Comprobante de pago</mat-checkbox>
-                                    <br>
-                                    <mat-checkbox>Ya cuenta con crédito</mat-checkbox>
+                                    <label><b>Formas de pago: </b></label>
+                                    <mat-radio-group class="example-radio-group" [(ngModel)]="formasPago">
+                                        <mat-radio-button class="example-radio-button" *ngFor="let pago of pagos" [value]="pago">
+                                            {{pago}}
+                                        </mat-radio-button>
+                                    </mat-radio-group>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -144,7 +107,6 @@
                             </div>
                             <!--/span-->
 
-                            <!--/span-->
                         </div>
 
                         <!--/span-->
@@ -153,22 +115,16 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label><b>Correo Folio</b></label>
-                                    <textarea rows="3" cols="40" class="form-control"></textarea>
+                                    <textarea matInput rows="3" cols="40" class="form-control"> {{agencia.correo}}</textarea>
                                 </div>
                             </div>
                             <!--/span-->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <!--<label>Country</label>
-                                    <select class="form-control custom-select">
-                                      <option>--Select your Country--</option>
-                                      <option>India</option>
-                                      <option>Sri Lanka</option>
-                                      <option>USA</option>
-                                  </select>-->
+
                                     <div class="form-group">
                                         <label><b>Correo Facturación</b></label>
-                                        <textarea rows="3" cols="40" class="form-control"></textarea>
+                                        <textarea matInput rows="3" cols="40" class="form-control">{{agencia.correoFac}}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -177,53 +133,126 @@
                         <h3 class="box-title m-t-40">Detalles del contenedor</h3>
                         <hr>
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group">
                                     <label><b>Contenedor</b></label>
-                                    <input type="text" class="form-control" placeholder="">
+                                    <input matInput type="text" class="form-control" placeholder="">
                                 </div>
                             </div>
                             <!--/span-->
                             <div class="col-md-3">
                                 <div class="form-group">
-                                    <div class="form-group">
-                                        <label class="control-label"><b>Tamaño - Tipo</b></label>
-                                        <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1">
-                                          <option value="Category 1">10</option>
-                                          <option value="Category 2">20</option>
-                                          <option value="Category 3">30</option>
-                                          <option value="Category 4">40</option>
+
+                                    <label class="control-label"><b>Tamaño - Tipo</b></label>
+                                    <select matNativeControl required class="form-control custom-select" data-placeholder="Seleccione una opción" tabindex="1">
+                                          <option value="Contenedor Estandar 20'">Contenedor Estandar 20'</option>
+                                          <option value="Contenedor Estandar 40">Contenedor Estandar 40'</option>
+                                          <option value="Contenedor Estandar De Cubo Alto 40'">Contenedor Estandar De Cubo Alto 40'</option>
+                                          <option value="Contenedor Tapa Dura 20'">Contenedor Tapa Dura 20'</option>
+                                          <option value="Contenedor Tapa Dura 40'">Contenedor Tapa Dura 40'</option>
+                                          <option value="Contenedor Tapa Abierta 20'">Contenedor Tapa Abierta 20'</option>
+                                          <option value="Contenedor Tapa Abierta 40'">Contenedor Tapa Abierta 40'</option>
+                                          <option value="Flat 20'">Flat 20'</option>
+                                          <option value="Flat 40">Flat 40'</option>
+                                          <option value="Plataforma 20'">Plataforma 20'</option>
+                                          <option value="Plataforma 40'">Plataforma 40'</option>
+                                          <option value="Contenedor Ventilado 20'">Contenedor Ventilado 20'</option>
+                                          <option value="Contenedor Termico 20'">Contenedor Termico 20'</option>
+                                          <option value="Contenedor Termico 40'">Contenedor Termico 40'</option>
+                                          <option value="Contenedor Refrigerante 20'">Contenedor Refrigerante 20'</option>
+                                          <option value="Contenedor Refrigerante 40'">Contenedor Refrigerante 40'</option>
+                                          <option value="Contenedor Refrigerante Cubo Alto 40'">Contenedor Refrigerante Cubo Alto 40'</option>
+                                          <option value="Contenedor Carga a Granel 20'">Contenedor Carga a Granel 20'</option>
+                                          <option value="Contenedor Tipo Tanque 20'">Contenedor Tipo Tanque 20'</option>
+                                          <option value="Contenedor Estandar 45'">Contenedor Estandar 45'</option>
+                                          <option value="Contenedor Estandar 48'">Contenedor Estandar 48'</option>
+                                          <option value="Contenedor Estandar 53'">Contenedor Estandar 53'</option>
+                                          <option value="Contenedor Estandar 8'">Contenedor Estandar 8'</option>
+                                          <option value="Contenedor Estandar 10'">Contenedor Estandar 10'</option>
+                                          <option value="Contenedor Estandar De Cubo Alto 45'">Contenedor Estandar De Cubo Alto 45'</option>
+                                          <option value="Semirremolque Con Racks Para Envases De Bebidas">Semirremolque Con Racks Para Envases De Bebidas</option>
+                                          <option value="Semirremolque Cuello De Ganzo">Semirremolque Cuello De Ganzo</option>
+                                          <option value="Contenedor Tolva Cubierto">Contenedor Tolva Cubierto</option>
+                                          <option value="Contenedor Tolva (Abierto)">Contenedor Tolva (Abierto)</option>
+                                          <option value="Auto-Tolva Cubierto/Descarga Neumatica">Auto-Tolva Cubierto/Descarga Neumatica</option>
+                                          <option value="Semirremolque Chasis">Semirremolque Chasis</option>
+                                          <option value="Semirremolque Autocargable (Con Sistema De Elevación)">Semirremolque Autocargable (Con Sistema De Elevación)</option>
+                                          <option value="Semirremolque Con Temperatura Controlada">Semirremolque Con Temperatura Controlada</option>
+                                          <option value="Contenedor Corto Trasero">Contenedor Corto Trasero</option>
+                                          <option value="Contenedor De Cama Baja">Contenedor De Cama Baja</option>
+                                          <option value="Plataforma de 28'">Plataforma de 28'</option>
+                                          <option value="Plataforma de 45'">Plataforma de 45'</option>
+                                          <option value="Plataforma de 48'">Plataforma de 48'</option>
+                                          <option value="Semirremolque Para Transporte De Caballos">Semirremolque Para Transporte De Caballos</option>
+                                          <option value="Semirremolque Para Transporte De Ganado">Semirremolque Para Transporte De Ganado</option>
+                                          <option value="Semirremolque Tanque (Liquidos)/Sin Calefacción/Sin Aislar">Semirremolque Tanque (Liquidos)/Sin Calefacción/Sin Aislar</option>
+                                          <option value="Semirremolque Tanque (Liquidos)/Con Calefacción/Sin Aislar">Semirremolque Tanque (Liquidos)/Con Calefacción/Sin Aislar</option>
+                                          <option value="Semirremolque Tanque (Liquidos)/Sin Calefacción/Aislado">Semirremolque Tanque (Liquidos)/Sin Calefacción/Aislado</option>
+                                          <option value="Semirremolque Tanque (Gas)/Sin Calefacción/Sin Aislar">Semirremolque Tanque (Gas)/Sin Calefacción/Sin Aislar</option>
+                                          <option value="Semirremolque Tanque (Gas)/Con Calefacción/Sin Aislar">Semirremolque Tanque (Gas)/Con Calefacción/Sin Aislar</option>
+                                          <option value="Semirremolque Tanque (Gas)/Sin Calefacción/Aislado">Semirremolque Tanque (Gas)/Sin Calefacción/Aislado</option>
+                                          <option value="Semirremolque Tanque (Gas)/Con Calefacción/Aislado">Semirremolque Tanque (Gas)/Con Calefacción/Aislado</option>
+                                          <option value="Semirremolque Tanque (Quimicos)/Sin Calefacción/Sin Aislar">Semirremolque Tanque (Quimicos)/Sin Calefacción/Sin Aislar</option>
+                                          <option value="Semirremolque Tanque (Quimicos)/Con Calefacción/Sin Aislar">Semirremolque Tanque (Quimicos)/Con Calefacción/Sin Aislar</option>
+                                          <option value="Semirremolque Tanque (Quimicos)/Sin Calefacción/Aislado">Semirremolque Tanque (Quimicos)/Sin Calefacción/Aislado</option>
+                                          <option value="Semirremolque Tanque (Quimicos)/Con Calefacción/Aislado">Semirremolque Tanque (Quimicos)/Con Calefacción/Aislado</option>
+                                          <option value="Semirremolque Tanque Gondola-Cerrada">Semirremolque Tanque Gondola-Cerrada</option>
+                                          <option value="Semirremolque Tanque Gondola-Abierta">Semirremolque Tanque Gondola-Abierta</option>
+                                          <option value="Semirremolque Tanque Tipo Caja Cerrada 48'">Semirremolque Tanque Tipo Caja Cerrada 48'</option>
+                                          <option value="Semirremolque Tanque Tipo Caja Cerrada 53'">Semirremolque Tanque Tipo Caja Cerrada 53'</option>
+                                          <option value="Semirremolque Tanque Tipo Caja Refrigerada 48'">Semirremolque Tanque Tipo Caja Refrigerada 48'</option>
+                                          <option value="Semirremolque Tanque Tipo Caja Refrigerada 53'">Semirremolque Tanque Tipo Caja Refrigerada 53'</option>
+                                          <option value="Doble Semirremolque">Doble Semirremolque</option>
+                                          <option value="Otros">Otros</option>
+                                          <option value="Tanque 20'">Tanque 20'</option>
+                                          <option value="Tanque 40'">Tanque 40'</option>
+                                          <option value="Carro De Ferrocarril">Carro De Ferrocarril</option>
+                                          <option value="High Cube 20'">High Cube 20'</option>
                                       </select>
-                                    </div>
+
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-2">
                                 <div class="form-group">
-                                    <div class="form-group">
-                                        <label class="control-label"><b>Estado contenedor</b></label>
-                                        <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1">
-                                          <option value="Category 1">Vacio</option>
-                                          <option value="Category 2">LLeno</option>
+
+                                    <label class="control-label"><b>Estado</b></label>
+                                    <select matNativeControl required class="form-control custom-select" data-placeholder="Seleccione una opción" tabindex="1">
+                                          <option value="Vacio">Vacio</option>
+                                          <option value="LLeno">LLeno</option>
                                       </select>
-                                    </div>
+
                                 </div>
                             </div>
-                            <div class="col-md-3">
 
-                                <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Añadir</button>
-
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label"><b>Servicios</b></label>
+                                    <select matNativeControl required class="form-control custom-select" data-placeholder="Seleccione una opción" tabindex="1">
+                                          <option value="Lavado">Lavado</option>
+                                          <option value="Reparación">Reparación</option>
+                                      </select>
+                                </div>
                             </div>
+
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label class="control-label"><b>Añadir</b></label>
+                                    <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Añadir</button>
+                                </div>
+                            </div>
+
                             <!--/span-->
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <table class="table table-striped">
+                                        <table matNativeControl required class="table table-striped">
                                             <thead>
                                                 <tr>
                                                     <th scope="col">#</th>
                                                     <th scope="col">Contenedor</th>
                                                     <th scope="col">Tamaño - Tipo</th>
                                                     <th scope="col">Estado contenedor</th>
+                                                    <th scope="col">Servicio</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -232,18 +261,21 @@
                                                     <td>155151</td>
                                                     <td>10</td>
                                                     <td>Vacio</td>
+                                                    <td>Lavado</td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">2</th>
                                                     <td>65695</td>
                                                     <td>20</td>
                                                     <td>Lleno</td>
+                                                    <td>Reparación</td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">3</th>
                                                     <td>989565</td>
                                                     <td>30</td>
                                                     <td>Vacio</td>
+                                                    <td>Lavado</td>
                                                 </tr>
                                             </tbody>
                                         </table>

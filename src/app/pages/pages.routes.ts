@@ -26,6 +26,7 @@ import { NavieraComponent } from './navieras/naviera.component';
 import { DonwloadrequestComponent } from './donwloadrequest/donwloadrequest.component';
 import { EmpresaComponent } from './empresa/empresa.component';
 import { MisclientesComponent } from './misclientes/misclientes.component';
+import { MiclienteComponent } from './misclientes/micliente.component';
 
 // Guards
 // import { LoginGuardGuard } from '../services/service.index';
@@ -129,6 +130,12 @@ const pagesRoutes: Routes = [
     },
     {path: 'naviera/:id', component: NavieraComponent, canActivate: [ AdminGuard ], data: {titulo: 'Actualizacion de datos'}},
     {path: 'misempresas', component: EmpresaComponent, canActivate: [ AdminGuard ], data: {titulo: 'Actualizacion de datos'}},
+    {
+        path: 'micliente/:id',
+        component: MiclienteComponent,
+        canActivate: [ AdminGuard ],
+        data: { titulo: 'Mantenimiento de Mis Clientes' }
+    },
     {path: 'misclientes/:id', component: MisclientesComponent, canActivate: [ AdminGuard ], data: {titulo: 'Actualizacion de datos'}},
     {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
     ];

@@ -24,11 +24,17 @@ export class ClienteService {
               .pipe( map( (resp: any) => resp.cliente  ));
   }
 
-  cargarClientesEmpresa(id: string): Observable<any> {
+  cargarClientesEmpresa(id: string, desde: number = 0): Observable<any> {
     // tslint:disable-next-line:prefer-const
-    let url = URL_SERVICIOS + '/cliente/empresa/' + id;
-    return this.http.get( url )
-              .pipe( map( (resp: any) => resp.cliente  ));
+    let url = URL_SERVICIOS + '/cliente/empresa/' + id + '?desde' + desde;
+    return this.http.get(url)
+    .pipe(
+    map( (resp: any) => {
+
+      this.totalClientes = resp.total;
+      console.log(resp.total);
+    return resp.cliente;
+    }));
   }
 
   cargarClientes(desde: number = 0): Observable<any> {
@@ -75,10 +81,11 @@ export class ClienteService {
 
       return this.http.put( url, cliente )
                 .pipe (map( (resp: any) => {
-                  swal('Cliente Actualizado', cliente.cliente, 'success');
+                  swal('Cliente Actualizado', cliente.razonSocial, 'success');
                   return resp.cliente;
                 }),
                 catchError( err => {
+                  console.error(err);
                   swal( err.error.mensaje, err.error.errors.message, 'error' );
                   return throwError(err);
                 }));
@@ -88,10 +95,11 @@ export class ClienteService {
       url += '?token=' + this._usuarioService.token;
       return this.http.post( url, cliente )
               .pipe(map( (resp: any) => {
-                swal('Cliente Creado', cliente.cliente, 'success');
+                swal('Cliente Creado', cliente.razonSocial, 'success');
                 return resp.cliente;
               }),
               catchError( err => {
+                console.log(err);
                 swal( err.error.mensaje, err.error.errors.message, 'error' );
                 return throwError(err);
               }));

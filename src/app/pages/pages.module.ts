@@ -53,8 +53,10 @@ import {
     MatSlideToggleModule,
     MatTabsModule,
     MatAutocompleteModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatRadioModule
   } from '@angular/material';
+import { MiclienteComponent } from './misclientes/micliente.component';
 
 
 
@@ -90,7 +92,8 @@ import {
         NavieraComponent,
         DonwloadrequestComponent,
         EmpresaComponent,
-        MisclientesComponent
+        MisclientesComponent,
+        MiclienteComponent
     ],
     exports: [
         DashboardComponent
@@ -111,7 +114,8 @@ import {
         MatSlideToggleModule,
         MatTabsModule,
         MatAutocompleteModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatRadioModule
     ]
     })
 

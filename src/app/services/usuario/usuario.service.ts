@@ -129,7 +129,7 @@ export class UsuarioService {
               }),
               catchError( err => {
                 console.log(err);
-                swal( err.error.mensaje, err.error.errores.message, 'error' );
+                swal( err.error.mensaje, err.error.errors.message, 'error' );
                 return throwError(err);
               }));
   }
@@ -179,6 +179,14 @@ export class UsuarioService {
    cargarUsuarios(desde: number = 0): Observable<any> {
     // tslint:disable-next-line:prefer-const
     let url = URL_SERVICIOS + '/usuario?desde=' + desde;
+
+    return this.http.get(url);
+
+  }
+
+  cargarUsuarioEmpresa(id: string): Observable<any> {
+    // tslint:disable-next-line:prefer-const
+    let url = URL_SERVICIOS + '/usuario/' + id;
 
     return this.http.get(url);
 
