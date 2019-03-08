@@ -16,6 +16,8 @@ export class Maniobra {
         public agencia?: string,
         public viaje?: string,
         public img?: string,
+        public imgl?: string,
+        public imgr?: string,
         public usuario?: string,
         public _id?: string,
         public fechaCreado?: Date,

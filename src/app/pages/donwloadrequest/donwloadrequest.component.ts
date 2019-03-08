@@ -9,6 +9,15 @@ import { Fletera } from '../../models/fleteras.models';
 import { FleteraService } from '../../services/service.index';
 import { Cliente } from '../../models/clientes.models';
 import { ClienteService } from '../../services/service.index';
+import { Prealta } from '../../models/prealtas.models';
+
+export interface datos {
+  contenedor: string;
+  tipo: string;
+  estado: string;
+  servicio: string;
+}
+
 
 @Component({
   selector: 'app-donwloadrequest',
@@ -18,6 +27,8 @@ import { ClienteService } from '../../services/service.index';
 export class DonwloadrequestComponent implements OnInit {
 
   usuario: Usuario;
+  prealtas: Prealta[] = [];
+  prealta: Prealta = new Prealta('', '');
   agencias: Agencia[] = [];
   agencia: Agencia = new Agencia('', '');
   navieras: Naviera[] = [];
@@ -32,6 +43,10 @@ export class DonwloadrequestComponent implements OnInit {
   facturas: string[] = ['Agencia Aduanal', 'Otro'];
   formasPago: string;
   pagos: string[] = ['Comprobante de pago', 'Ya cuenta con crédito'];
+  datos: datos[] = [
+  {contenedor: '1', tipo: 'Hydrogen', estado: '1.0079', servicio: 'H'},
+  {contenedor: '2', tipo: 'Hydrogen2', estado: '1.00792', servicio: 'H2'}
+]; 
 
   constructor(
     public _usuarioService: UsuarioService,

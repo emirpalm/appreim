@@ -5,6 +5,7 @@ import { Maniobra } from '../../models/maniobras.models';
 import { SubirArchivoService } from 'src/app/services/service.index';
 import { Router, ActivatedRoute } from '@angular/router';
 
+
 @Component({
   selector: 'app-fotos',
   templateUrl: './fotos.component.html',

@@ -1,3 +1,4 @@
+export { PrealtaService } from './prealta/prealta.service';
 export { NavieraService } from './naviera/naviera.service';
 export { BuqueService } from './buque/buque.service';
 export { SharedService } from './shared/shared.service';

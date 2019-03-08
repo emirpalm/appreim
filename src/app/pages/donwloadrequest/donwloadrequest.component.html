@@ -14,7 +14,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label"><b>Agente Aduanal</b></label>
-                                    <mat-select placeholder="Seleccione un cliente" (selectionChange)="cargarDatos($event.value) " [(ngModel)]="usuario.empresas.razonSocial" name="cliente" required>
+                                    <mat-select placeholder="Seleccione un cliente" (selectionChange)="cargarDatos($event.value) " [(ngModel)]="prealta.agencia" name="cliente" required>
                                         <mat-option *ngFor="let usuario of usuario.empresas" [value]="usuario._id">
                                             {{usuario.razonSocial}}
                                         </mat-option>
@@ -27,7 +27,7 @@
                             <div class="col-md-6">
                                 <div class="form-group has-danger">
                                     <label class="control-label"><b>Naviera</b></label>
-                                    <mat-select placeholder="Seleccione una naviera" [(ngModel)]="naviera.razonSocial" name="naviera" required>
+                                    <mat-select placeholder="Seleccione una naviera" [(ngModel)]="prealta.naviera" name="naviera" required>
                                         <mat-option *ngFor="let naviera of navieras" [value]="naviera._id">
                                             {{naviera.razonSocial}}
                                         </mat-option>
@@ -41,7 +41,7 @@
                             <div class="col-md-6">
                                 <div class="form-group has-success">
                                     <label class="control-label"><b>Transportista</b></label>
-                                    <mat-select placeholder="Seleccione un transportista" [(ngModel)]="fletera.razonSocial" name="fletera" required>
+                                    <mat-select placeholder="Seleccione un transportista" [(ngModel)]="prealta.transportista" name="fletera" required>
                                         <mat-option *ngFor="let fletera of fleteras" [value]="fletera._id">
                                             {{fletera.razonSocial}}
                                         </mat-option>
@@ -54,12 +54,12 @@
                                     <!-- <label class="control-label">Date of Birth</label>
                                     <input type="date" class="form-control" placeholder="dd/mm/yyyy">-->
                                     <label class="control-label"><b>Facturar servicio a: </b></label>
-                                    <mat-radio-group class="example-radio-group" [(ngModel)]="facturaa">
+                                    <mat-radio-group class="example-radio-group" [(ngModel)]="prealta.facturarA">
                                         <mat-radio-button class="example-radio-button" *ngFor="let factura of facturas" [value]="factura">
                                             {{factura}}
                                         </mat-radio-button>
                                     </mat-radio-group>
-                                    <mat-select placeholder="Seleccione un cliente" [(ngModel)]="cliente.razonSocial" name="cliente" required>
+                                    <mat-select placeholder="Seleccione un cliente" [(ngModel)]="prealta.facturarA" name="cliente" required>
                                         <mat-option *ngFor="let cliente of clientes" [value]="cliente._id">
                                             {{cliente.razonSocial}}
                                         </mat-option>
@@ -75,7 +75,7 @@
                             <div class="col-md-6 ">
                                 <div class="form-group">
                                     <label><b>Observaciones</b></label>
-                                    <textarea matInput rows="3" cols="40" class="form-control"></textarea>
+                                    <textarea matInput rows="3" cols="40" class="form-control" [(ngModel)]="prealta.observaciones"></textarea>
                                 </div>
                             </div>
 
@@ -92,7 +92,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label><b>Formas de pago: </b></label>
-                                    <mat-radio-group class="example-radio-group" [(ngModel)]="formasPago">
+                                    <mat-radio-group class="example-radio-group" [(ngModel)]="prealta.credito">
                                         <mat-radio-button class="example-radio-button" *ngFor="let pago of pagos" [value]="pago">
                                             {{pago}}
                                         </mat-radio-button>
@@ -114,8 +114,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label><b>Correo Folio</b></label>
-                                    <textarea matInput rows="3" cols="40" class="form-control"> {{agencia.correo}}</textarea>
+                                    <label><b>Correo Personal</b></label>
+                                    <textarea matInput rows="3" cols="40" class="form-control" [(ngModel)]="prealta.correo"> {{agencia.correo}}</textarea>
                                 </div>
                             </div>
                             <!--/span-->
@@ -124,7 +124,7 @@
 
                                     <div class="form-group">
                                         <label><b>Correo Facturación</b></label>
-                                        <textarea matInput rows="3" cols="40" class="form-control">{{agencia.correoFac}}</textarea>
+                                        <textarea matInput rows="3" cols="40" class="form-control" [(ngModel)]="prealta.correofactura">{{agencia.correoFac}}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -256,12 +256,12 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
+                                                <tr *ngFor="let dato of datos">
                                                     <th scope="row">1</th>
-                                                    <td>155151</td>
-                                                    <td>10</td>
-                                                    <td>Vacio</td>
-                                                    <td>Lavado</td>
+                                                    <td>{{dato.contenedor}}</td>
+                                                    <td>{{dato.tipo}}</td>
+                                                    <td>{{dato.estado}}</td>
+                                                    <td>{{dato.servicio}}</td>
                                                 </tr>
                                                 <tr>
                                                     <th scope="row">2</th>
