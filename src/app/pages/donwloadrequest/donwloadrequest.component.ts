@@ -46,7 +46,7 @@ export class DonwloadrequestComponent implements OnInit {
   datos: datos[] = [
   {contenedor: '1', tipo: 'Hydrogen', estado: '1.0079', servicio: 'H'},
   {contenedor: '2', tipo: 'Hydrogen2', estado: '1.00792', servicio: 'H2'}
-]; 
+];
 
   constructor(
     public _usuarioService: UsuarioService,
@@ -101,6 +101,13 @@ export class DonwloadrequestComponent implements OnInit {
           });
   }
 
+  anadirContenedores() {
+
+    // tslint:disable-next-line:prefer-const
+    let index = this.datos.find( dato => dato.contenedor === '1');
+    console.log(index);
+
+  }
 
 
 }

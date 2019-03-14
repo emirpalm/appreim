@@ -49,9 +49,4 @@ export class PrealtaService {
         .pipe(map(resp => swal('Prealta Borrado', 'Eliminado Correctamente', 'success')));
     }
 
-    guardarPrealta( prealta: Prealta ): Observable<any> {
-
-        let url = URL_SERVICIOS
-    }
-
 }
