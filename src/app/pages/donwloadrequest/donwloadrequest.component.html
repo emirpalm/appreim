@@ -14,7 +14,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label"><b>Agente Aduanal</b></label>
-                                    <mat-select placeholder="Seleccione un cliente" (selectionChange)="cargarDatos($event.value) " [(ngModel)]="prealta.agencia" name="cliente" required>
+                                    <mat-select placeholder="Seleccione un cliente" (selectionChange)="cargarDatos($event.value) " [(ngModel)]="prealta.agencia" name="agencia" required>
                                         <mat-option *ngFor="let usuario of usuario.empresas" [value]="usuario._id">
                                             {{usuario.razonSocial}}
                                         </mat-option>
@@ -41,7 +41,7 @@
                             <div class="col-md-6">
                                 <div class="form-group has-success">
                                     <label class="control-label"><b>Transportista</b></label>
-                                    <mat-select placeholder="Seleccione un transportista" [(ngModel)]="prealta.transportista" name="fletera" required>
+                                    <mat-select placeholder="Seleccione un transportista" [(ngModel)]="prealta.fletera" name="fletera" required required>
                                         <mat-option *ngFor="let fletera of fleteras" [value]="fletera._id">
                                             {{fletera.razonSocial}}
                                         </mat-option>
@@ -136,7 +136,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label><b>Contenedor</b></label>
-                                    <input matInput type="text" class="form-control" placeholder="">
+                                    <input #box type="text" name="contenedor" class="form-control">
                                 </div>
                             </div>
                             <!--/span-->
@@ -144,71 +144,71 @@
                                 <div class="form-group">
 
                                     <label class="control-label"><b>Tamaño - Tipo</b></label>
-                                    <select matNativeControl required class="form-control custom-select" data-placeholder="Seleccione una opción" tabindex="1">
-                                          <option value="Contenedor Estandar 20'">Contenedor Estandar 20'</option>
-                                          <option value="Contenedor Estandar 40">Contenedor Estandar 40'</option>
-                                          <option value="Contenedor Estandar De Cubo Alto 40'">Contenedor Estandar De Cubo Alto 40'</option>
-                                          <option value="Contenedor Tapa Dura 20'">Contenedor Tapa Dura 20'</option>
-                                          <option value="Contenedor Tapa Dura 40'">Contenedor Tapa Dura 40'</option>
-                                          <option value="Contenedor Tapa Abierta 20'">Contenedor Tapa Abierta 20'</option>
-                                          <option value="Contenedor Tapa Abierta 40'">Contenedor Tapa Abierta 40'</option>
-                                          <option value="Flat 20'">Flat 20'</option>
-                                          <option value="Flat 40">Flat 40'</option>
-                                          <option value="Plataforma 20'">Plataforma 20'</option>
-                                          <option value="Plataforma 40'">Plataforma 40'</option>
-                                          <option value="Contenedor Ventilado 20'">Contenedor Ventilado 20'</option>
-                                          <option value="Contenedor Termico 20'">Contenedor Termico 20'</option>
-                                          <option value="Contenedor Termico 40'">Contenedor Termico 40'</option>
-                                          <option value="Contenedor Refrigerante 20'">Contenedor Refrigerante 20'</option>
-                                          <option value="Contenedor Refrigerante 40'">Contenedor Refrigerante 40'</option>
-                                          <option value="Contenedor Refrigerante Cubo Alto 40'">Contenedor Refrigerante Cubo Alto 40'</option>
-                                          <option value="Contenedor Carga a Granel 20'">Contenedor Carga a Granel 20'</option>
-                                          <option value="Contenedor Tipo Tanque 20'">Contenedor Tipo Tanque 20'</option>
-                                          <option value="Contenedor Estandar 45'">Contenedor Estandar 45'</option>
-                                          <option value="Contenedor Estandar 48'">Contenedor Estandar 48'</option>
-                                          <option value="Contenedor Estandar 53'">Contenedor Estandar 53'</option>
-                                          <option value="Contenedor Estandar 8'">Contenedor Estandar 8'</option>
-                                          <option value="Contenedor Estandar 10'">Contenedor Estandar 10'</option>
-                                          <option value="Contenedor Estandar De Cubo Alto 45'">Contenedor Estandar De Cubo Alto 45'</option>
-                                          <option value="Semirremolque Con Racks Para Envases De Bebidas">Semirremolque Con Racks Para Envases De Bebidas</option>
-                                          <option value="Semirremolque Cuello De Ganzo">Semirremolque Cuello De Ganzo</option>
-                                          <option value="Contenedor Tolva Cubierto">Contenedor Tolva Cubierto</option>
-                                          <option value="Contenedor Tolva (Abierto)">Contenedor Tolva (Abierto)</option>
-                                          <option value="Auto-Tolva Cubierto/Descarga Neumatica">Auto-Tolva Cubierto/Descarga Neumatica</option>
-                                          <option value="Semirremolque Chasis">Semirremolque Chasis</option>
-                                          <option value="Semirremolque Autocargable (Con Sistema De Elevación)">Semirremolque Autocargable (Con Sistema De Elevación)</option>
-                                          <option value="Semirremolque Con Temperatura Controlada">Semirremolque Con Temperatura Controlada</option>
-                                          <option value="Contenedor Corto Trasero">Contenedor Corto Trasero</option>
-                                          <option value="Contenedor De Cama Baja">Contenedor De Cama Baja</option>
-                                          <option value="Plataforma de 28'">Plataforma de 28'</option>
-                                          <option value="Plataforma de 45'">Plataforma de 45'</option>
-                                          <option value="Plataforma de 48'">Plataforma de 48'</option>
-                                          <option value="Semirremolque Para Transporte De Caballos">Semirremolque Para Transporte De Caballos</option>
-                                          <option value="Semirremolque Para Transporte De Ganado">Semirremolque Para Transporte De Ganado</option>
-                                          <option value="Semirremolque Tanque (Liquidos)/Sin Calefacción/Sin Aislar">Semirremolque Tanque (Liquidos)/Sin Calefacción/Sin Aislar</option>
-                                          <option value="Semirremolque Tanque (Liquidos)/Con Calefacción/Sin Aislar">Semirremolque Tanque (Liquidos)/Con Calefacción/Sin Aislar</option>
-                                          <option value="Semirremolque Tanque (Liquidos)/Sin Calefacción/Aislado">Semirremolque Tanque (Liquidos)/Sin Calefacción/Aislado</option>
-                                          <option value="Semirremolque Tanque (Gas)/Sin Calefacción/Sin Aislar">Semirremolque Tanque (Gas)/Sin Calefacción/Sin Aislar</option>
-                                          <option value="Semirremolque Tanque (Gas)/Con Calefacción/Sin Aislar">Semirremolque Tanque (Gas)/Con Calefacción/Sin Aislar</option>
-                                          <option value="Semirremolque Tanque (Gas)/Sin Calefacción/Aislado">Semirremolque Tanque (Gas)/Sin Calefacción/Aislado</option>
-                                          <option value="Semirremolque Tanque (Gas)/Con Calefacción/Aislado">Semirremolque Tanque (Gas)/Con Calefacción/Aislado</option>
-                                          <option value="Semirremolque Tanque (Quimicos)/Sin Calefacción/Sin Aislar">Semirremolque Tanque (Quimicos)/Sin Calefacción/Sin Aislar</option>
-                                          <option value="Semirremolque Tanque (Quimicos)/Con Calefacción/Sin Aislar">Semirremolque Tanque (Quimicos)/Con Calefacción/Sin Aislar</option>
-                                          <option value="Semirremolque Tanque (Quimicos)/Sin Calefacción/Aislado">Semirremolque Tanque (Quimicos)/Sin Calefacción/Aislado</option>
-                                          <option value="Semirremolque Tanque (Quimicos)/Con Calefacción/Aislado">Semirremolque Tanque (Quimicos)/Con Calefacción/Aislado</option>
-                                          <option value="Semirremolque Tanque Gondola-Cerrada">Semirremolque Tanque Gondola-Cerrada</option>
-                                          <option value="Semirremolque Tanque Gondola-Abierta">Semirremolque Tanque Gondola-Abierta</option>
-                                          <option value="Semirremolque Tanque Tipo Caja Cerrada 48'">Semirremolque Tanque Tipo Caja Cerrada 48'</option>
-                                          <option value="Semirremolque Tanque Tipo Caja Cerrada 53'">Semirremolque Tanque Tipo Caja Cerrada 53'</option>
-                                          <option value="Semirremolque Tanque Tipo Caja Refrigerada 48'">Semirremolque Tanque Tipo Caja Refrigerada 48'</option>
-                                          <option value="Semirremolque Tanque Tipo Caja Refrigerada 53'">Semirremolque Tanque Tipo Caja Refrigerada 53'</option>
-                                          <option value="Doble Semirremolque">Doble Semirremolque</option>
-                                          <option value="Otros">Otros</option>
-                                          <option value="Tanque 20'">Tanque 20'</option>
-                                          <option value="Tanque 40'">Tanque 40'</option>
-                                          <option value="Carro De Ferrocarril">Carro De Ferrocarril</option>
-                                          <option value="High Cube 20'">High Cube 20'</option>
-                                      </select>
+                                    <mat-select [(value)]="selectedTipo" name="tipo" required class="form-control" tabindex="1">
+                                        <mat-option value="Contenedor Estandar 20'">Contenedor Estandar 20'</mat-option>
+                                        <mat-option value="Contenedor Estandar 40">Contenedor Estandar 40'</mat-option>
+                                        <mat-option value="Contenedor Estandar De Cubo Alto 40'">Contenedor Estandar De Cubo Alto 40'</mat-option>
+                                        <mat-option value="Contenedor Tapa Dura 20'">Contenedor Tapa Dura 20'</mat-option>
+                                        <mat-option value="Contenedor Tapa Dura 40'">Contenedor Tapa Dura 40'</mat-option>
+                                        <mat-option value="Contenedor Tapa Abierta 20'">Contenedor Tapa Abierta 20'</mat-option>
+                                        <mat-option value="Contenedor Tapa Abierta 40'">Contenedor Tapa Abierta 40'</mat-option>
+                                        <mat-option value="Flat 20'">Flat 20'</mat-option>
+                                        <mat-option value="Flat 40">Flat 40'</mat-option>
+                                        <mat-option value="Plataforma 20'">Plataforma 20'</mat-option>
+                                        <mat-option value="Plataforma 40'">Plataforma 40'</mat-option>
+                                        <mat-option value="Contenedor Ventilado 20'">Contenedor Ventilado 20'</mat-option>
+                                        <mat-option value="Contenedor Termico 20'">Contenedor Termico 20'</mat-option>
+                                        <mat-option value="Contenedor Termico 40'">Contenedor Termico 40'</mat-option>
+                                        <mat-option value="Contenedor Refrigerante 20'">Contenedor Refrigerante 20'</mat-option>
+                                        <mat-option value="Contenedor Refrigerante 40'">Contenedor Refrigerante 40'</mat-option>
+                                        <mat-option value="Contenedor Refrigerante Cubo Alto 40'">Contenedor Refrigerante Cubo Alto 40'</mat-option>
+                                        <mat-option value="Contenedor Carga a Granel 20'">Contenedor Carga a Granel 20'</mat-option>
+                                        <mat-option value="Contenedor Tipo Tanque 20'">Contenedor Tipo Tanque 20'</mat-option>
+                                        <mat-option value="Contenedor Estandar 45'">Contenedor Estandar 45'</mat-option>
+                                        <mat-option value="Contenedor Estandar 48'">Contenedor Estandar 48'</mat-option>
+                                        <mat-option value="Contenedor Estandar 53'">Contenedor Estandar 53'</mat-option>
+                                        <mat-option value="Contenedor Estandar 8'">Contenedor Estandar 8'</mat-option>
+                                        <mat-option value="Contenedor Estandar 10'">Contenedor Estandar 10'</mat-option>
+                                        <mat-option value="Contenedor Estandar De Cubo Alto 45'">Contenedor Estandar De Cubo Alto 45'</mat-option>
+                                        <mat-option value="Semirremolque Con Racks Para Envases De Bebidas">Semirremolque Con Racks Para Envases De Bebidas</mat-option>
+                                        <mat-option value="Semirremolque Cuello De Ganzo">Semirremolque Cuello De Ganzo</mat-option>
+                                        <mat-option value="Contenedor Tolva Cubierto">Contenedor Tolva Cubierto</mat-option>
+                                        <mat-option value="Contenedor Tolva (Abierto)">Contenedor Tolva (Abierto)</mat-option>
+                                        <mat-option value="Auto-Tolva Cubierto/Descarga Neumatica">Auto-Tolva Cubierto/Descarga Neumatica</mat-option>
+                                        <mat-option value="Semirremolque Chasis">Semirremolque Chasis</mat-option>
+                                        <mat-option value="Semirremolque Autocargable (Con Sistema De Elevación)">Semirremolque Autocargable (Con Sistema De Elevación)</mat-option>
+                                        <mat-option value="Semirremolque Con Temperatura Controlada">Semirremolque Con Temperatura Controlada</mat-option>
+                                        <mat-option value="Contenedor Corto Trasero">Contenedor Corto Trasero</mat-option>
+                                        <mat-option value="Contenedor De Cama Baja">Contenedor De Cama Baja</mat-option>
+                                        <mat-option value="Plataforma de 28'">Plataforma de 28'</mat-option>
+                                        <mat-option value="Plataforma de 45'">Plataforma de 45'</mat-option>
+                                        <mat-option value="Plataforma de 48'">Plataforma de 48'</mat-option>
+                                        <mat-option value="Semirremolque Para Transporte De Caballos">Semirremolque Para Transporte De Caballos</mat-option>
+                                        <mat-option value="Semirremolque Para Transporte De Ganado">Semirremolque Para Transporte De Ganado</mat-option>
+                                        <mat-option value="Semirremolque Tanque (Liquidos)/Sin Calefacción/Sin Aislar">Semirremolque Tanque (Liquidos)/Sin Calefacción/Sin Aislar</mat-option>
+                                        <mat-option value="Semirremolque Tanque (Liquidos)/Con Calefacción/Sin Aislar">Semirremolque Tanque (Liquidos)/Con Calefacción/Sin Aislar</mat-option>
+                                        <mat-option value="Semirremolque Tanque (Liquidos)/Sin Calefacción/Aislado">Semirremolque Tanque (Liquidos)/Sin Calefacción/Aislado</mat-option>
+                                        <mat-option value="Semirremolque Tanque (Gas)/Sin Calefacción/Sin Aislar">Semirremolque Tanque (Gas)/Sin Calefacción/Sin Aislar</mat-option>
+                                        <mat-option value="Semirremolque Tanque (Gas)/Con Calefacción/Sin Aislar">Semirremolque Tanque (Gas)/Con Calefacción/Sin Aislar</mat-option>
+                                        <mat-option value="Semirremolque Tanque (Gas)/Sin Calefacción/Aislado">Semirremolque Tanque (Gas)/Sin Calefacción/Aislado</mat-option>
+                                        <mat-option value="Semirremolque Tanque (Gas)/Con Calefacción/Aislado">Semirremolque Tanque (Gas)/Con Calefacción/Aislado</mat-option>
+                                        <mat-option value="Semirremolque Tanque (Quimicos)/Sin Calefacción/Sin Aislar">Semirremolque Tanque (Quimicos)/Sin Calefacción/Sin Aislar</mat-option>
+                                        <mat-option value="Semirremolque Tanque (Quimicos)/Con Calefacción/Sin Aislar">Semirremolque Tanque (Quimicos)/Con Calefacción/Sin Aislar</mat-option>
+                                        <mat-option value="Semirremolque Tanque (Quimicos)/Sin Calefacción/Aislado">Semirremolque Tanque (Quimicos)/Sin Calefacción/Aislado</mat-option>
+                                        <mat-option value="Semirremolque Tanque (Quimicos)/Con Calefacción/Aislado">Semirremolque Tanque (Quimicos)/Con Calefacción/Aislado</mat-option>
+                                        <mat-option value="Semirremolque Tanque Gondola-Cerrada">Semirremolque Tanque Gondola-Cerrada</mat-option>
+                                        <mat-option value="Semirremolque Tanque Gondola-Abierta">Semirremolque Tanque Gondola-Abierta</mat-option>
+                                        <mat-option value="Semirremolque Tanque Tipo Caja Cerrada 48'">Semirremolque Tanque Tipo Caja Cerrada 48'</mat-option>
+                                        <mat-option value="Semirremolque Tanque Tipo Caja Cerrada 53'">Semirremolque Tanque Tipo Caja Cerrada 53'</mat-option>
+                                        <mat-option value="Semirremolque Tanque Tipo Caja Refrigerada 48'">Semirremolque Tanque Tipo Caja Refrigerada 48'</mat-option>
+                                        <mat-option value="Semirremolque Tanque Tipo Caja Refrigerada 53'">Semirremolque Tanque Tipo Caja Refrigerada 53'</mat-option>
+                                        <mat-option value="Doble Semirremolque">Doble Semirremolque</mat-option>
+                                        <mat-option value="Otros">Otros</mat-option>
+                                        <mat-option value="Tanque 20'">Tanque 20'</mat-option>
+                                        <mat-option value="Tanque 40'">Tanque 40'</mat-option>
+                                        <mat-option value="Carro De Ferrocarril">Carro De Ferrocarril</mat-option>
+                                        <mat-option value="High Cube 20'">High Cube 20'</mat-option>
+                                    </mat-select>
 
                                 </div>
                             </div>
@@ -216,10 +216,10 @@
                                 <div class="form-group">
 
                                     <label class="control-label"><b>Estado</b></label>
-                                    <select matNativeControl required class="form-control custom-select" data-placeholder="Seleccione una opción" tabindex="1">
-                                          <option value="Vacio">Vacio</option>
-                                          <option value="LLeno">LLeno</option>
-                                      </select>
+                                    <mat-select [(value)]="selectedEstado" name="estado" required class="form-control" tabindex="1">
+                                        <mat-option value="Vacio">Vacio</mat-option>
+                                        <mat-option value="LLeno">LLeno</mat-option>
+                                    </mat-select>
 
                                 </div>
                             </div>
@@ -227,17 +227,17 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label class="control-label"><b>Servicios</b></label>
-                                    <select matNativeControl required class="form-control custom-select" data-placeholder="Seleccione una opción" tabindex="1">
-                                          <option value="Lavado">Lavado</option>
-                                          <option value="Reparación">Reparación</option>
-                                      </select>
+                                    <mat-select [(value)]="selectedServicio" name="servicios" required class="form-control" tabindex="1">
+                                        <mat-option value="Lavado">Lavado</mat-option>
+                                        <mat-option value="Reparación">Reparación</mat-option>
+                                    </mat-select>
                                 </div>
                             </div>
 
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label class="control-label"><b>Añadir</b></label>
-                                    <button (click)="anadirContenedores()" type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Añadir</button>
+                                    <button (click)="anadirContenedores(box.value)" type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Añadir</button>
                                 </div>
                             </div>
 
@@ -248,7 +248,7 @@
                                         <table matNativeControl required class="table table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th scope="col">#</th>
+                                                    <!--<th scope="col">#</th>-->
                                                     <th scope="col">Contenedor</th>
                                                     <th scope="col">Tamaño - Tipo</th>
                                                     <th scope="col">Estado contenedor</th>
@@ -257,25 +257,16 @@
                                             </thead>
                                             <tbody>
                                                 <tr *ngFor="let dato of datos">
-                                                    <th scope="row">1</th>
+                                                    <!--<th scope="row">{{dato.contador}}</th>-->
                                                     <td>{{dato.contenedor}}</td>
                                                     <td>{{dato.tipo}}</td>
                                                     <td>{{dato.estado}}</td>
                                                     <td>{{dato.servicio}}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>65695</td>
-                                                    <td>20</td>
-                                                    <td>Lleno</td>
-                                                    <td>Reparación</td>
-                                                </tr>
-                                                <tr>
-                                                    <th scope="row">3</th>
-                                                    <td>989565</td>
-                                                    <td>30</td>
-                                                    <td>Vacio</td>
-                                                    <td>Lavado</td>
+                                                    <td>
+                                                        <button (click)="remover(dato.contenedor)" class="btn btn-danger">
+                                                  <i class="fas fa-trash"></i>
+                                                  </button>
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>

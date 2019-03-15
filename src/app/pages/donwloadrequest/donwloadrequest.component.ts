@@ -10,7 +10,10 @@ import { FleteraService } from '../../services/service.index';
 import { Cliente } from '../../models/clientes.models';
 import { ClienteService } from '../../services/service.index';
 import { Prealta } from '../../models/prealtas.models';
+import { Contenedor } from 'src/app/models/contenedores.models';
+import swal from 'sweetalert';
 
+// tslint:disable-next-line:class-name
 export interface datos {
   contenedor: string;
   tipo: string;
@@ -33,20 +36,21 @@ export class DonwloadrequestComponent implements OnInit {
   agencia: Agencia = new Agencia('', '');
   navieras: Naviera[] = [];
   naviera: Naviera = new Naviera('');
-  fleteras : Fletera[] = [];
+  fleteras: Fletera[] = [];
   fletera: Fletera = new Fletera('');
   clientes: Cliente[] = [];
   cliente: Cliente = new Cliente('');
   profile: Usuario = new Usuario('');
-  desde: number = 0;
+  desde = 0;
   facturaa: string;
   facturas: string[] = ['Agencia Aduanal', 'Otro'];
   formasPago: string;
   pagos: string[] = ['Comprobante de pago', 'Ya cuenta con crédito'];
-  datos: datos[] = [
-  {contenedor: '1', tipo: 'Hydrogen', estado: '1.0079', servicio: 'H'},
-  {contenedor: '2', tipo: 'Hydrogen2', estado: '1.00792', servicio: 'H2'}
-];
+  datos: datos[] = [];
+  // tslint:disable-next-line:quotemark
+  selectedTipo = "Contenedor Estandar 20'";
+  selectedEstado = 'Vacio';
+  selectedServicio = 'Lavado';
 
   constructor(
     public _usuarioService: UsuarioService,
@@ -101,13 +105,38 @@ export class DonwloadrequestComponent implements OnInit {
           });
   }
 
-  anadirContenedores() {
+  anadirContenedores(value: string) {
 
+     // console.log(value);
     // tslint:disable-next-line:prefer-const
-    let index = this.datos.find( dato => dato.contenedor === '1');
-    console.log(index);
+    // tslint:disable-next-line:triple-equals
+    let index = this.datos.find( dato => dato.contenedor == value);
 
-  }
+    // tslint:disable-next-line:triple-equals
+    if (value == '') {
+      swal( 'Error esta vacio', 'No fue posible insertar', 'error' );
+      // console.log('Error esta vacio');
+      return;
+     }
+     if (index != null) {
+      swal( 'Error Contenedor Duplicado', 'No fue posible insertar: ' + index.contenedor, 'error' );
+      // console.log('Contenedor duplicado ' + index.contenedor);
+     } else {
+      // tslint:disable-next-line:max-line-length
+      this.datos.push({contenedor: value, tipo: this.selectedTipo, estado: this.selectedEstado, servicio: this.selectedServicio});
+     }
 
+}
+
+remover(element: any) {
+console.log(element);
+let index = this.datos.find( dato => dato.contenedor == element);
+// tslint:disable-next-line: prefer-const
+let index2 = this.datos.indexOf(index);
+console.log(index2);
+if (index2 >= -1) {
+  this.datos.splice(index2, 1);
+}
+}
 
 }

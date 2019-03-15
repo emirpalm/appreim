@@ -4,7 +4,7 @@ export class Prealta {
         public folio?: string,
         public agencia?: string,
         public naviera?: string,
-        public transportista?: string,
+        public fletera?: string,
         public facturarA?: string,
         public observaciones?: string,
         public bl?: string,
