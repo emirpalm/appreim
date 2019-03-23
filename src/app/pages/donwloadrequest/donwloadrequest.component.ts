@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Agencia } from '../../models/agencias.models';
 import { AgenciaService } from 'src/app/services/service.index';
 import { Usuario } from '../../models/usuarios.model';
@@ -10,6 +13,7 @@ import { FleteraService } from '../../services/service.index';
 import { Cliente } from '../../models/clientes.models';
 import { ClienteService } from '../../services/service.index';
 import { Prealta } from '../../models/prealtas.models';
+import { PrealtaService } from '../../services/service.index';
 import { Contenedor } from 'src/app/models/contenedores.models';
 import swal from 'sweetalert';
 
@@ -29,6 +33,7 @@ export interface datos {
 })
 export class DonwloadrequestComponent implements OnInit {
 
+  forma: FormGroup;
   usuario: Usuario;
   prealtas: Prealta[] = [];
   prealta: Prealta = new Prealta('', '');
@@ -46,7 +51,7 @@ export class DonwloadrequestComponent implements OnInit {
   facturas: string[] = ['Agencia Aduanal', 'Otro'];
   formasPago: string;
   pagos: string[] = ['Comprobante de pago', 'Ya cuenta con crédito'];
-  datos: datos[] = [];
+  contenedores: datos[] = [];
   // tslint:disable-next-line:quotemark
   selectedTipo = "Contenedor Estandar 20'";
   selectedEstado = 'Vacio';
@@ -57,7 +62,9 @@ export class DonwloadrequestComponent implements OnInit {
     public _agenciaService: AgenciaService,
     public _navieraService: NavieraService,
     public _fleteraService: FleteraService,
-    public _clienteService: ClienteService
+    public _clienteService: ClienteService,
+    public _prealtaService: PrealtaService,
+    public router: Router
   ) {
     this.usuario = this._usuarioService.usuario;
     console.log(this.usuario);
@@ -67,6 +74,17 @@ export class DonwloadrequestComponent implements OnInit {
   ngOnInit() {
     this.cargarNavieras();
     this.cargarFleteras();
+    this.forma = new FormGroup({
+      agencia: new FormControl(null, Validators.required ),
+      naviera: new FormControl(null, [Validators.required] ),
+      transportista: new FormControl(null, Validators.required ),
+      facturarA: new FormControl(null, Validators.required ),
+      observaciones: new FormControl(null, Validators.required ),
+      credito: new FormControl(null, Validators.required),
+      correo: new FormControl(null, Validators.required ),
+      correoFac: new FormControl(null, Validators.required ),
+      contenedores: new FormControl(this.contenedores)
+    });
   }
   cargarNavieras() {
     // this.cargando = true;
@@ -110,7 +128,7 @@ export class DonwloadrequestComponent implements OnInit {
      // console.log(value);
     // tslint:disable-next-line:prefer-const
     // tslint:disable-next-line:triple-equals
-    let index = this.datos.find( dato => dato.contenedor == value);
+    let index = this.contenedores.find( dato => dato.contenedor == value);
 
     // tslint:disable-next-line:triple-equals
     if (value == '') {
@@ -123,20 +141,49 @@ export class DonwloadrequestComponent implements OnInit {
       // console.log('Contenedor duplicado ' + index.contenedor);
      } else {
       // tslint:disable-next-line:max-line-length
-      this.datos.push({contenedor: value, tipo: this.selectedTipo, estado: this.selectedEstado, servicio: this.selectedServicio});
+      this.contenedores.push({contenedor: value, tipo: this.selectedTipo, estado: this.selectedEstado, servicio: this.selectedServicio});
      }
 
 }
 
-remover(element: any) {
-console.log(element);
-let index = this.datos.find( dato => dato.contenedor == element);
-// tslint:disable-next-line: prefer-const
-let index2 = this.datos.indexOf(index);
-console.log(index2);
-if (index2 >= -1) {
-  this.datos.splice(index2, 1);
+  remover(element: any) {
+    console.log(element);
+     let index = this.contenedores.find( dato => dato.contenedor == element);
+      // tslint:disable-next-line: prefer-const
+     let index2 = this.contenedores.indexOf(index);
+       console.log(index2);
+       if (index2 >= -1) {
+      this.contenedores.splice(index2, 1);
+    }
 }
+
+  guardarPrealta( ) {
+    console.log(this.forma);
+   // console.log(this.datos);
+
+    if ( this.forma.invalid ) {
+      return;
+    }
+    // tslint:disable-next-line:prefer-const
+    let prealta = new Prealta(
+      this.forma.value.agencia,
+      this.forma.value.naviera,
+      this.forma.value.transportista,
+      this.forma.value.facturarA,
+      this.forma.value.observaciones,
+      this.forma.value.credito,
+      this.forma.value.correo,
+      this.forma.value.correoFac,
+      this.forma.value.contenedores
+    );
+    console.log(prealta);
+
+    this._prealtaService.guardarPrealta(prealta)
+    .subscribe( prealta => {
+      this.prealta._id = prealta._id;
+      // this.router.navigate(['/prealta', prealta._id]);
+    });
+ 
 }
 
 }

@@ -37,6 +37,8 @@ import { FotosComponent } from './fotos/fotos.component';
 import { NgDropFilesDirective } from '.././directives/ng-drop-files.directive';
 import { EmpresaComponent } from './empresa/empresa.component';
 import { MisclientesComponent } from './misclientes/misclientes.component';
+import { MiclienteComponent } from './misclientes/micliente.component';
+import { ApprovalPageComponent } from './approval-page/approval-page.component';
 
 // Pipes Modulos
 import { PipesModule } from '../pipes/pipes.module';
@@ -56,7 +58,6 @@ import {
     MatCheckboxModule,
     MatRadioModule
   } from '@angular/material';
-import { MiclienteComponent } from './misclientes/micliente.component';
 
 
 
@@ -93,7 +94,8 @@ import { MiclienteComponent } from './misclientes/micliente.component';
         DonwloadrequestComponent,
         EmpresaComponent,
         MisclientesComponent,
-        MiclienteComponent
+        MiclienteComponent,
+        ApprovalPageComponent
     ],
     exports: [
         DashboardComponent

@@ -27,6 +27,7 @@ import { DonwloadrequestComponent } from './donwloadrequest/donwloadrequest.comp
 import { EmpresaComponent } from './empresa/empresa.component';
 import { MisclientesComponent } from './misclientes/misclientes.component';
 import { MiclienteComponent } from './misclientes/micliente.component';
+import { ApprovalPageComponent } from './approval-page/approval-page.component';
 
 // Guards
 // import { LoginGuardGuard } from '../services/service.index';
@@ -45,12 +46,18 @@ const pagesRoutes: Routes = [
         component: DashboardComponent,
         data: { titulo: 'Dashboard' }
     },
+    {
+        path: 'aprobacion',
+        component: ApprovalPageComponent,
+        canActivate: [AdminGuard],
+        data: { titulo: 'Aprobacion de descargas'}
+    },
             {path: 'maniobras', component: ManiobrasComponent, data: {titulo: 'Maniobras'}},
             {path: 'maniobra/:id', component: ManiobraComponent, data: {titulo: 'Maniobra'}},
             {path: 'fotos/:id', component: FotosComponent, data: {titulo: 'Fotos'}},
             {path: 'account-settings', component: AccountSettingsComponent, data: {titulo: 'Configuración de la cuenta'}},
             {path: 'profile', component: ProfileComponent, data: {titulo: 'Mi perfil'}},
-            { path: 'busqueda/:termino', component: BusquedaComponent, data: { titulo: 'Buscador' } },
+            {path: 'busqueda/:termino', component: BusquedaComponent, data: { titulo: 'Buscador' } },
     // Register
     {
         path: 'register',

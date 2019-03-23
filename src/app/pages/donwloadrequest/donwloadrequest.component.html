@@ -6,7 +6,7 @@
                 <h4 class="m-b-0 text-white">Solicitud de descarga</h4>
             </div>
             <div class="card-body">
-                <form action="#">
+                <form ngNativeValidate [formGroup]="forma" (ngSubmit)="guardarPrealta(forma)">
                     <div class="form-body">
                         <h3 class="card-title">Datos generales</h3>
                         <hr>
@@ -14,7 +14,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="control-label"><b>Agente Aduanal</b></label>
-                                    <mat-select placeholder="Seleccione un cliente" (selectionChange)="cargarDatos($event.value) " [(ngModel)]="prealta.agencia" name="agencia" required>
+                                    <mat-select placeholder="Seleccione un cliente" (selectionChange)="cargarDatos($event.value)" formControlName="agencia" name="agencia" type="text" required>
                                         <mat-option *ngFor="let usuario of usuario.empresas" [value]="usuario._id">
                                             {{usuario.razonSocial}}
                                         </mat-option>
@@ -27,8 +27,8 @@
                             <div class="col-md-6">
                                 <div class="form-group has-danger">
                                     <label class="control-label"><b>Naviera</b></label>
-                                    <mat-select placeholder="Seleccione una naviera" [(ngModel)]="prealta.naviera" name="naviera" required>
-                                        <mat-option *ngFor="let naviera of navieras" [value]="naviera._id">
+                                    <mat-select placeholder="Seleccione una naviera" formControlName="naviera" name="naviera" type="text" required>
+                                        <mat-option *ngFor="let naviera of navieras" [value]="naviera.razonSocial">
                                             {{naviera.razonSocial}}
                                         </mat-option>
                                     </mat-select>
@@ -41,8 +41,8 @@
                             <div class="col-md-6">
                                 <div class="form-group has-success">
                                     <label class="control-label"><b>Transportista</b></label>
-                                    <mat-select placeholder="Seleccione un transportista" [(ngModel)]="prealta.fletera" name="fletera" required required>
-                                        <mat-option *ngFor="let fletera of fleteras" [value]="fletera._id">
+                                    <mat-select placeholder="Seleccione un transportista" formControlName="transportista" name="transportista" type="text" required>
+                                        <mat-option *ngFor="let fletera of fleteras" [value]="fletera.razonSocial">
                                             {{fletera.razonSocial}}
                                         </mat-option>
                                     </mat-select>
@@ -54,13 +54,13 @@
                                     <!-- <label class="control-label">Date of Birth</label>
                                     <input type="date" class="form-control" placeholder="dd/mm/yyyy">-->
                                     <label class="control-label"><b>Facturar servicio a: </b></label>
-                                    <mat-radio-group class="example-radio-group" [(ngModel)]="prealta.facturarA">
+                                    <mat-radio-group class="example-radio-group">
                                         <mat-radio-button class="example-radio-button" *ngFor="let factura of facturas" [value]="factura">
                                             {{factura}}
                                         </mat-radio-button>
                                     </mat-radio-group>
-                                    <mat-select placeholder="Seleccione un cliente" [(ngModel)]="prealta.facturarA" name="cliente" required>
-                                        <mat-option *ngFor="let cliente of clientes" [value]="cliente._id">
+                                    <mat-select placeholder="Seleccione un cliente" formControlName="facturarA" name="facturarA" type="text" required>
+                                        <mat-option *ngFor="let cliente of clientes" [value]="cliente.razonSocial">
                                             {{cliente.razonSocial}}
                                         </mat-option>
                                     </mat-select>
@@ -75,7 +75,7 @@
                             <div class="col-md-6 ">
                                 <div class="form-group">
                                     <label><b>Observaciones</b></label>
-                                    <textarea matInput rows="3" cols="40" class="form-control" [(ngModel)]="prealta.observaciones"></textarea>
+                                    <textarea matInput rows="3" cols="40" class="form-control" formControlName="observaciones" name="observaciones"></textarea>
                                 </div>
                             </div>
 
@@ -92,7 +92,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label><b>Formas de pago: </b></label>
-                                    <mat-radio-group class="example-radio-group" [(ngModel)]="prealta.credito">
+                                    <mat-radio-group class="example-radio-group" formControlName="credito" name="credito">
                                         <mat-radio-button class="example-radio-button" *ngFor="let pago of pagos" [value]="pago">
                                             {{pago}}
                                         </mat-radio-button>
@@ -115,7 +115,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label><b>Correo Personal</b></label>
-                                    <textarea matInput rows="3" cols="40" class="form-control" [(ngModel)]="prealta.correo"> {{agencia.correo}}</textarea>
+                                    <textarea matInput rows="3" cols="40" class="form-control" formControlName="correo" name="correo"></textarea>
                                 </div>
                             </div>
                             <!--/span-->
@@ -124,7 +124,7 @@
 
                                     <div class="form-group">
                                         <label><b>Correo Facturación</b></label>
-                                        <textarea matInput rows="3" cols="40" class="form-control" [(ngModel)]="prealta.correofactura">{{agencia.correoFac}}</textarea>
+                                        <textarea matInput rows="3" cols="40" class="form-control" formControlName="correoFac" name="correoFac"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -136,7 +136,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label><b>Contenedor</b></label>
-                                    <input #box type="text" name="contenedor" class="form-control">
+                                    <input #box type="text" class="form-control">
                                 </div>
                             </div>
                             <!--/span-->
@@ -237,7 +237,7 @@
                             <div class="col-md-2">
                                 <div class="form-group">
                                     <label class="control-label"><b>Añadir</b></label>
-                                    <button (click)="anadirContenedores(box.value)" type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Añadir</button>
+                                    <button (click)="anadirContenedores(box.value)" type="button" class="btn btn-success"> <i class="fa fa-check"></i> Añadir</button>
                                 </div>
                             </div>
 
@@ -256,16 +256,16 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr *ngFor="let dato of datos">
+                                                <tr *ngFor="let contenedor of contenedores">
                                                     <!--<th scope="row">{{dato.contador}}</th>-->
-                                                    <td>{{dato.contenedor}}</td>
-                                                    <td>{{dato.tipo}}</td>
-                                                    <td>{{dato.estado}}</td>
-                                                    <td>{{dato.servicio}}</td>
+                                                    <td>{{contenedor.contenedor}}</td>
+                                                    <td>{{contenedor.tipo}}</td>
+                                                    <td>{{contenedor.estado}}</td>
+                                                    <td>{{contenedor.servicio}}</td>
                                                     <td>
-                                                        <button (click)="remover(dato.contenedor)" class="btn btn-danger">
-                                                  <i class="fas fa-trash"></i>
-                                                  </button>
+                                                        <button (click)="remover(contenedor.contenedor)" class="btn btn-danger">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
                                                     </td>
                                                 </tr>
                                             </tbody>
