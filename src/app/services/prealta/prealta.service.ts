@@ -53,6 +53,21 @@ export class PrealtaService {
         .pipe(map(resp => swal('Prealta Borrado', 'Eliminado Correctamente', 'success')));
     }
 
+    cambioEstado( prealta: Prealta ): Observable<any> {
+
+        let url = URL_SERVICIOS + '/prealta/aprobacion/' + prealta._id;
+        url += '?token=' + this._usuarioService.token;
+        return this.http.put( url, prealta )
+                        .pipe(map((resp: any) => {
+                            swal('Prealta Actualizada', prealta.agencia, 'success');
+                            return resp.prealta;
+                        }),
+                        catchError( err => {
+                            swal( err.error.mensaje, err.error.errors.message, 'error' );
+                              return throwError(err);
+                            }));
+                        }
+
     guardarPrealta( prealta: Prealta ): Observable<any> {
         // tslint:disable-next-line: prefer-const
         let url = URL_SERVICIOS + '/prealta';

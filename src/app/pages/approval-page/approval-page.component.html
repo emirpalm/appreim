@@ -60,15 +60,20 @@
                             <td>{{prealta.facturarA}}</td>
                             <td>{{prealta.credito}}</td>
                             <td>{{prealta.observaciones}}</td>
-                            <td>{{prealta.folioAprobacion}}</td>
                             <td>
+                                <mat-slide-toggle [(ngModel)]="prealta.folioAprobacion" name="folioAprobacion" (change)="cambioEstado(prealta)" [checked]="true">{{prealta.folioAprobacion}}</mat-slide-toggle>
+                            </td>
+                            <td>
+                                <!--<button (click)="guardarPrealta(prealta)" class="btn btn-primary">
+                                <i class="fas fa-save"></i>
+                                </button>-->
                                 <button [routerLink]="['/prealta', prealta._id ]" class="btn btn-primary">
-                        <i class="fa fa-edit"></i>
-                      </button>
+                                <i class="fa fa-edit"></i>
+                                </button>
 
                                 <button (click)="borrarPrealta( prealta )" class="btn btn-danger">
-                        <i class="fa fa-trash-o"></i>
-                      </button>
+                                <i class="fa fa-trash-o"></i>
+                                </button>
                             </td>
                         </tr>
                     </tbody>

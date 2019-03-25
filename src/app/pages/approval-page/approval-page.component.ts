@@ -17,6 +17,7 @@ export class ApprovalPageComponent implements OnInit {
   totalRegistros: number = 0;
   // tslint:disable-next-line:no-inferrable-types
   desde: number = 0;
+  checked = false;
 
   constructor( public _prealtaService: PrealtaService ) {}
 
@@ -28,6 +29,21 @@ export class ApprovalPageComponent implements OnInit {
     this.cargando = true;
     this._prealtaService.cargarPrealtas(this.desde)
     .subscribe(prealtas => this.prealtas = prealtas );
+  }
+
+  guardarPrealta(prealta: Prealta) {
+    this._prealtaService.guardarPrealta(prealta)
+    .subscribe(resp => {
+      this.cargarPrealtas();
+    });
+
+  }
+
+  cambioEstado(prealta: Prealta) {
+    this._prealtaService.cambioEstado(prealta)
+    .subscribe(resp => {
+      this.cargarPrealtas();
+    });
   }
 
   cambiarDesde(valor: number) {
