@@ -28,7 +28,9 @@ import { EmpresaComponent } from './empresa/empresa.component';
 import { MisclientesComponent } from './misclientes/misclientes.component';
 import { MiclienteComponent } from './misclientes/micliente.component';
 import { ApprovalPageComponent } from './approval-page/approval-page.component';
-
+import { ContenedoresDisponiblesComponent } from './contenedores-disponibles/contenedores-disponibles.component';
+import { ContenedoresRLComponent } from './contenedores-rl/contenedores-rl.component';
+import { ReporteContenedoresRLComponent } from './reporte-contenedores-rl/reporte-contenedores-rl.component';
 // Guards
 // import { LoginGuardGuard } from '../services/service.index';
 import { AdminGuard } from '../services/service.index';
@@ -136,6 +138,24 @@ const pagesRoutes: Routes = [
         data: { titulo: 'Mantenimiento de Navieras' }
     },
     {path: 'naviera/:id', component: NavieraComponent, canActivate: [ AdminGuard ], data: {titulo: 'Actualizacion de datos'}},
+    {
+        path: 'contenedoresDisponibles',
+        component: ContenedoresDisponiblesComponent,
+        canActivate: [ AdminGuard ],
+        data: { titulo: 'Contenedores disponibles' }
+    },
+    {
+        path: 'contenedoresRL',
+        component: ContenedoresRLComponent,
+        canActivate: [ AdminGuard ],
+        data: { titulo: 'Contenedores en reparación / lavado' }
+    },
+    {
+        path: 'reportesRL',
+        component: ReporteContenedoresRLComponent,
+        canActivate: [ AdminGuard ],
+        data: { titulo: 'Reporte contenedores reparación / lavado' }
+    },
     {path: 'misempresas', component: EmpresaComponent, canActivate: [ AdminGuard ], data: {titulo: 'Actualizacion de datos'}},
     {
         path: 'micliente/:id',

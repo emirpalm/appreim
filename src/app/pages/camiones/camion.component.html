@@ -7,21 +7,21 @@
                 <div class="col-sm-12 col-xs-12">
                     <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarCamion(f)">
                         <div class="my-container">
-                            <mat-form-field>
-                                <input matInput [(ngModel)]="camion.numbereconomico" name="numbereconomico" type="text" class="form-control" placeholder="Ingrese el numero economico" required>
-                            </mat-form-field>
+                            <!--========input placas=========-->
                             <mat-form-field>
                                 <input matInput [(ngModel)]="camion.placa" name="placa" type="text" class="form-control" placeholder="Ingrese las placas" required>
                             </mat-form-field>
-                            <!--========Combombox Contenedor=========-->
-                            <!--========Combombox fletera=========-->
+                            <!--========input numeroEconomico=========-->
                             <mat-form-field>
-                                <mat-select placeholder="Seleccione una fletera" (selectionChange)="cambioFletera( $event.value )" [(ngModel)]="camion.fletera" name="fletera" required>
-                                    <mat-option *ngFor="let fletera of fleteras" [value]="fletera._id">
-                                        {{ fletera.nombre }}
-                                    </mat-option>
-                                </mat-select>
+                                <input matInput [(ngModel)]="camion.numbereconomico" name="numbereconomico" type="text" class="form-control" placeholder="Ingrese el numero economico" required>
                             </mat-form-field>
+                            <!--========datePiker vigencia del seguro=========-->
+                            <mat-form-field>
+                                <input matInput [matDatepicker]="picker" [(ngModel)]="camion.vigenciaSeguro" name="vigenciaSeguro" type="text" class="form-control" placeholder="Vigencia del seguro" required>
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+
                         </div>
                         <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">
                           <i class="fa fa-save"></i>

@@ -12,6 +12,10 @@ import { Contenedor } from '../../models/contenedores.models';
 import { ContenedorService } from '../../services/service.index';
 import {Observable} from 'rxjs';
 
+// datapiker
+import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+
 export class MyItems {
   Value: string;
   constructor(Value: string) {
@@ -29,11 +33,39 @@ export interface Tipo {
   viewValue: string;
 }
 
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+// import {default as _rollupMoment} from 'moment';
+
+const moment = _moment;
+
+// See the Moment.js docs for the meaning of these formats:
+// https://momentjs.com/docs/#/displaying/format/
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'LL',
+  },
+  display: {
+    dateInput: 'LL',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
+
 
 @Component({
     selector: 'app-viaje',
     templateUrl: './viaje.component.html',
-    styles: []
+    styles: [],
+    providers: [
+      // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
+      // application's root module. We provide it at the component level here, due to limitations of
+      // our example generation script.
+      {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+      {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+      {provide: MAT_DATE_LOCALE, useValue: 'es-mx' },
+    ],
   })
 
   export class ViajeComponent implements OnInit {
@@ -104,8 +136,8 @@ export interface Tipo {
               this.viaje = viaje;
               this.viaje.buque = viaje.buque._id;
               this.cambioBuque( this.viaje.buque );
-              this.viaje.naviera = viaje.naviera._id;
-              this.cambioNaviera( this.viaje.naviera );
+              // this.viaje.naviera = viaje.naviera._id;
+              // this.cambioNaviera( this.viaje.naviera );
               // this.viaje.contenedor = viaje.contenedor._id;
               // this.cambioContenedor( this.viaje.contenedor );
               // this.cambioFletera( this.camion.fletera );

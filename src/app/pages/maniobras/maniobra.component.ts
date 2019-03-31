@@ -43,7 +43,7 @@ export class ManiobraComponent implements OnInit {
   fleteras: Fletera[] = [];
   fletera: Fletera = new Fletera('', '');
   viajes: Viaje[] = [];
-  viaje: Viaje = new Viaje('', '', '', '', '');
+  viaje: Viaje = new Viaje('');
   viajec: Viaje = new Viaje('');
   myControl = new FormControl();
   filteredOptions: Observable<Viaje[]>;

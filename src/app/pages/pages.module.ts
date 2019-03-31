@@ -39,7 +39,9 @@ import { EmpresaComponent } from './empresa/empresa.component';
 import { MisclientesComponent } from './misclientes/misclientes.component';
 import { MiclienteComponent } from './misclientes/micliente.component';
 import { ApprovalPageComponent } from './approval-page/approval-page.component';
-
+import { ContenedoresDisponiblesComponent } from './contenedores-disponibles/contenedores-disponibles.component';
+import { ContenedoresRLComponent } from './contenedores-rl/contenedores-rl.component';
+import { ReporteContenedoresRLComponent } from './reporte-contenedores-rl/reporte-contenedores-rl.component';
 // Pipes Modulos
 import { PipesModule } from '../pipes/pipes.module';
 // import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
@@ -95,7 +97,10 @@ import {
         EmpresaComponent,
         MisclientesComponent,
         MiclienteComponent,
-        ApprovalPageComponent
+        ApprovalPageComponent,
+        ContenedoresDisponiblesComponent,
+        ContenedoresRLComponent,
+        ReporteContenedoresRLComponent
     ],
     exports: [
         DashboardComponent

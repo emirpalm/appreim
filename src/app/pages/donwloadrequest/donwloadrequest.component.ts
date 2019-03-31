@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { NgForm, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Agencia } from '../../models/agencias.models';
 import { AgenciaService } from 'src/app/services/service.index';
@@ -158,32 +157,31 @@ export class DonwloadrequestComponent implements OnInit {
 }
 
   guardarPrealta( ) {
-    console.log(this.forma);
    // console.log(this.datos);
+   if ( this.forma.invalid ) {
+    return;
+  }
+  // tslint:disable-next-line:prefer-const
+  let prealta = new Prealta(
+    this.forma.value.agencia,
+    this.forma.value.naviera,
+    this.forma.value.transportista,
+    this.forma.value.facturarA,
+    this.forma.value.observaciones,
+    this.forma.value.credito,
+    this.forma.value.correo,
+    this.forma.value.correoFac,
+    this.forma.value.contenedores
+  );
+  console.log(prealta);
 
-    if ( this.forma.invalid ) {
-      return;
-    }
-    // tslint:disable-next-line:prefer-const
-    let prealta = new Prealta(
-      this.forma.value.agencia,
-      this.forma.value.naviera,
-      this.forma.value.transportista,
-      this.forma.value.facturarA,
-      this.forma.value.observaciones,
-      this.forma.value.credito,
-      this.forma.value.correo,
-      this.forma.value.correoFac,
-      this.forma.value.contenedores
-    );
-    console.log(prealta);
-
-    this._prealtaService.guardarPrealta(prealta)
+  this._prealtaService.guardarPrealta(prealta)
+    // tslint:disable-next-line:no-shadowed-variable
     .subscribe( prealta => {
-      this.prealta._id = prealta._id;
-      // this.router.navigate(['/prealta', prealta._id]);
-    });
- 
+    this.prealta._id = prealta._id;
+    // this.router.navigate(['/prealta', prealta._id]);
+  });
+  
 }
 
 }

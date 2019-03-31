@@ -7,6 +7,7 @@
                 <div class="col-sm-12 col-xs-12">
                     <form #f="ngForm" ngNativeValidate (ngSubmit)="guardarViaje(f)">
                         <div class="my-container">
+                            <!--========input viaje=========-->
                             <mat-form-field>
                                 <input matInput [(ngModel)]="viaje.viaje" name="viaje" type="text" class="form-control" placeholder="Ingrese el viaje" required>
                             </mat-form-field>
@@ -18,14 +19,26 @@
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
-                            <!--========Combombox Naviera=========-->
+                            <!--========input fecha arrivo=========-->
+                            <mat-form-field>
+                                <input matInput [matDatepicker]="picker" [(ngModel)]="viaje.fechaArrivo" name="fechaArrivo" type="text" class="form-control" placeholder="Fecha de arrivo" required>
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker>
+                            </mat-form-field>
+                            <!--========input fecha temporal=========-->
+                            <mat-form-field>
+                                <input matInput [matDatepicker]="picker2" [(ngModel)]="viaje.fechaVigenciaTemporal" name="fechaVigenciaTemporal" type="text" class="form-control" placeholder="Vigencia del temporal" required>
+                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                <mat-datepicker #picker2></mat-datepicker>
+                            </mat-form-field>
+                            <!--========Combombox Naviera=========
                             <mat-form-field class="naviera">
                                 <mat-select placeholder="Seleccione una Naviera" (selectionChange)="cambioNaviera( $event.value )" [(ngModel)]="viaje.naviera" name="naviera" required>
                                     <mat-option *ngFor="let naviera of navieras" [value]="naviera._id">
                                         {{ naviera.naviera }}
                                     </mat-option>
                                 </mat-select>
-                            </mat-form-field>
+                            </mat-form-field>-->
                             <!--<mat-form-field>
                                 <input matInput [(ngModel)]="viaje.contenedor" name="contenedor" type="text" class="form-control" placeholder="Ingrese el contenedor" required>
                             </mat-form-field>

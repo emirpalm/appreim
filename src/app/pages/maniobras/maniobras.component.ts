@@ -14,7 +14,7 @@ import {MatDatepicker} from '@angular/material/datepicker';
 // the `default as` syntax.
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
-import * as Moment from 'moment';
+// import * as Moment from 'moment';
 
 const moment = _moment;
 

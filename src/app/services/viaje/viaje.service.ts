@@ -28,8 +28,8 @@ export class ViajeService {
     .pipe(map( (resp: any) => {
 
       this.totalViajes = resp.total;
-      // console.log(resp.viaje);
-    return resp.viaje || [];
+     // console.log(resp.viaje);
+    return resp.viaje;
     }));
   }
 
