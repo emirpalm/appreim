@@ -28,7 +28,9 @@
                     <thead>
                         <tr>
                             <th>Foto</th>
-                            <th>Operador</th>
+                            <th>Nombre del Chofer</th>
+                            <th>Vigencia de Licencia</th>
+                            <th>PDF Licencia</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -36,6 +38,8 @@
                         <tr *ngFor="let operador of operadores">
                             <td class=".w70"><img [src]="operador.img | imagen:'operador'" class="img-50 img-circle pointer"></td>
                             <td>{{operador.operador}}</td>
+                            <td>{{operador.vigenciaLicencia}}</td>
+                            <td>{{operador.pdfLicencia}}</td>
                             <td>
                                 <button [routerLink]="['/operador', operador._id ]" class="btn btn-primary">
                               <i class="fa fa-edit"></i>
