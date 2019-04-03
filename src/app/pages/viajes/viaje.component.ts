@@ -53,6 +53,14 @@ export const MY_FORMATS = {
   },
 };
 
+// tslint:disable-next-line:class-name
+export interface datos {
+  contenedor: string;
+  tipo: string;
+  peso: string;
+  cliente: string;
+}
+
 
 @Component({
     selector: 'app-viaje',
@@ -95,6 +103,8 @@ export const MY_FORMATS = {
     // tslint:disable-next-line:quotemark
     {value: '40-1', viewValue: "40' H"}
   ];
+  contenedorescsv: datos[] = [];
+  parsedCsv: string[][];
 
     constructor(public _viajeService: ViajeService,
       public _contenedorService: ContenedorService,
@@ -186,5 +196,8 @@ export const MY_FORMATS = {
               });
 
     }
+
+    cargarCVS() {s}
+    limpiarArchivos() {}
 
   }

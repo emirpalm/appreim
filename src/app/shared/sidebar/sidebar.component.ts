@@ -27,12 +27,12 @@ export class SidebarComponent implements OnInit {
       this.role = 'Administrador';
       return;
     }
-    if (this.usuario.role == 'REIMADMIN_ROLE') {
-      this.role = 'Administrador REIM';
+    if (this.usuario.role == 'PATIOADMIN_ROLE') {
+      this.role = 'Administrador Patio';
       return;
     }
-    if (this.usuario.role == 'REIM_ROLE') {
-      this.role = 'REIM';
+    if (this.usuario.role == 'PATIO_ROLE') {
+      this.role = 'Patio';
       return;
     }
     if (this.usuario.role == 'AA_ROLE') {

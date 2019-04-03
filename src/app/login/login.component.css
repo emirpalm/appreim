@@ -46,6 +46,7 @@ Login register and recover password Page
 .login-box {
     width: 400px;
     margin: 0 auto;
+    background: #313388;
 }
 
 .login-box .footer {
@@ -75,6 +76,6 @@ Login register and recover password Page
 }
 
 .card-body img {
-    width: 150px;
+    width: 300px;
     height: auto;
 }

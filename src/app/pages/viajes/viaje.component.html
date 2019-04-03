@@ -84,29 +84,25 @@
     <div class="col-md-6">
         <mat-card>
             <h3>Seleccione archivos</h3>
-            <input type="file" name="file" accept="*.csv" />
+            <input type="file" (change)="cargarCVS($event.target)" name="file" accept="*.csv" />
             <h4>Cargar archivos</h4>
             <button (click)="cargarCVS()" class="btn btn-success">Cargar CSV</button>
             <button (click)="limpiarArchivos()" class="btn btn-danger">Limpiar</button>
             <table class="table">
                 <thead class="thead-dark">
                     <tr>
-                        <th>Viaje</th>
-                        <th>Buque</th>
                         <th>Contenedor</th>
-                        <th>tipo</th>
-                        <th>Vacio / Importacion</th>
+                        <th>Tipo</th>
+                        <th>Peso</th>
+                        <th>Cliente</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let archivo of archivos">
-                        <th>{{archivo.nombreArchivo}}</th>
-                        <th>{{archivo.archivo.size / 1024 / 1024 | number: '.2-2'}} MB</th>
-                        <th>
-                            <div class="progress">
-                                <div class="progress-bar" role="progressbar" [ngStyle]="{'width': archivo.progreso + '%'}"></div>
-                            </div>
-                        </th>
+                    <tr *ngFor="let contenedorcsv of contenedorescsv">
+                        <th>{{contenedorcsv.contenedor}}</th>
+                        <th>{{contenedorcsv.tipo}}</th>
+                        <th>{{contenedorcsv.peso}}</th>
+                        <th>{{contenedorcsv.cliente}}</th>
                     </tr>
                 </tbody>
             </table>
