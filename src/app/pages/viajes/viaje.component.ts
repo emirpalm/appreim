@@ -197,7 +197,7 @@ export interface datos {
 
     }
 
-    cargarCVS() {s}
+    cargarCVS() {}
     limpiarArchivos() {}
 
   }
