@@ -31,6 +31,8 @@ import { ApprovalPageComponent } from './approval-page/approval-page.component';
 import { ContenedoresDisponiblesComponent } from './contenedores-disponibles/contenedores-disponibles.component';
 import { ContenedoresRLComponent } from './contenedores-rl/contenedores-rl.component';
 import { ReporteContenedoresRLComponent } from './reporte-contenedores-rl/reporte-contenedores-rl.component';
+import { BuquesComponent } from './buques/buques.component';
+import { BuqueComponent } from './buques/buque.component';
 // Guards
 // import { LoginGuardGuard } from '../services/service.index';
 import { AdminGuard } from '../services/service.index';
@@ -164,6 +166,13 @@ const pagesRoutes: Routes = [
         data: { titulo: 'Mantenimiento de Mis Clientes' }
     },
     {path: 'misclientes/:id', component: MisclientesComponent, canActivate: [ AdminGuard ], data: {titulo: 'Actualizacion de datos'}},
+    {
+        path: 'buques',
+        component: BuquesComponent,
+        canActivate: [ AdminGuard ],
+        data: { titulo: 'Mantenimiento de Buques' }
+    },
+    {path: 'buque/:id', component: BuqueComponent,  canActivate: [ AdminGuard ], data: {titulo: 'Actualizacion de datos'}},
     {path: '', redirectTo: '/dashboard', pathMatch: 'full'},
     ];
     export const PAGES_ROUTES = RouterModule.forChild( pagesRoutes );

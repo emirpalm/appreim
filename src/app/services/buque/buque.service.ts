@@ -27,7 +27,7 @@ export class BuqueService {
 
       this.totalBuques = resp.total;
       console.log(resp.total);
-    return resp.buque;
+    return resp.buques;
     }));
   }
 
@@ -52,7 +52,7 @@ export class BuqueService {
 
   guardarBuque( buque: Buque ): Observable<any> {
 
-    let url = URL_SERVICIOS + '/cliente';
+    let url = URL_SERVICIOS + '/buque';
 
     if ( buque._id ) {
       // actualizando

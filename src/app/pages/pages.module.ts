@@ -42,6 +42,8 @@ import { ApprovalPageComponent } from './approval-page/approval-page.component';
 import { ContenedoresDisponiblesComponent } from './contenedores-disponibles/contenedores-disponibles.component';
 import { ContenedoresRLComponent } from './contenedores-rl/contenedores-rl.component';
 import { ReporteContenedoresRLComponent } from './reporte-contenedores-rl/reporte-contenedores-rl.component';
+import { BuquesComponent } from './buques/buques.component';
+import { BuqueComponent } from './buques/buque.component';
 // Pipes Modulos
 import { PipesModule } from '../pipes/pipes.module';
 // import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
@@ -60,6 +62,7 @@ import {
     MatCheckboxModule,
     MatRadioModule
   } from '@angular/material';
+
 
 
 
@@ -100,7 +103,9 @@ import {
         ApprovalPageComponent,
         ContenedoresDisponiblesComponent,
         ContenedoresRLComponent,
-        ReporteContenedoresRLComponent
+        ReporteContenedoresRLComponent,
+        BuquesComponent,
+        BuqueComponent
     ],
     exports: [
         DashboardComponent

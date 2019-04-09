@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm, FormControl } from '@angular/forms';
+import { NgForm, NgModel, FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
 import { Viaje } from '../../models/viajes.models';
@@ -11,6 +11,7 @@ import { NavieraService } from '../../services/service.index';
 import { Contenedor } from '../../models/contenedores.models';
 import { ContenedorService } from '../../services/service.index';
 import {Observable} from 'rxjs';
+import swal from 'sweetalert';
 
 // datapiker
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
@@ -34,6 +35,8 @@ export interface Tipo {
 }
 
 import * as _moment from 'moment';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { FileItem } from 'src/app/models/file-item.models';
 // tslint:disable-next-line:no-duplicate-imports
 // import {default as _rollupMoment} from 'moment';
 
@@ -55,17 +58,17 @@ export const MY_FORMATS = {
 
 // tslint:disable-next-line:class-name
 export interface datos {
-  contenedor: string;
-  tipo: string;
-  peso: string;
-  cliente: string;
+  Contenedor: string;
+  Tipo: string;
+  Estado: string;
+  Cliente: string;
 }
 
 
 @Component({
     selector: 'app-viaje',
     templateUrl: './viaje.component.html',
-    styles: [],
+    styleUrls: ['./viaje.component.css'],
     providers: [
       // `MomentDateAdapter` can be automatically provided by importing `MomentDateModule` in your
       // application's root module. We provide it at the component level here, due to limitations of
@@ -83,7 +86,10 @@ export interface datos {
   // IsForUpdate: boolean = false;
   // newItem: any = {};
   // updatedItem;
+  pdfSubir: File;
+  forma: FormGroup;
   myControl = new FormControl();
+  excelSubir: File;
   filteredOptions: Observable<Contenedor[]>;
   viajes: Viaje[] = [];
   viaje: Viaje = new Viaje('');
@@ -91,8 +97,6 @@ export interface datos {
   buque: Buque = new Buque('');
   navieras: Naviera[] = [];
   naviera: Naviera = new Naviera('');
-  contenedores: Contenedor[] = [];
-  contenedor: Contenedor = new Contenedor('', '', '');
   vacioimports: Vacioimport[] = [
     {value: 'Vacio-0', viewValue: 'Vacio'},
     {value: 'Importacion-1', viewValue: 'Importación'}
@@ -103,8 +107,7 @@ export interface datos {
     // tslint:disable-next-line:quotemark
     {value: '40-1', viewValue: "40' H"}
   ];
-  contenedorescsv: datos[] = [];
-  parsedCsv: string[][];
+  contenedores: datos[] = [];
 
     constructor(public _viajeService: ViajeService,
       public _contenedorService: ContenedorService,
@@ -129,13 +132,10 @@ export interface datos {
     ngOnInit() {
       this._viajeService.cargarViajes()
       .subscribe( viajes => this.viajes = viajes );
-      this._contenedorService.cargarContenedores()
-      .subscribe( contenedores => this.contenedores = contenedores );
       this._buqueService.cargarBuques()
       .subscribe( buques => this.buques = buques );
       this._navieraService.cargarNavieras()
       .subscribe( navieras => this.navieras = navieras );
-
     }
 
     cargarViaje( id: string ) {
@@ -155,13 +155,6 @@ export interface datos {
             });
     }
 
-    cambioContenedor( id: string ) {
-
-      this._contenedorService.cargarContenedor( id )
-            .subscribe( contenedor => this.contenedor = contenedor );
-
-    }
-
     cambioBuque( id: string ) {
 
       this._buqueService.cargarBuque( id )
@@ -178,26 +171,143 @@ export interface datos {
 
 
     guardarViaje( f: NgForm ) {
-
-      console.log( f.valid );
-      console.log( f.value );
-
-      if ( f.invalid ) {
+    // console.log(this.datos);
+    if ( f.invalid ) {
         return;
-      }
+        }
+        this.viaje.contenedores = this.contenedores.map(function(obj) {
+            var obj2 = {};
+              obj2['Contenedor'] = obj.Contenedor;
+              obj2['Tipo'] = obj.Tipo;
+              obj2['Estado'] = obj.Estado;
+              obj2['Cliente'] = obj.Cliente;
+              return obj2;
 
-      this._viajeService.guardarViaje( this.viaje )
-              .subscribe( viaje => {
+        });
 
-                this.viaje._id = viaje._id;
+     console.log(this.viaje);
 
-                this.router.navigate(['/viaje', viaje._id ]);
-
-              });
+       this._viajeService.guardarViaje(this.viaje)
+       // tslint:disable-next-line:no-shadowed-variable
+       .subscribe( viaje => {
+          // this.viaje._id = viaje._id;
+       // this.router.navigate(['/prealta', prealta._id]);
+     });
 
     }
 
-    cargarCVS() {}
+    seleccionPDF(archivo: File) {
+      console.log(archivo);
+       // console.log(archivo.name);
+       // Obtener nombre del archivo
+       var nombreCortado = archivo.name.split('.');
+       var extensionArchivo = nombreCortado[nombreCortado.length - 1];
+      // console.log(extensionArchivo);
+
+       // Sólo estas extensiones aceptamos
+       var extensionesValidas = ['pdf'];
+
+       if (!archivo) {
+         this.pdfSubir = null;
+         return;
+       }
+       if (extensionesValidas.indexOf(extensionArchivo) < 0) {
+         swal('Solo Archivos Excel', 'El archivo seleccionado no tiene formato PDF', 'error');
+         this.pdfSubir = null;
+         return;
+
+       }
+          this.pdfSubir = archivo;
+
+          this._viajeService.cargarPDF(this.pdfSubir)
+          // tslint:disable-next-line:no-shadowed-variable
+          .subscribe( nombreArchivo => {
+            this.viaje.pdfTemporal = nombreArchivo;
+            console.log(this.viaje.pdfTemporal);
+             // this.viaje._id = viaje._id;
+          // this.router.navigate(['/prealta', prealta._id]);
+        });
+
+
+
+          //console.log(this.pdfSubir);
+          // this.viaje.pdfTemporal = archivo.name;
+          // tslint:disable-next-line:prefer-const
+         // let reader = new FileReader();
+          // tslint:disable-next-line:prefer-const
+          // let urlImagenTemp = reader.readAsDataURL(archivo);
+         // reader.onloadend = () => this.imagenTemp = reader.result;
+     }
+
+
+    seleccionExcel(archivo: File) {
+     // console.log(archivo.name);
+      // Obtener nombre del archivo
+      var nombreCortado = archivo.name.split('.');
+      var extensionArchivo = nombreCortado[nombreCortado.length - 1];
+     // console.log(extensionArchivo);
+
+      // Sólo estas extensiones aceptamos
+      var extensionesValidas = ['xlsx', 'xls'];
+
+      if (!archivo) {
+        this.excelSubir = null;
+        return;
+      }
+      if (extensionesValidas.indexOf(extensionArchivo) < 0) {
+        swal('Solo Archivos Excel', 'El archivo seleccionado no tiene formato .xls o .xlsx', 'error');
+        this.excelSubir = null;
+        return;
+
+      }
+         this.excelSubir = archivo;
+         // tslint:disable-next-line:prefer-const
+        // let reader = new FileReader();
+         // tslint:disable-next-line:prefer-const
+         // let urlImagenTemp = reader.readAsDataURL(archivo);
+        // reader.onloadend = () => this.imagenTemp = reader.result;
+    }
+
+    cargarExcel() {
+      // console.log(this.excelSubir);
+      this._viajeService.cargarExcel(this.excelSubir)
+      .subscribe( excel => { 
+        // console.log(excel);
+        this.contenedores = excel;
+        this.viaje.viaje = excel[0].Viaje;
+
+        let index = this.buques.find( dato => dato.buque == excel[0].Buque);
+
+        if (!index) {
+          swal( 'El nombre del Buque', 'No fue encontrado en el catalogo', 'error' );
+        } else { this.viaje.buque = index._id }
+
+        console.log(this.contenedores);
+        console.log(this.viaje.viaje);
+        console.log(index);
+      });
+     }
+
+    anadirContenedor(contenedor: string, tipo: string, estado: string, cliente: string ) {
+        // console.log(value);
+    // tslint:disable-next-line:prefer-const
+    // tslint:disable-next-line:triple-equals
+    let index = this.contenedores.find( dato => dato.Contenedor == contenedor);
+
+    // tslint:disable-next-line:triple-equals
+    if (contenedor == '') {
+      swal( 'Error esta vacio', 'No fue posible insertar', 'error' );
+      // console.log('Error esta vacio');
+      return;
+     }
+     if (index != null) {
+      swal( 'Error Contenedor Duplicado', 'No fue posible insertar: ' + index.Contenedor, 'error' );
+      // console.log('Contenedor duplicado ' + index.contenedor);
+     } else {
+      // tslint:disable-next-line:max-line-length
+      this.contenedores.push({Contenedor: contenedor, Tipo: tipo, Estado: estado, Cliente: cliente});
+     }
+    }
     limpiarArchivos() {}
 
   }
