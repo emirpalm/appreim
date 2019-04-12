@@ -23,7 +23,8 @@ import { ViajeComponent } from './viajes/viaje.component';
 import { FotosComponent } from './fotos/fotos.component';
 import { NavierasComponent } from './navieras/navieras.component';
 import { NavieraComponent } from './navieras/naviera.component';
-import { DonwloadrequestComponent } from './donwloadrequest/donwloadrequest.component';
+import { SolicitudesDescargasComponent } from './solicitudDescarga/solicitudes-descargas.component';
+import { SolicitudDescargaComponent } from './solicitudDescarga/solicitudDescarga.component';
 import { EmpresaComponent } from './empresa/empresa.component';
 import { MisclientesComponent } from './misclientes/misclientes.component';
 import { MiclienteComponent } from './misclientes/micliente.component';
@@ -33,6 +34,7 @@ import { ContenedoresRLComponent } from './contenedores-rl/contenedores-rl.compo
 import { ReporteContenedoresRLComponent } from './reporte-contenedores-rl/reporte-contenedores-rl.component';
 import { BuquesComponent } from './buques/buques.component';
 import { BuqueComponent } from './buques/buque.component';
+import { SolicitudesDComponent } from './approval-page/solicitudes-d.component';
 // Guards
 // import { LoginGuardGuard } from '../services/service.index';
 import { AdminGuard } from '../services/service.index';
@@ -51,17 +53,19 @@ const pagesRoutes: Routes = [
         data: { titulo: 'Dashboard' }
     },
     {
-        path: 'aprobacion',
-        component: ApprovalPageComponent,
+        path: 'solicitudes_de_descarga',
+        component: SolicitudesDComponent,
         canActivate: [AdminGuard],
-        data: { titulo: 'Aprobacion de descargas'}
+        data: { titulo: 'Solicitudes de descargas'}
     },
-            {path: 'maniobras', component: ManiobrasComponent, data: {titulo: 'Maniobras'}},
-            {path: 'maniobra/:id', component: ManiobraComponent, data: {titulo: 'Maniobra'}},
-            {path: 'fotos/:id', component: FotosComponent, data: {titulo: 'Fotos'}},
-            {path: 'account-settings', component: AccountSettingsComponent, data: {titulo: 'Configuración de la cuenta'}},
-            {path: 'profile', component: ProfileComponent, data: {titulo: 'Mi perfil'}},
-            {path: 'busqueda/:termino', component: BusquedaComponent, data: { titulo: 'Buscador' } },
+    // tslint:disable-next-line:max-line-length
+    {path: 'aprobacion_de_descarga/:id', component: ApprovalPageComponent,  canActivate: [ AdminGuard ], data: {titulo: 'Aprobar descarga'}},
+    {path: 'maniobras', component: ManiobrasComponent, data: {titulo: 'Maniobras'}},
+    {path: 'maniobra/:id', component: ManiobraComponent, data: {titulo: 'Maniobra'}},
+    {path: 'fotos/:id', component: FotosComponent, data: {titulo: 'Fotos'}},
+    {path: 'account-settings', component: AccountSettingsComponent, data: {titulo: 'Configuración de la cuenta'}},
+    {path: 'profile', component: ProfileComponent, data: {titulo: 'Mi perfil'}},
+    {path: 'busqueda/:termino', component: BusquedaComponent, data: { titulo: 'Buscador' } },
     // Register
     {
         path: 'register',
@@ -71,11 +75,13 @@ const pagesRoutes: Routes = [
     },
     // Solicitud Descarga
     {
-        path: 'aadescarga',
-        component: DonwloadrequestComponent,
+        path: 'solicitudes_descargas',
+        component: SolicitudesDescargasComponent,
         canActivate: [ AdminGuard ],
         data: { titulo: 'Solicitud de descargas' }
     },
+    // tslint:disable-next-line:max-line-length
+    {path: 'solicitud_descarga/:id', component: SolicitudDescargaComponent,  canActivate: [ AdminGuard ], data: {titulo: 'Actualizacion de datos'}},
     // Mantenimientos ADMIN ROLE
     {
         path: 'usuarios',

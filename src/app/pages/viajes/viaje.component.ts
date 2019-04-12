@@ -81,12 +81,7 @@ export interface datos {
 
   export class ViajeComponent implements OnInit {
 
-  // title = 'Working With Array In Angular 5';
-  // myItems: MyItems[] = new Array();
-  // IsForUpdate: boolean = false;
-  // newItem: any = {};
-  // updatedItem;
-  pdfSubir: File;
+  fileTemporal: File;
   forma: FormGroup;
   myControl = new FormControl();
   excelSubir: File;
@@ -144,6 +139,7 @@ export interface datos {
 
               console.log( viaje );
               this.viaje = viaje;
+              this.contenedores = viaje.contenedores;
               this.viaje.buque = viaje.buque._id;
               this.cambioBuque( this.viaje.buque );
               // this.viaje.naviera = viaje.naviera._id;
@@ -196,30 +192,21 @@ export interface datos {
 
     }
 
-    seleccionPDF(archivo: File) {
+    seleccionTemporal(archivo: File) {
       console.log(archivo);
-       // console.log(archivo.name);
-       // Obtener nombre del archivo
-       var nombreCortado = archivo.name.split('.');
-       var extensionArchivo = nombreCortado[nombreCortado.length - 1];
-      // console.log(extensionArchivo);
-
-       // Sólo estas extensiones aceptamos
-       var extensionesValidas = ['pdf'];
 
        if (!archivo) {
-         this.pdfSubir = null;
+         this.fileTemporal = null;
          return;
        }
-       if (extensionesValidas.indexOf(extensionArchivo) < 0) {
-         swal('Solo Archivos Excel', 'El archivo seleccionado no tiene formato PDF', 'error');
-         this.pdfSubir = null;
-         return;
+       if (archivo.type.indexOf('image') < 0 && archivo.type.indexOf('pdf') < 0) {
+        swal('Solo Archivos De Imagen', 'El archivo seleccionado no tiene formato Imagen', 'error');
+        this.fileTemporal = null;
+        return;
+      }
+          this.fileTemporal = archivo;
 
-       }
-          this.pdfSubir = archivo;
-
-          this._viajeService.cargarPDF(this.pdfSubir)
+          this._viajeService.seleccionTemporal(this.fileTemporal)
           // tslint:disable-next-line:no-shadowed-variable
           .subscribe( nombreArchivo => {
             this.viaje.pdfTemporal = nombreArchivo;
@@ -228,15 +215,6 @@ export interface datos {
           // this.router.navigate(['/prealta', prealta._id]);
         });
 
-
-
-          //console.log(this.pdfSubir);
-          // this.viaje.pdfTemporal = archivo.name;
-          // tslint:disable-next-line:prefer-const
-         // let reader = new FileReader();
-          // tslint:disable-next-line:prefer-const
-          // let urlImagenTemp = reader.readAsDataURL(archivo);
-         // reader.onloadend = () => this.imagenTemp = reader.result;
      }
 
 
@@ -308,6 +286,7 @@ export interface datos {
       this.contenedores.push({Contenedor: contenedor, Tipo: tipo, Estado: estado, Cliente: cliente});
      }
     }
+
     limpiarArchivos() {}
 
   }

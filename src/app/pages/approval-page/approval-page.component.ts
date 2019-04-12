@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Prealta } from '../../models/prealtas.models';
 import { PrealtaService } from '../../services/service.index';
+import { Usuario } from '../../models/usuarios.model';
+import { UsuarioService } from '../../services/service.index';
+import { Router, ActivatedRoute } from '@angular/router';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-approval-page',
@@ -8,8 +12,9 @@ import { PrealtaService } from '../../services/service.index';
   styles: []
 })
 export class ApprovalPageComponent implements OnInit {
-
-  prealtas: Prealta[] = [];
+  usuario: Usuario;
+  solicitudes: Prealta[] = [];
+  solicitud: Prealta = new Prealta('');
   // prealta: Prealta = new Prealta('', '');
   // tslint:disable-next-line:no-inferrable-types
   cargando: boolean = true;
@@ -19,22 +24,36 @@ export class ApprovalPageComponent implements OnInit {
   desde: number = 0;
   checked = false;
 
-  constructor( public _prealtaService: PrealtaService ) {}
+  constructor( public _usuarioService: UsuarioService,
+    public _prealtaService: PrealtaService,
+    public activatedRoute: ActivatedRoute,
+    public router: Router ) {
+    this.usuario = this._usuarioService.usuario;
+    activatedRoute.params.subscribe( params => {
 
-  ngOnInit() {
-    this.cargarPrealtas();
+      // tslint:disable-next-line:prefer-const
+      let id = params['id'];
+
+      if ( id !== 'nuevo' ) {
+        this.cargarSolicitud( id );
+      }
+
+    });
   }
 
-  cargarPrealtas() {
+  ngOnInit() {
+  }
+
+  cargarSolicitud(id: string) {
     this.cargando = true;
-    this._prealtaService.cargarPrealtas(this.desde)
-    .subscribe(prealtas => this.prealtas = prealtas );
+    this._prealtaService.cargarSolicitud(id)
+    .subscribe(solicitud => this.solicitud = solicitud );
   }
 
   guardarPrealta(prealta: Prealta) {
-    this._prealtaService.guardarPrealta(prealta)
+    this._prealtaService.guardarSolicitud(prealta)
     .subscribe(resp => {
-      this.cargarPrealtas();
+     // this.cargarSolicitudes();
     });
 
   }
@@ -42,38 +61,11 @@ export class ApprovalPageComponent implements OnInit {
   cambioEstado(prealta: Prealta) {
     this._prealtaService.cambioEstado(prealta)
     .subscribe(resp => {
-      this.cargarPrealtas();
+     // this.cargarSolicitudes();
     });
   }
 
-  cambiarDesde(valor: number) {
-    // tslint:disable-next-line:prefer-const
-    let desde = this.desde + valor;
-    console.log(desde);
-    if (desde >= this._prealtaService.totalPrealtas) {
-      return;
-    }
-    if (desde < 0) {
-      return;
-    }
-    this.desde += valor;
-    this.cargarPrealtas();
-  }
 
-  buscarPrealta(termino: string) {
-    if (termino.length <=0) {
-      this.cargarPrealtas();
-      return;
-    }
-    this.cargando = true;
-    this._prealtaService.buscarPrealta(termino)
-    .subscribe( prealtas => this.prealtas = prealtas);
-  }
 
-  borrarPrealta(prealta: Prealta) {
-
-    this._prealtaService.borrarPrealta( prealta._id )
-    .subscribe( () =>  this.cargarPrealtas() );
-  }
 
 }

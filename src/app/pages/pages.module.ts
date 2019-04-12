@@ -32,7 +32,8 @@ import { ViajeComponent } from './viajes/viaje.component';
 import { AddcontainersComponent } from './addcontainers/addcontainers.component';
 import { NavierasComponent } from './navieras/navieras.component';
 import { NavieraComponent } from './navieras/naviera.component';
-import { DonwloadrequestComponent } from './donwloadrequest/donwloadrequest.component';
+import { SolicitudesDescargasComponent } from './solicitudDescarga/solicitudes-descargas.component';
+import { SolicitudDescargaComponent } from './solicitudDescarga/solicitudDescarga.component';
 import { FotosComponent } from './fotos/fotos.component';
 import { NgDropFilesDirective } from '.././directives/ng-drop-files.directive';
 import { EmpresaComponent } from './empresa/empresa.component';
@@ -44,6 +45,7 @@ import { ContenedoresRLComponent } from './contenedores-rl/contenedores-rl.compo
 import { ReporteContenedoresRLComponent } from './reporte-contenedores-rl/reporte-contenedores-rl.component';
 import { BuquesComponent } from './buques/buques.component';
 import { BuqueComponent } from './buques/buque.component';
+import { SolicitudesDComponent } from './approval-page/solicitudes-d.component';
 // Pipes Modulos
 import { PipesModule } from '../pipes/pipes.module';
 // import { ModalUploadComponent } from '../components/modal-upload/modal-upload.component';
@@ -60,10 +62,9 @@ import {
     MatTabsModule,
     MatAutocompleteModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatRadioModule,
+    MatStepperModule
   } from '@angular/material';
-
-
 
 
 @NgModule({
@@ -96,7 +97,8 @@ import {
         AddcontainersComponent,
         NavierasComponent,
         NavieraComponent,
-        DonwloadrequestComponent,
+        SolicitudesDescargasComponent,
+        SolicitudDescargaComponent,
         EmpresaComponent,
         MisclientesComponent,
         MiclienteComponent,
@@ -105,7 +107,8 @@ import {
         ContenedoresRLComponent,
         ReporteContenedoresRLComponent,
         BuquesComponent,
-        BuqueComponent
+        BuqueComponent,
+        SolicitudesDComponent
     ],
     exports: [
         DashboardComponent
@@ -127,7 +130,8 @@ import {
         MatTabsModule,
         MatAutocompleteModule,
         MatCheckboxModule,
-        MatRadioModule
+        MatRadioModule,
+        MatStepperModule
     ]
     })
 

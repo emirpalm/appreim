@@ -68,7 +68,7 @@ export class ViajeService {
 
   }
 
-  guardarViaje2( viaje: Viaje ): Observable<any> {
+  guardarViaje( viaje: Viaje ): Observable<any> {
 
     let url = URL_SERVICIOS + '/viaje';
 
@@ -103,7 +103,7 @@ export class ViajeService {
 
   }
 
-  guardarViaje( viaje: Viaje ): Observable<any> {
+  guardarViaje2( viaje: Viaje ): Observable<any> {
 
     let url = URL_SERVICIOS + '/viaje';
       url += '?token=' + this._usuarioService.token;
@@ -208,7 +208,7 @@ cargarExcel(archivo: File ): Observable<any> {
       }));
 }
 
-cargarPDF(archivo: File ): Observable<any> {
+seleccionTemporal(archivo: File ): Observable<any> {
   // tslint:disable-next-line:prefer-const
   let formData = new FormData();
 

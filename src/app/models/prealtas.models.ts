@@ -1,23 +1,21 @@
 export class Prealta {
 
     constructor (
-        // public folio?: string,
         public agencia?: string,
         public naviera?: string,
         public transportista?: string,
+        public cliente?: string,
         public facturarA?: string,
+        public buque?: string,
+        public viaje?: string,
         public observaciones?: string,
-        // public bl?: string,
-        // public comprobantePago?: string,
+        public rutaBL?: string,
         public credito?: string,
+        public rutaComprobante?: string,
         public correo?: string,
         public correoFac?: string,
-        public contenedores?: string,
-       // public tipo?: string,
-        // public reparacion?: string,
-        // public lavado?: string,
-        // bpublic estado?: string,
-        public folioAprobacion?: string,
+        public contenedores?: Array<any>,
+        public usuario?: string,
         public _id?: string
     ) {}
 
