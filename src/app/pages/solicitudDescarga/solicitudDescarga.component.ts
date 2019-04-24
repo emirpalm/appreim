@@ -52,7 +52,7 @@ export class SolicitudDescargaComponent implements OnInit {
   fletera: Fletera = new Fletera('');
   clientes: Cliente[] = [];
   cliente: Cliente = new Cliente('');
-  profile: Usuario = new Usuario('');
+  // profile: Usuario = new Usuario('');
   desde = 0;
   facturaa: string;
   facturas: string[] = ['Agencia Aduanal', 'Otro'];

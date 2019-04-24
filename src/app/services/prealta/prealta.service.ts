@@ -35,10 +35,10 @@ export class PrealtaService {
 
     }
 
-    cargarSolicitudesAgencia( id: string, desde: number = 0): Observable<any> {
+    cargarSolicitudesAgencia( agencias: string, desde: number = 0): Observable<any> {
 
         // tslint:disable-next-line:prefer-const
-        let url = URL_SERVICIOS + '/solicitudD/' + id;
+        let url = URL_SERVICIOS + '/solicitudD/agencia' + agencias;
         url += '?desde=' + desde;
         return this.http.get(url)
         .pipe ( map((resp: any) => {
@@ -57,6 +57,15 @@ export class PrealtaService {
         let url = URL_SERVICIOS + '/solicitudD/' + id;
         return this.http.get(url)
         .pipe ( map((resp: any) => resp.solicitud ));
+
+    }
+
+    cargarManiobraID( contenedor: string, viaje: string, buque: string): Observable<any> {
+
+        // tslint:disable-next-line:prefer-const
+        let url = URL_SERVICIOS + '/maniobra/obtener?contenedor=' + contenedor + '&viaje=' + viaje + '&buque=' + buque;
+        return this.http.get(url)
+        .pipe ( map((resp: any) => resp.maniobra  ));
 
     }
 
@@ -115,6 +124,24 @@ export class PrealtaService {
                 return throwError(err);
             }));
         }
+    }
+
+    guardarSolicitudManiobra( solicitud: Prealta ): Observable<any> {
+        // tslint:disable-next-line: prefer-const
+        let url = URL_SERVICIOS + '/solicitudD/solicitudmaniobra';
+            // Actualiazando
+            url += '/' + solicitud._id;
+            url += '?token=' + this._usuarioService.token;
+
+            return this.http.put( url, solicitud )
+            .pipe(map((resp: any) => {
+                swal('Solicitud de descarga Aprobada', 'La solicitud fue aprobada', 'success');
+                return resp.solicitud;
+            }),
+            catchError( err => {
+                swal( err.error.mensaje, err.error.errors.message, 'error' );
+                  return throwError(err);
+                }));
     }
 
     buscarSolicitud( termino: string): Observable<any> {

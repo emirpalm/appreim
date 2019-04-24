@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Prealta } from '../../models/prealtas.models';
 import { PrealtaService } from '../../services/service.index';
+import { Usuario } from '../../models/usuarios.model';
+import { UsuarioService } from '../../services/service.index';
 
 @Component({
   selector: 'app-solicitudes-d',
@@ -17,11 +19,30 @@ export class SolicitudesDComponent implements OnInit {
    totalRegistros: number = 0;
    // tslint:disable-next-line:no-inferrable-types
    desde: number = 0;
+   usuario: Usuario;
 
-  constructor(public _prealtaService: PrealtaService) { }
+  constructor(
+    public _prealtaService: PrealtaService,
+    public _usuarioService: UsuarioService
+    ) {
+      this.usuario = this._usuarioService.usuario;
+      if(this.usuario.role = 'ADMIN_ROLE') {
+        this.cargarSolicitudes();
+      } else {
+         this.cargarSolicitudesAgencias(this.usuario.empresas);
+      }
+    }
 
   ngOnInit() {
-    this.cargarSolicitudes();
+  }
+
+  cargarSolicitudesAgencias(agencias: string) {
+    this.cargando = true;
+    this._prealtaService.cargarSolicitudesAgencia(agencias, this.desde)
+    .subscribe(solicitudesD =>
+      // this.totalRegistros = resp.total;
+      this.prealtas = solicitudesD
+    );
   }
 
   cargarSolicitudes() {
